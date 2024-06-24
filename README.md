@@ -1,24 +1,10 @@
 # sixt.github.io
 
 ## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+vue create sixt.github.io
+ㄴ[vue3] babel, router, vuex, eslint
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+npm i vuetify --no-fund
+npm i -D vuetify vite-plugin-vuetify --no-fund
+npm i @mdi/font --no-fund
