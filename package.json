@@ -27,6 +27,8 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "prettier": "^3.2.5",
+    "sass": "^1.77.6",
+    "sass-loader": "^10.5.2",
     "vite-plugin-vuetify": "^2.0.3",
     "vuetify": "^3.6.10"
   },

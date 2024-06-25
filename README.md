@@ -14,3 +14,5 @@ npm i showdown --no-fund
 
 npm i -d eslint-plugin-prettier --no-fund
 npm i vue-router@next --no-fund
+
+npm i sass sass-loader@10 -D --no-fund

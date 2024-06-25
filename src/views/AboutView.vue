@@ -15,7 +15,6 @@ export default {
   },
   async created() {
     try {
-      console.log(this.$route.params);
       const param = this.$route.params.title;
       const post = await import("@/posts/" + param + ".md");
       this.contents = htmlConverter(post.default);
