@@ -10,7 +10,3 @@ npm i -D vuetify vite-plugin-vuetify --no-fund
 npm i @mdi/font --no-fund
 
 npm i raw-loader --no-fund
-npm i showdown --no-fund
-
-npm i -d eslint-plugin-prettier --no-fund
-npm i vue-router@next --no-fund

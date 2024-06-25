@@ -1,6 +1,27 @@
+<script setup>
+import htmlConverter from "@/utils/HTMLConverter";
+</script>
+
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-    <v-text-field></v-text-field>
-  </div>
+  <div v-html="contents"></div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      contents: null,
+    };
+  },
+  async created() {
+    try {
+      console.log(this.$route.params);
+      const param = this.$route.params.title;
+      const post = await import("@/posts/" + param + ".md");
+      this.contents = htmlConverter(post.default);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+};
+</script>
