@@ -15,7 +15,23 @@
 
     <v-divider></v-divider>
 
-    <v-list density="compact" nav> </v-list>
+    <v-list density="compact" nav id="nav">
+      <v-list-item
+        prepend-icon="mdi-account-search"
+        title="INTRODUCE"
+        value="introduce"
+        @click="this.$router.push('/about')"
+        class="navItems"
+      ></v-list-item>
+
+      <v-list-item
+        prepend-icon="mdi-note-edit-outline"
+        title="LOGGING"
+        value="blog"
+        @click="this.$router.push('/logging')"
+        class="navItems"
+      ></v-list-item>
+    </v-list>
   </v-layout>
 </template>
 
@@ -41,13 +57,24 @@ export default {
 <style lang="scss">
 #menuSection {
   display: block;
-  width: 20%;
-  height: 95%;
-  position: fixed;
-  background-color: #f7a501;
-  border-radius: 10px 10px 10px 10px;
+  position: relative;
+  height: 93%;
+  background-color: rgba(247, 165, 1, 0.65);
+  border-radius: 10px;
   padding: 10px;
+  box-shadow: 0.3em 0.3em 1em lightgray;
 
+  /* v-list custom */
+  .v-list {
+    background-color: transparent;
+    color: #1a1a1a;
+
+    .v-list-item-title {
+      font-weight: 400;
+    }
+  }
+
+  /* profile section custom */
   #profile {
     width: 100%;
     margin-bottom: 10px;
@@ -89,13 +116,15 @@ export default {
     }
   }
 
-  .v-list {
-    background-color: transparent;
-    color: #1a1a1a;
+  /* nav section custom */
+  #nav .navItems {
+    margin: 0.2rem;
+    padding: 1.2rem;
+    font-size: 1.2rem;
 
     .v-list-item-title {
-      font-size: 16px;
-      font-weight: 400;
+      text-align: center;
+      font-size: 1.2rem;
     }
   }
 }

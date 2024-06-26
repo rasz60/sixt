@@ -1,11 +1,18 @@
 <script setup>
 import MenuSection from "@/components/MenuSection.vue";
+import HomeView from "@/views/HomeView.vue";
 </script>
 
 <template>
   <v-container>
-    <MenuSection />
-    <router-view />
+    <v-row id="main">
+      <v-col sm="3">
+        <MenuSection />
+      </v-col>
+      <v-col sm="9">
+        <HomeView />
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -13,6 +20,7 @@ import MenuSection from "@/components/MenuSection.vue";
 export default {
   components: {
     MenuSection,
+    HomeView,
   },
 };
 </script>
@@ -21,10 +29,14 @@ export default {
 @import "@/assets/style/common.scss";
 
 #app {
-  background-color: #1a1a1a;
-
   .v-container {
+    padding-top: 3rem;
     height: 1000px;
+    min-height: 800px;
+  }
+  #main {
+    height: 100%;
+    padding: 0;
   }
 }
 </style>

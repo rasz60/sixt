@@ -11,6 +11,7 @@
     "@mdi/font": "^7.4.47",
     "core-js": "^3.8.3",
     "eslint-plugin-vue": "^9.26.0",
+    "marked": "^13.0.1",
     "raw-loader": "^4.0.2",
     "showdown": "^2.1.0",
     "vue": "^3.2.13",

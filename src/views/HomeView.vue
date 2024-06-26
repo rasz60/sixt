@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div id="contents">
+    <router-view />
+  </div>
 </template>
 
 <script>
@@ -7,6 +9,12 @@
 
 export default {
   name: "HomeView",
-
 };
 </script>
+
+<style lang="scss">
+#contents {
+  height: 100%;
+  padding-left: 10px;
+}
+</style>

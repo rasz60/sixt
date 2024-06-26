@@ -1,0 +1,102 @@
+<script setup>
+import htmlConverter from "@/utils/HTMLConverter";
+</script>
+
+<template>
+  <v-card>
+    <v-card-title id="detailsTitle">
+      {{ post.title }}
+    </v-card-title>
+
+    <span id="subTitle">{{ post.date }} ({{ post.dateDiff }})</span>
+    <div id="keywords">
+      <v-chip
+        v-for="keyword in post.keywords"
+        :key="keyword"
+        color="indigo"
+        size="small"
+        link
+        class="keyword"
+        >{{ keyword }}</v-chip
+      >
+    </div>
+    <v-divider></v-divider>
+    <div id="doc" v-html="contents"></div>
+  </v-card>
+</template>
+
+<script>
+import posts from "@/utils/posts";
+
+export default {
+  data() {
+    return {
+      contents: null,
+      post: null,
+    };
+  },
+  async created() {
+    try {
+      const param = this.$route.params.seq;
+      this.post = JSON.parse(posts).filter((e) => e.seq == param)[0];
+      const post = await import(
+        "!raw-loader!@/posts/" + this.post.name + ".md"
+      );
+      this.contents = htmlConverter(post.default);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+};
+</script>
+
+<style>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.css");
+
+#detailsTitle {
+  justify-content: center;
+  font-size: 30px;
+  width: 100%;
+  height: 4em;
+  padding-top: 3em;
+  padding-bottom: 1em;
+  font-weight: 700;
+}
+
+#subTitle {
+  display: flex;
+  justify-content: center;
+  color: darkgray;
+}
+
+#keywords {
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+
+  .keyword {
+    margin: 2px;
+  }
+}
+
+#doc {
+  padding: 20px;
+
+  * {
+    margin: 5px;
+  }
+
+  h1 {
+  }
+
+  h2 {
+  }
+
+  pre {
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+  }
+}
+</style>
