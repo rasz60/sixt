@@ -93,14 +93,13 @@ export default {
   },
   mounted() {
     this.setPostBg();
-    console.log(this.posts[0].realDateDiff);
   },
   methods: methods,
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style lang="scss">
 #postsList {
   height: 100%;
   padding: 1.2rem;

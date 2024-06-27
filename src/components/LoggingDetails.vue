@@ -51,9 +51,7 @@ export default {
 };
 </script>
 
-<style>
-@import url("https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.1.0/github-markdown.css");
-
+<style lang="scss">
 #detailsTitle {
   justify-content: center;
   font-size: 30px;
@@ -79,7 +77,6 @@ export default {
     margin: 2px;
   }
 }
-
 #doc {
   padding: 20px;
 

@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunksixt_github_io"]=self["webpackChunksixt_github_io"]||[]).push([[698],{9317:function(n,r,i){i.r(r),r["default"]="# sixt.github.io\r\n\r\n## Project setup\r\n\r\n\r\n#### vue create sixt.github.io\r\n\r\nㄴ[vue3] babel, router, vuex, eslint\r\n\r\n\r\n\r\n\r\nnpm i vuetify --no-fund\r\n\r\nnpm i -D vuetify vite-plugin-vuetify --no-fund\r\n\r\nnpm i @mdi/font --no-fund\r\n\r\n\r\nnpm i raw-loader --no-fund\r\n"}}]);
+//# sourceMappingURL=698.41a9da43.js.map
