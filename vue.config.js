@@ -9,4 +9,5 @@ module.exports = defineConfig({
       .loader("raw-loader")
       .end();
   },
+  publicPath: "/sixt/",
 });
