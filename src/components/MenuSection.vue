@@ -58,11 +58,13 @@ export default {
 #menuSection {
   display: block;
   position: relative;
-  height: 93%;
+  height: 90vh;
   background-color: rgba(247, 165, 1, 0.65);
   border-radius: 10px;
   padding: 10px;
   box-shadow: 0.3em 0.3em 1em lightgray;
+
+  transition: all 10ms linear;
 
   /* v-list custom */
   .v-list {

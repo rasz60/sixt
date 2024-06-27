@@ -40,22 +40,22 @@ const dateDiff = (posts) => {
 const posts = [
   {
     seq: 1,
+    group: "g-1",
     name: "README",
     title: "[WEB] Spring-boot, Vue3, MySql 웹페이지 만들기🔨",
     date: "2024-06-26",
     dateDiff: null,
     keywords: ["keyword0", "keyword1", "keyword2"],
-    description: "description",
     proceeding: true,
   },
   {
     seq: 2,
+    group: "g-2",
     name: "ISSUE",
     title: "[WEB] GitHub Pages Blog 만들기 issue🩺",
     date: "2024-06-26",
     dateDiff: null,
     keywords: ["keyword0", "keyword1", "keyword2"],
-    description: "description",
     proceeding: true,
   },
 ];

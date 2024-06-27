@@ -87,16 +87,63 @@ export default {
   }
 
   h1 {
+    font-size: 2em;
   }
 
   h2 {
+    font-size: 1.8em;
+  }
+
+  h3 {
+    font-size: 1.6em;
+  }
+
+  h4 {
+    font-size: 1.4em;
+    margin: 1rem;
+  }
+
+  h5 {
+    font-size: 1.2em;
+    margin: 0.8rem;
+  }
+
+  h6 {
+    font-size: 1em;
+    margin: 0.6rem;
+  }
+
+  h1,
+  h2,
+  h3 {
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid lightgray;
+  }
+
+  h6 {
+    color: darkgray;
+    font-weight: 400;
   }
 
   pre {
     background-color: #f7f7f7;
     padding: 15px;
     border-radius: 10px;
-    margin: 10px;
+    margin: 1em;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  a:hover {
+    background-color: aliceblue;
+  }
+
+  hr {
+    margin-top: 2em;
+    margin-bottom: 2em;
   }
 }
 </style>

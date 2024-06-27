@@ -22,6 +22,12 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  scrollBehavior() {
+    // 항상 맨 위로 스크롤
+    return {
+      top: 0,
+    };
+  },
   routes,
 });
 
