@@ -12,7 +12,7 @@
     "core-js": "^3.8.3",
     "emailjs-com": "^3.2.0",
     "eslint-plugin-vue": "^9.26.0",
-    "marked": "^13.0.1",
+    "postcss": "^8.4.38",
     "raw-loader": "^4.0.2",
     "showdown": "^2.1.0",
     "vue": "^3.2.13",
