@@ -4,11 +4,10 @@
       <v-list-item
         prepend-avatar="https://avatars.githubusercontent.com/u/96821067?v=4"
         title="SIXT(Jinwoong Kim)"
-        subtitle="rassayzsixt@gmail.com"
+        subtitle="devsixt60@gmail.com"
       >
         <div id="social">
           <v-icon icon="mdi-github" @click="goHref(0)" />
-          <v-icon icon="mdi-instagram" @click="goHref(1)" />
         </div>
       </v-list-item>
     </v-list>
@@ -43,10 +42,7 @@ export default {
   },
   methods: {
     goHref(idx) {
-      var url = [
-        "https://github.com/rasz60",
-        "https://instagram.com/rasz_sixt",
-      ];
+      var url = ["https://github.com/rasz60"];
 
       window.open("about:blank").location.href = url[idx];
     },
