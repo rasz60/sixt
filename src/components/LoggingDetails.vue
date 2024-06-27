@@ -1,5 +1,5 @@
 <script setup>
-import htmlConverter from "@/utils/HTMLConverter";
+//import htmlConverter from "@/utils/HTMLConverter";
 </script>
 
 <template>
@@ -36,15 +36,19 @@ export default {
       post: null,
     };
   },
-  async created() {
-    try {
+  created() {
+    this.setPost();
+  },
+  methods: {
+    async setPost() {
       const param = this.$route.params.seq;
-      this.post = JSON.parse(posts).filter((e) => e.seq == param)[0];
-      const post = await import("@/posts/" + this.post.name + ".md");
-      this.contents = await htmlConverter(post.default);
-    } catch (e) {
-      console.log(e);
-    }
+      let displayPost = await JSON.parse(posts).filter(
+        (e) => e.seq == param
+      )[0];
+      this.post = displayPost;
+      //const post = await import("@/posts/" + this.post.name + ".md");
+      //this.contents = htmlConverter(post.default);
+    },
   },
 };
 </script>
