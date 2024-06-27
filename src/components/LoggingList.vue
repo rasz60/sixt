@@ -1,11 +1,55 @@
 <template>
+  <v-row class="category">
+    <v-col cols="9">
+      <v-chip prepend-icon="mdi-list-box-outline" link @click="seeAll"
+        >전체보기</v-chip
+      >
+      <v-chip
+        class="category"
+        v-for="category in categorys.filter((e) => e.type == 'status')"
+        :key="category"
+        :prepend-icon="
+          this.commonjs.keywordPIcon(category.type, category.value)
+        "
+        :color="this.commonjs.keywordColor(category.type, category.value)"
+        @click="setPosts(null, category.value)"
+        link
+        >{{ category.title }}</v-chip
+      >
+      <v-chip
+        class="category"
+        v-for="category in categorys.filter((e) => e.type != 'status')"
+        :key="category"
+        :prepend-icon="this.commonjs.keywordPIcon(category.type)"
+        :color="this.commonjs.keywordColor(category.type)"
+        link
+        @click="setPosts(category.type, null)"
+        >{{ category.value }}</v-chip
+      >
+    </v-col>
+
+    <v-col cols="3">
+      <v-text-field
+        variant="underlined"
+        append-icon="mdi-magnify"
+        v-model="searchKeyword"
+        @click:append="setPosts(undefined, undefined)"
+      ></v-text-field>
+    </v-col>
+  </v-row>
   <v-row class="loggingRow">
     <v-col
-      v-for="post in posts"
+      v-for="post in displayPosts"
       :key="post"
       cols="4"
       @click="this.$router.push('/logging/' + post.seq)"
     >
+      <v-badge
+        class="newPostsBadge"
+        v-show="post.newPost"
+        color="red"
+        content="new"
+      ></v-badge>
       <v-card class="post" link>
         <v-card-title class="postTitle">
           {{ post.title }}
@@ -17,11 +61,12 @@
           <v-chip
             v-for="keyword in post.keywords"
             :key="keyword"
-            color="indigo"
+            :prepend-icon="this.commonjs.keywordPIcon(keyword.type)"
+            :color="this.commonjs.keywordColor(keyword.type)"
             size="small"
             link
             class="keyword"
-            >{{ keyword }}</v-chip
+            >{{ keyword.value }}</v-chip
           >
         </div>
 
@@ -35,38 +80,41 @@
 
 <script>
 import posts from "@/utils/posts";
+import datas from "@/assets/js/logging/loggingListDatas.js";
+import methods from "@/assets/js/logging/loggingListMethods.js";
 
 export default {
   data() {
-    return {
-      posts: posts,
-    };
+    return datas;
   },
   created() {
     this.posts = JSON.parse(posts);
+    this.displayPosts = this.posts;
   },
   mounted() {
-    this.randomColor();
+    this.setPostBg();
+    console.log(this.posts[0].realDateDiff);
   },
-  methods: {
-    randomColor() {
-      let postTitle = document.querySelectorAll(".postTitle");
-
-      for (var i = 0; i < postTitle.length; i++) {
-        const rColor = Math.floor(Math.random() * 128 + 64);
-        const gColor = Math.floor(Math.random() * 128 + 64);
-        const bColor = Math.floor(Math.random() * 128 + 64);
-
-        postTitle[i].style.backgroundColor =
-          "rgb(" + rColor + "," + gColor + "," + bColor + ", 0.1)";
-      }
-    },
-  },
+  methods: methods,
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+#postsList {
+  height: 100%;
+  padding: 1.2rem;
+}
+
+.newPostsBadge {
+  position: absolute;
+  z-index: 1;
+}
+
+.category {
+  margin: 0.3rem;
+}
+
 .post:hover {
   top: -0.3em;
   box-shadow: 0.3em 0.3em 1em lightgray;

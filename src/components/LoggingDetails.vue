@@ -13,11 +13,12 @@ import htmlConverter from "@/utils/HTMLConverter";
       <v-chip
         v-for="keyword in post.keywords"
         :key="keyword"
-        color="indigo"
+        :prepend-icon="this.commonjs.keywordPIcon(keyword.type)"
+        :color="this.commonjs.keywordColor(keyword.type)"
         size="small"
         link
         class="keyword"
-        >{{ keyword }}</v-chip
+        >{{ keyword.value }}</v-chip
       >
     </div>
     <v-divider></v-divider>

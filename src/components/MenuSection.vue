@@ -7,7 +7,11 @@
         subtitle="devsixt60@gmail.com"
       >
         <div id="social">
-          <v-icon icon="mdi-github" @click="goHref(0)" />
+          <v-icon
+            icon="mdi-github"
+            @click="newWindow(`https://github.com/rasz60`)"
+          />
+          <v-icon icon="mdi-email-fast-outline"></v-icon>
         </div>
       </v-list-item>
     </v-list>
@@ -19,17 +23,35 @@
         prepend-icon="mdi-account-search"
         title="INTRODUCE"
         value="introduce"
-        @click="this.$router.push('/about')"
+        @click="chngRouter('/about')"
         class="navItems"
-      ></v-list-item>
+      >
+        <template v-slot:append>
+          <v-badge
+            v-show="updateIntroduce"
+            color="error"
+            content="new"
+            inline
+          ></v-badge>
+        </template>
+      </v-list-item>
 
       <v-list-item
         prepend-icon="mdi-note-edit-outline"
         title="LOGGING"
         value="blog"
-        @click="this.$router.push('/logging')"
+        @click="chngRouter('/logging')"
         class="navItems"
-      ></v-list-item>
+      >
+        <template v-slot:append>
+          <v-badge
+            v-show="newPostCnt > 0"
+            color="red"
+            :content="newPostCnt"
+            inline
+          ></v-badge>
+        </template>
+      </v-list-item>
     </v-list>
   </v-layout>
 </template>
@@ -38,13 +60,26 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {
+      updateIntroduce: false,
+      newPostCnt: 0,
+    };
+  },
+  mounted() {
+    this.newPostCnt = this.commonjs.newPostCnt();
+    //this.commonjs.updateIntroduce();
   },
   methods: {
-    goHref(idx) {
-      var url = ["https://github.com/rasz60"];
-
-      window.open("about:blank").location.href = url[idx];
+    newWindow(url) {
+      window.open("about:blank").location.href = url;
+    },
+    chngRouter(path) {
+      var currRouter = this.$router.currentRoute._rawValue.fullPath;
+      if (currRouter != path) {
+        this.$router.push(path);
+      } else {
+        this.$router.go(0);
+      }
     },
   },
 };

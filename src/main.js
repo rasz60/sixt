@@ -5,5 +5,10 @@ import store from "./store";
 
 // Vuetify
 import vuetify from "./plugins/vuetify";
+import common from "@/assets/js/common.js";
 
-createApp(App).use(store).use(router).use(vuetify).mount("#app");
+let app = createApp(App);
+
+app.config.globalProperties.commonjs = common;
+
+app.use(store).use(router).use(vuetify).mount("#app");
