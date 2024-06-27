@@ -40,10 +40,8 @@ export default {
     try {
       const param = this.$route.params.seq;
       this.post = JSON.parse(posts).filter((e) => e.seq == param)[0];
-      const post = await import(
-        "!raw-loader!@/posts/" + this.post.name + ".md"
-      );
-      this.contents = htmlConverter(post.default);
+      const post = await import("@/posts/" + this.post.name + ".md");
+      this.contents = await htmlConverter(post.default);
     } catch (e) {
       console.log(e);
     }
