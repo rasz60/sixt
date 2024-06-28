@@ -80,8 +80,8 @@
 
 <script>
 import posts from "@/utils/posts";
-import datas from "@/assets/js/logging/loggingListDatas.js";
-import methods from "@/assets/js/logging/loggingListMethods.js";
+import datas from "@/assets/js/logging/list/loggingListDatas.js";
+import methods from "@/assets/js/logging/list/loggingListMethods.js";
 
 export default {
   data() {

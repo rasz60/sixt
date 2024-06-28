@@ -1,7 +1,3 @@
-<script setup>
-//import htmlConverter from "@/utils/HTMLConverter";
-</script>
-
 <template>
   <v-card>
     <v-card-title id="detailsTitle">
@@ -27,29 +23,17 @@
 </template>
 
 <script>
-import posts from "@/utils/posts";
+import datas from "@/assets/js/logging/details/loggingDetailsDatas.js";
+import methods from "@/assets/js/logging/details/loggingDetailsMethods.js";
 
 export default {
   data() {
-    return {
-      contents: null,
-      post: null,
-    };
+    return datas;
   },
   created() {
     this.setPost();
   },
-  methods: {
-    async setPost() {
-      const param = this.$route.params.seq;
-      let displayPost = await JSON.parse(posts).filter(
-        (e) => e.seq == param
-      )[0];
-      this.post = displayPost;
-      //const post = await import("@/posts/" + this.post.name + ".md");
-      //this.contents = htmlConverter(post.default);
-    },
-  },
+  methods: methods,
 };
 </script>
 
