@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import MainView from "@/components/MainView.vue";
 import AboutView from "@/components/AboutView.vue";
 import LoggingList from "@/components/LoggingList.vue";
@@ -27,7 +27,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHashHistory(),
   scrollBehavior() {
     // 항상 맨 위로 스크롤
     return {
