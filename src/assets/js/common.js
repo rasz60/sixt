@@ -15,7 +15,7 @@ const getAllPosts = () => {
 // 키워드별 chip 배경색 설정
 const keywordColor = (type, value) => {
   var color = "";
-
+  console.log(type, value);
   for (var i in keywordConfig) {
     let config = keywordConfig[i];
     if (config.type == type) {
@@ -24,7 +24,7 @@ const keywordColor = (type, value) => {
       } else {
         color = config.color;
       }
-      break;
+      if (color != "") break;
     }
   }
 
@@ -42,7 +42,7 @@ const keywordPIcon = (type, value) => {
       } else {
         icon = config.icon;
       }
-      break;
+      if (icon != "") break;
     }
   }
 
@@ -102,7 +102,15 @@ const dateDiff = (posts) => {
 
     posts[i].realDateDiff =
       now.getTime() -
-      new Date(dateParam[0], dateParam[1] - 1, dateParam[2]).getTime();
+      new Date(
+        dateParam[0],
+        dateParam[1] - 1,
+        dateParam[2],
+
+        timeParam[0],
+        timeParam[1],
+        timeParam[2]
+      ).getTime();
     posts[i].dateDiff = rst;
   }
 };

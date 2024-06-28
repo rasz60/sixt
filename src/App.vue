@@ -1,16 +1,16 @@
 <script setup>
-import MenuSection from "@/components/MenuSection.vue";
-import HomeView from "@/views/HomeView.vue";
+import MenuView from "@/views/MenuView.vue";
+import ContentView from "@/views/ContentView.vue";
 </script>
 
 <template>
   <v-container id="container">
     <v-row id="main">
       <v-col sm="3" id="menu">
-        <MenuSection />
+        <MenuView />
       </v-col>
       <v-col sm="9">
-        <HomeView />
+        <ContentView />
       </v-col>
     </v-row>
   </v-container>
@@ -19,8 +19,8 @@ import HomeView from "@/views/HomeView.vue";
 <script>
 export default {
   components: {
-    MenuSection,
-    HomeView,
+    MenuView,
+    ContentView,
   },
   data() {
     return {
@@ -46,7 +46,7 @@ export default {
 @import "@/assets/style/common.scss";
 
 .v-container {
-  padding-top: 3rem;
+  padding-top: 3rem !important;
   min-height: 800px;
 
   #main {

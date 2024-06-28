@@ -120,6 +120,7 @@ export default {
 .v-card-title {
   display: flex !important;
   align-items: center;
+  justify-content: center;
   text-align: center;
   white-space: pre-wrap !important;
   height: 10em;

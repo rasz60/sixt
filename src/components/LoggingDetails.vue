@@ -110,11 +110,27 @@ export default {
     font-weight: 400;
   }
 
+  code {
+    background-color: #f7f7f7;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 0.3em;
+    font-weight: 500;
+  }
+
   pre {
     background-color: #f7f7f7;
     padding: 15px;
     border-radius: 10px;
     margin: 1em;
+
+    code {
+      padding: 0;
+      background-color: transparent;
+      border-radius: none;
+      margin: 0;
+      font-weight: 400;
+    }
   }
 
   a {

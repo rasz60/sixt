@@ -1,30 +1,26 @@
 [
   {
     "seq": 1,
-    "group": "g-1",
-    "name": "README",
-    "title": "[WEB] Spring-boot, Vue3, MySql 웹페이지 만들기🔨",
-    "date": "2024-06-26 18:52:34",
+    "groupSeq": 1,
+    "name": "g1_seq1",
+    "title": "[WEB] GitHub Pages Blog 만들기🔨 #1",
+    "date": "2024-06-24 11:25:13",
     "dateDiff": null,
     "keywords": [
       { "type": "dev", "value": "dev" },
-      { "type": "full", "value": "fullstack" },
-      { "type": "back", "value": "java" },
-      { "type": "back", "value": "spring-boot" },
-      { "type": "back", "value": "spring-security" },
+      { "type": "front", "value": "frontend" },
       { "type": "front", "value": "vue" },
-      { "type": "front", "value": "vuetify" },
-      { "type": "db", "value": "mysql" }
+      { "type": "front", "value": "vuetify" }
     ],
     "newPost": false,
-    "proceeding": false
+    "proceeding": true
   },
   {
     "seq": 2,
-    "group": "g-2",
-    "name": "ISSUE",
-    "title": "[WEB] GitHub Pages Blog 만들기 issue🩺",
-    "date": "2024-06-27 11:50:12",
+    "group": 1,
+    "name": "g1_issue1",
+    "title": "[WEB] GitHub Pages Blog 만들기 🩺issue#1",
+    "date": "2024-06-24 15:00:30",
     "realDateDiff": 0,
     "dateDiff": null,
     "keywords": [
@@ -34,6 +30,6 @@
       { "type": "front", "value": "vuetify" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   }
 ]
