@@ -1,0 +1,25 @@
+[
+  { "type": "dev", "color": "cyan", "icon": "mdi-math-log" },
+  { "type": "issue", "color": "red", "icon": "mdi-alert-circle-outline" },
+  { "type": "full", "color": "indigo", "icon": "mdi-set-all" },
+  {
+    "type": "back",
+    "color": "green",
+    "icon": "mdi-code-greater-than-or-equal"
+  },
+  { "type": "front", "color": "orange", "icon": "mdi-palette" },
+  { "type": "db", "color": "primary", "icon": "mdi-database" },
+  { "type": "lib", "color": "secondary", "icon": "mdi-plus-box-multiple" },
+  {
+    "type": "status",
+    "color": "green-darken-4",
+    "icon": "mdi-play-box-outline",
+    "value": true
+  },
+  {
+    "type": "status",
+    "color": "red-darken-4",
+    "icon": "mdi-stop-circle-outline",
+    "value": false
+  }
+]

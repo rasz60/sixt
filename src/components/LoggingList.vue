@@ -79,7 +79,6 @@
 </template>
 
 <script>
-import posts from "@/utils/posts";
 import datas from "@/assets/js/logging/list/loggingListDatas.js";
 import methods from "@/assets/js/logging/list/loggingListMethods.js";
 
@@ -88,7 +87,7 @@ export default {
     return datas;
   },
   created() {
-    this.posts = JSON.parse(posts);
+    this.posts = this.commonjs.getAllPosts();
     this.displayPosts = this.posts;
   },
   mounted() {

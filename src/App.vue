@@ -44,21 +44,20 @@ export default {
 
 <style lang="scss">
 @import "@/assets/style/common.scss";
-#app {
-  .v-container {
-    padding-top: 3rem;
-    min-height: 800px;
 
-    #main {
-      height: auto;
-      padding: 0;
-    }
+.v-container {
+  padding-top: 3rem;
+  min-height: 800px;
 
-    #menu {
-      height: auto;
-      padding-left: 1em;
-      padding-right: 3em;
-    }
+  #main {
+    height: auto;
+    padding: 0;
+  }
+
+  #menu {
+    height: auto;
+    padding-left: 1em;
+    padding-right: 3em;
   }
 }
 </style>
