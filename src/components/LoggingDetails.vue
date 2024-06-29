@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card id="details">
     <v-card-title id="detailsTitle">
       {{ post.title }}
     </v-card-title>
@@ -17,8 +17,50 @@
         >{{ keyword.value }}</v-chip
       >
     </div>
+    <div id="btnBox">
+      <v-btn
+        size="small"
+        prepend-icon="mdi-format-list-bulleted"
+        @click="this.$router.push('/logging')"
+        color="secondary"
+        >go to list</v-btn
+      >
+    </div>
     <v-divider></v-divider>
     <div id="doc" v-html="contents"></div>
+    <v-divider></v-divider>
+    <v-row id="relatedPosts">
+      <v-col cols="6">
+        <v-list>
+          <v-list-item class="relatedPostTitle"
+            >다른 시리즈 게시물 보기</v-list-item
+          >
+          <v-list-item
+            class="relatedPostList"
+            link
+            v-for="serizePost in serizePosts"
+            :key="serizePost"
+            @click="movePost(serizePost.seq)"
+          >
+            {{ serizePost.title }}
+          </v-list-item>
+        </v-list>
+      </v-col>
+      <v-col cols="6">
+        <v-list>
+          <v-list-item class="relatedPostTitle">관련 게시물 보기</v-list-item>
+          <v-list-item
+            class="relatedPostList"
+            link
+            v-for="relatedPost in relatedPosts"
+            :key="relatedPost"
+            @click="movePost(relatedPost.seq)"
+          >
+            {{ relatedPost.title }}
+          </v-list-item>
+        </v-list>
+      </v-col>
+    </v-row>
   </v-card>
 </template>
 
@@ -27,123 +69,44 @@ import datas from "@/assets/js/logging/details/loggingDetailsDatas.js";
 import methods from "@/assets/js/logging/details/loggingDetailsMethods.js";
 
 export default {
+  name: "LoggingDetails",
   data() {
     return datas;
   },
   created() {
     this.setPost();
   },
+  mounted() {
+    this.setRelatedPosts();
+  },
   methods: methods,
 };
 </script>
 
 <style lang="scss">
-#detailsTitle {
-  justify-content: center;
-  font-size: 30px;
-  width: 100%;
-  height: 4em;
-  padding-top: 3em;
-  padding-bottom: 1em;
-  font-weight: 700;
-}
+@import "@/assets/style/loggingDetails.scss";
+@import "@/assets/style/markdownDoc.scss";
 
-#subTitle {
+#btnBox {
   display: flex;
-  justify-content: center;
-  color: darkgray;
-}
-
-#keywords {
-  padding: 1em;
-  display: flex;
-  justify-content: center;
-
-  .keyword {
-    margin: 2px;
-  }
-}
-#doc {
+  justify-content: flex-end;
   padding: 20px;
+}
 
-  * {
-    margin: 5px;
+#relatedPosts {
+  padding-left: 20px;
+  padding-right: 20px;
+
+  .relatedPostTitle {
+    padding: 0.4rem 0 0.4rem 0;
   }
 
-  h1 {
-    font-size: 2em;
-  }
+  .relatedPostList {
+    padding-left: 0.4rem;
+    min-height: 2rem;
 
-  h2 {
-    font-size: 1.8em;
-  }
-
-  h3 {
-    font-size: 1.6em;
-  }
-
-  h4 {
-    font-size: 1.4em;
-    margin: 1rem;
-  }
-
-  h5 {
-    font-size: 1.2em;
-    margin: 0.8rem;
-  }
-
-  h6 {
-    font-size: 1em;
-    margin: 0.6rem;
-  }
-
-  h1,
-  h2,
-  h3 {
-    padding-bottom: 1.2rem;
-    margin-bottom: 1.2rem;
-    border-bottom: 1px solid lightgray;
-  }
-
-  h6 {
     color: darkgray;
-    font-weight: 400;
-  }
-
-  code {
-    background-color: #f7f7f7;
-    padding: 5px;
-    border-radius: 10px;
-    margin: 0.3em;
-    font-weight: 500;
-  }
-
-  pre {
-    background-color: #f7f7f7;
-    padding: 15px;
-    border-radius: 10px;
-    margin: 1em;
-
-    code {
-      padding: 0;
-      background-color: transparent;
-      border-radius: none;
-      margin: 0;
-      font-weight: 400;
-    }
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  a:hover {
-    background-color: aliceblue;
-  }
-
-  hr {
-    margin-top: 2em;
-    margin-bottom: 2em;
+    text-decoration: underline;
   }
 }
 </style>

@@ -1,6 +1,10 @@
+<script setup>
+import { RouterView } from "vue-router";
+</script>
+
 <template>
   <div id="contents">
-    <router-view />
+    <RouterView :key="$route.fullPath" />
   </div>
 </template>
 
@@ -8,7 +12,7 @@
 // @ is an alias to /src
 
 export default {
-  name: "ContentSection",
+  name: "contentSection",
 };
 </script>
 

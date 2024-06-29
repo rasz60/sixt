@@ -6,27 +6,34 @@ import ContentView from "@/views/ContentView.vue";
 <template>
   <v-container id="container">
     <v-row id="main">
-      <v-col sm="3" id="menu">
+      <v-col cols="3" id="menu">
         <MenuView />
       </v-col>
-      <v-col sm="9">
+      <v-col cols="9">
         <ContentView />
       </v-col>
     </v-row>
+    <v-btn
+      v-show="scrolled"
+      icon="mdi-arrow-up"
+      color="primary"
+      id="dial"
+      @click="goTop"
+    >
+    </v-btn>
   </v-container>
 </template>
 
 <script>
 export default {
+  name: "app",
   components: {
     MenuView,
     ContentView,
   },
   data() {
     return {
-      target: null,
-      scrollTop: 0,
-      isScrollDown: false,
+      scrolled: false,
     };
   },
   mounted() {
@@ -35,16 +42,29 @@ export default {
   methods: {
     handleScroll() {
       var scroll = document.scrollingElement.scrollTop;
-      var target = document.querySelector("#menuSection");
-      target.style.top = scroll + "px";
+
+      this.scrolled = scroll > 0;
+
+      var target1 = document.querySelector("#menuSection");
+
+      if (target1 != null) {
+        target1.style.top = scroll + "px";
+      }
+
+      var target2 = document.querySelector("#dial");
+      if (target2 != null) {
+        target2.style.marginTop = scroll > 0 ? "92vh" : "0";
+        target2.style.top = scroll + "px";
+      }
+    },
+    goTop() {
+      window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
     },
   },
 };
 </script>
 
 <style lang="scss">
-@import "@/assets/style/common.scss";
-
 .v-container {
   padding-top: 3rem !important;
   min-height: 800px;
@@ -58,6 +78,12 @@ export default {
     height: auto;
     padding-left: 1em;
     padding-right: 3em;
+  }
+
+  #dial {
+    position: absolute;
+    right: 5rem;
+    top: 0;
   }
 }
 </style>

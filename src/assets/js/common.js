@@ -1,5 +1,5 @@
-import jsonPosts from "/public/storages/_posts.json";
-import keywordConfig from "/public/storages/_keyword.json";
+import jsonPosts from "/public/json/_posts.json";
+import keywordConfig from "/public/json/_keyword.json";
 
 // 모든 post array 가져오기
 const getAllPosts = () => {
@@ -15,7 +15,6 @@ const getAllPosts = () => {
 // 키워드별 chip 배경색 설정
 const keywordColor = (type, value) => {
   var color = "";
-  console.log(type, value);
   for (var i in keywordConfig) {
     let config = keywordConfig[i];
     if (config.type == type) {

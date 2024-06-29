@@ -83,6 +83,7 @@ import datas from "@/assets/js/logging/list/loggingListDatas.js";
 import methods from "@/assets/js/logging/list/loggingListMethods.js";
 
 export default {
+  name: "loggingList",
   data() {
     return datas;
   },

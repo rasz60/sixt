@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunksixt_github_io"]=self["webpackChunksixt_github_io"]||[]).push([[557],{5557:function(u,t,e){e.r(t),t["default"]="### vue-router 사용하기\n"}}]);
+//# sourceMappingURL=557.13d712ec.js.map

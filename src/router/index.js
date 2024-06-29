@@ -1,18 +1,18 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import MainView from "@/components/MainView.vue";
-import AboutView from "@/components/AboutView.vue";
+import MainPage from "@/components/MainPage.vue";
+import AboutMe from "@/components/AboutMe.vue";
 import LoggingList from "@/components/LoggingList.vue";
 import LoggingDetails from "@/components/LoggingDetails.vue";
 const routes = [
   {
     path: "/",
-    name: "main",
-    component: MainView,
+    name: "MainPage",
+    component: MainPage,
   },
   {
     path: "/about",
-    name: "introduce",
-    component: AboutView,
+    name: "AboutMe",
+    component: AboutMe,
   },
   {
     path: "/logging",

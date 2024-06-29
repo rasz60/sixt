@@ -16,8 +16,7 @@
     "raw-loader": "^4.0.2",
     "showdown": "^2.1.0",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.13",
-    "vuex": "^4.0.0"
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -25,7 +24,6 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
-    "@vue/cli-plugin-vuex": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "prettier": "^3.2.5",

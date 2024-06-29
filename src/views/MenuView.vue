@@ -1,10 +1,12 @@
 <template>
   <v-layout id="menuSection">
-    <v-list id="profile">
+    <v-list density="compact" nav id="nav">
       <v-list-item
+        id="profile"
         prepend-avatar="https://avatars.githubusercontent.com/u/96821067?v=4"
         title="SIXT(Jinwoong Kim)"
         subtitle="devsixt60@gmail.com"
+        @click="this.$router.push('/')"
       >
         <div id="social">
           <v-icon
@@ -14,16 +16,14 @@
           <v-icon icon="mdi-email-fast-outline"></v-icon>
         </div>
       </v-list-item>
-    </v-list>
 
-    <v-divider></v-divider>
+      <v-divider></v-divider>
 
-    <v-list density="compact" nav id="nav">
       <v-list-item
         prepend-icon="mdi-account-search"
         title="INTRODUCE"
         value="introduce"
-        @click="chngRouter('/about')"
+        @click="this.$router.push('/about')"
         class="navItems"
       >
         <template v-slot:append>
@@ -40,7 +40,7 @@
         prepend-icon="mdi-note-edit-outline"
         title="LOGGING"
         value="blog"
-        @click="chngRouter('/logging')"
+        @click="this.$router.push('/logging')"
         class="navItems"
       >
         <template v-slot:append>
@@ -58,7 +58,7 @@
 
 <script>
 export default {
-  components: {},
+  name: "menuView",
   data() {
     return {
       updateIntroduce: false,
@@ -67,19 +67,10 @@ export default {
   },
   mounted() {
     this.newPostCnt = this.commonjs.newPostCnt();
-    //this.commonjs.updateIntroduce();
   },
   methods: {
     newWindow(url) {
       window.open("about:blank").location.href = url;
-    },
-    chngRouter(path) {
-      var currRouter = this.$router.currentRoute._rawValue.fullPath;
-      if (currRouter != path) {
-        this.$router.push(path);
-      } else {
-        this.$router.go(0);
-      }
     },
   },
 };

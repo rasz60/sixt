@@ -1,0 +1,25 @@
+#detailsTitle {
+  justify-content: center;
+  font-size: 30px;
+  width: 100%;
+  height: 4em;
+  padding-top: 3em;
+  padding-bottom: 1em;
+  font-weight: 700;
+}
+
+#subTitle {
+  display: flex;
+  justify-content: center;
+  color: darkgray;
+}
+
+#keywords {
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+
+  .keyword {
+    margin: 2px;
+  }
+}

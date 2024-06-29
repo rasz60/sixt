@@ -1,14 +1,16 @@
 ### Github repository는 늘어나는데 기록이 하나도 없다. 😂
 
-commit message만 들여다보고는 자세히 알기 힘들어서 구현했던 기능도 다시 구글링해야 하는 깊은 도르마무에 빠졌다. 👾
+commit message만 들여다보고는 자세히 알기 힘들어서 구현했던 기능도 다시 구글링해야 하는 깊은 도르마무에 빠졌다. ⏳👾
 
 포트폴리오를 만들 생각이 있던 차에, '아예 블로그를 만들어봐야겠다' 생각이 들었다.
+
+그❗ 래❕ 서❗ 지금 보고있는 이 블로그를 만드는 과정을 하나씩 기록해보았다.😏
 <br/><br/>
 
 ### Vue3 프로젝트 생성
 
 회사 동료와 최근에 진행했던 `vue3`를 이용해서 만들기로 했다.<br/>
-구현을 위한 자세한 내용은 [@yemsu🔗](https://yemsu.github.io/make-github-io-blog-with-vue3-1/)라는 분의 블로그를 상당히 많이 참고했다.🙇‍♂️
+구현을 위한 자세한 내용은 [@yemsu](https://yemsu.github.io/make-github-io-blog-with-vue3-1/)라는 분의 블로그를 상당히 많이 참고했다.🙇‍♂️
 
 <br/>간략하게는 이런 식으로 동작하는 블로그이다.
 <br/>① markdown 파일로 게시글 작성, Git repository에 commit
@@ -16,6 +18,7 @@ commit message만 들여다보고는 자세히 알기 힘들어서 구현했던 
 <br/>③ 게시글 리스트, 게시글 상세 페이지에 출력
 <br/><br/>
 먼저 VS-Code를 이용해서 vue 프로젝트를 생성했다.
+[@issue#1. vue create terminal 권한 문제](#/logging/2)
 
 ```
 vue create ${프로젝트를 저장할 경로}
@@ -29,6 +32,7 @@ vue create ${프로젝트를 저장할 경로}
 ### 초기 설정
 
 ① 프로젝트 생성한 폴더를 VS Code에 불러온 후, 사용할 dependency들을 설치한다.
+[@issue#2. dependency 설치](#/logging/3)
 
 ###### ㄴ 직전 프로젝트 진행 시, funding 때문에 dependency가 제대로 동작하지 않아, 설치할 때 무조건 반사로 --no-fund를 붙이고 있다.
 
@@ -53,21 +57,20 @@ npm i @mdi/font --no-fund
 npm i sass sass-loader@10 -D --no-fund
 ```
 
-###### 초반에 eslint와 prettier가 충돌해서 꽤나 애를 먹었..지만 해결! 💁‍♂️[🔗](https://rasz60.github.io/sixt/#/logging/2)
+###### 초반에 eslint와 prettier가 충돌해서 꽤나 애를 먹었..지만 해결! 💁‍♂️[@issue#3. prettier 설정](#/logging/4)
 
 <br/>
 ② main.js : 설치한 dependency들을 사용할 수 있도록 main.js를 작성했다. 
-###### ㄴvuex도 쓸 줄 몰라서 일단 제외했다. 나중에 한 번 써봐야지🤦‍♂️
+###### ㄴ일단은 기본 페이지 띄우는데 필요하지 않은 것들은 제외했다.
 
 ```
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
 import vuetify from "./plugins/vuetify";
 
 let app = createApp(App);
 
-app.use(router).use(vuetify).mount("#app");
+app.use(vuetify).mount("#app");
 ```
 
 <br/>
@@ -111,4 +114,4 @@ npm run serve
 ```
 <br/>
 
-이걸로 초기 세팅은 끝! 🙌
+이걸로 초기 설정은 끝! 🙌
