@@ -79,7 +79,6 @@ export default {
   min-height: 800px;
 
   #main {
-    height: auto;
     padding: 0;
   }
 

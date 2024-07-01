@@ -49,9 +49,9 @@ const keywordPIcon = (type, value) => {
 };
 
 const randomColor = () => {
-  const rColor = Math.floor(Math.random() * 128 + 64);
-  const gColor = Math.floor(Math.random() * 128 + 64);
-  const bColor = Math.floor(Math.random() * 128 + 64);
+  const rColor = Math.floor(Math.random() * 256);
+  const gColor = Math.floor(Math.random() * 256);
+  const bColor = Math.floor(Math.random() * 256);
 
   return rColor + "," + gColor + "," + bColor;
 };
@@ -74,31 +74,6 @@ const dateDiff = (posts) => {
 
     let now = new Date();
 
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var date = now.getDate();
-    var hours = now.getHours();
-    var minutes = now.getMinutes();
-    var seconds = now.getSeconds();
-
-    if (year != dateParam[0]) {
-      rst = year - dateParam[0] + "년 전";
-    } else if (month != dateParam[1]) {
-      rst = month - dateParam[1] + "개월 전";
-    } else if (date != dateParam[2]) {
-      rst = date - dateParam[2] + "일 전";
-    } else {
-      posts[i].newPost = true;
-
-      if (hours - timeParam[0] > 0) {
-        rst = hours - timeParam[0] + "시간 전";
-      } else if (minutes - timeParam[1] > 0) {
-        rst = minutes - timeParam[1] + "분 전";
-      } else {
-        rst = seconds - timeParam[2] + "초 전";
-      }
-    }
-
     posts[i].realDateDiff =
       now.getTime() -
       new Date(
@@ -110,6 +85,23 @@ const dateDiff = (posts) => {
         timeParam[1],
         timeParam[2]
       ).getTime();
+
+    var t = Math.ceil(posts[i].realDateDiff / 1000);
+
+    if (t < 60) {
+      rst = t + "초 전";
+    } else if (t >= 60 && t < 60 * 60) {
+      rst = Math.ceil(t / 60) + "분 전";
+    } else if (t >= 60 * 60 && t < 60 * 60 * 24) {
+      rst = Math.ceil(t / (60 * 60)) + "시간 전";
+    } else if (t >= 60 * 60 * 24 && t < 60 * 60 * 24 * 30) {
+      rst = Math.ceil(t / (60 * 60 * 24)) + "일 전";
+    } else if (t >= 60 * 60 * 24 * 30 && t < 60 * 60 * 24 * 365) {
+      rst = Math.ceil(t / (60 * 60 * 24 * 30)) + "개월 전";
+    } else if (t >= 60 * 60 * 24 * 365) {
+      rst = Math.ceil(t / (60 * 60 * 24 * 365)) + "년 전";
+    }
+
     posts[i].dateDiff = rst;
   }
 };
