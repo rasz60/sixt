@@ -15,8 +15,9 @@ import ContentView from "@/views/ContentView.vue";
     </v-row>
     <v-btn
       v-show="scrolled"
+      variant="tonal"
       icon="mdi-arrow-up"
-      color="primary"
+      color="cyan"
       id="dial"
       @click="goTop"
     >
@@ -82,7 +83,10 @@ export default {
 
   #dial {
     position: absolute;
-    right: 5rem;
+    right: 2.5rem;
+    width: 2em;
+    height: 2em;
+    font-size: 1.3em;
     top: 0;
   }
 }

@@ -37,9 +37,11 @@
       ></v-text-field>
     </v-col>
   </v-row>
-  <v-row class="loggingRow">
+  <v-row v-for="(row, i) in rows" :key="row" class="loggingRow">
     <v-col
-      v-for="post in displayPosts"
+      v-for="post in displayPosts.filter((p, idx) => {
+        if (idx >= i * 3 && idx < (i + 1) * 3) return p;
+      })"
       :key="post"
       cols="4"
       @click="this.$router.push('/logging/' + post.seq)"
@@ -90,6 +92,7 @@ export default {
   created() {
     this.posts = this.commonjs.getAllPosts();
     this.displayPosts = this.posts;
+    this.rows = Math.ceil(this.posts.length / 3);
   },
   mounted() {
     this.setPostBg();

@@ -14,7 +14,7 @@ export default {
     }
   },
   setPostWithKeyword(type) {
-    let conditionPosts = new Array();
+    let conditionPosts = [];
     for (var i in this.posts) {
       var keywords = this.posts[i].keywords;
       for (var j = 0; j < keywords.length; j++) {
@@ -38,6 +38,33 @@ export default {
   setPostContainsKeyword(type) {
     let conditionPosts = new Array();
     for (var i in this.posts) {
+      var chk = false;
+      var keywords = this.posts[i].keywords;
+      for (var j = 0; j < keywords.length; j++) {
+        if (keywords[j].type.indexOf(type) > -1) {
+          conditionPosts.push(this.posts[i]);
+          chk = true;
+          break;
+        }
+        if (keywords[j].value.indexOf(type) > -1) {
+          conditionPosts.push(this.posts[i]);
+          chk = true;
+          break;
+        }
+      }
+      if (!chk) {
+        var title = this.posts[i].title;
+        if (title.indexOf(type) > -1) {
+          conditionPosts.push(this.posts[i]);
+          chk = true;
+        }
+      }
+    }
+    return conditionPosts;
+  },
+  setPostContainsTitle(type) {
+    let conditionPosts = new Array();
+    for (var i in this.posts) {
       var keywords = this.posts[i].keywords;
       for (var j = 0; j < keywords.length; j++) {
         if (keywords[j].type.indexOf(type) > -1) {
@@ -52,6 +79,7 @@ export default {
     }
     return conditionPosts;
   },
+
   async setPosts(type, value) {
     this.displayPosts = new Array();
 
@@ -62,14 +90,10 @@ export default {
       if (this.searchKeyword == "") {
         alert("검색어를 입력해주세요.");
       } else {
+        // 키워드에 포함된 포스트 찾기
         this.displayPosts = this.setPostContainsKeyword(this.searchKeyword);
-        this.posts.filter((p) => {
-          p.title.indexOf(this.searchKeyword) > -1
-            ? this.displayPosts.filter((p2) =>
-                p2.seq != p.seq ? this.displayPosts.push(p) : false
-              )
-            : false;
-        });
+
+        //
       }
     } else {
       if (keywordFlag) {

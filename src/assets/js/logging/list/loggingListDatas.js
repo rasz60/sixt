@@ -14,4 +14,5 @@ export default {
     { type: "status", title: "진행중", value: true },
     { type: "status", title: "마감", value: false },
   ],
+  rows: 0,
 };

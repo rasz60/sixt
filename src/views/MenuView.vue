@@ -11,7 +11,7 @@
         <div id="social">
           <v-icon
             icon="mdi-github"
-            @click="newWindow(`https://github.com/rasz60`)"
+            @click.stop="newWindow(`https://github.com/rasz60`)"
           />
           <v-icon icon="mdi-email-fast-outline"></v-icon>
         </div>
@@ -23,7 +23,7 @@
         prepend-icon="mdi-account-search"
         title="INTRODUCE"
         value="introduce"
-        @click="this.$router.push('/about')"
+        @click="moveMenu('/about')"
         class="navItems"
       >
         <template v-slot:append>
@@ -40,13 +40,13 @@
         prepend-icon="mdi-note-edit-outline"
         title="LOGGING"
         value="blog"
-        @click="this.$router.push('/logging')"
+        @click="moveMenu('/logging')"
         class="navItems"
       >
         <template v-slot:append>
           <v-badge
             v-show="newPostCnt > 0"
-            color="red"
+            color="error"
             :content="newPostCnt"
             inline
           ></v-badge>
@@ -71,6 +71,13 @@ export default {
   methods: {
     newWindow(url) {
       window.open("about:blank").location.href = url;
+    },
+    moveMenu(url) {
+      if (this.$route.fullPath == url) {
+        this.$router.go(0);
+      } else {
+        this.$router.push(url);
+      }
     },
   },
 };

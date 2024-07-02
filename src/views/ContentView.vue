@@ -20,5 +20,6 @@ export default {
 #contents {
   height: 100%;
   padding-left: 10px;
+  padding-right: 2.2rem;
 }
 </style>
