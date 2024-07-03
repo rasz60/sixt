@@ -145,5 +145,23 @@
     ],
     "newPost": false,
     "proceeding": true
+  },
+  {
+    "seq": 9,
+    "groupSeq": 1,
+    "type": "dev",
+    "serizes": "g1",
+    "name": "seq6",
+    "title": "GitHub Pages Blog 만들기🔨 #6\n- 게시글 목록 검색 기능 추가",
+    "date": "2024-06-28 10:15:19",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "frontend" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]

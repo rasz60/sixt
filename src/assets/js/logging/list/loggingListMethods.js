@@ -9,9 +9,6 @@ export default {
   },
   async seeAll() {
     this.displayPosts = this.posts;
-    if ((await this.displayPosts.length) > 0) {
-      this.setPostBg();
-    }
   },
   setPostWithKeyword(type) {
     let conditionPosts = [];
@@ -62,49 +59,28 @@ export default {
     }
     return conditionPosts;
   },
-  setPostContainsTitle(type) {
-    let conditionPosts = new Array();
-    for (var i in this.posts) {
-      var keywords = this.posts[i].keywords;
-      for (var j = 0; j < keywords.length; j++) {
-        if (keywords[j].type.indexOf(type) > -1) {
-          conditionPosts.push(this.posts[i]);
-          break;
-        }
-        if (keywords[j].value.indexOf(type) > -1) {
-          conditionPosts.push(this.posts[i]);
-          break;
-        }
-      }
-    }
-    return conditionPosts;
-  },
-
   async setPosts(type, value) {
-    this.displayPosts = new Array();
-
     var keywordFlag = value == null;
-    var statusFlag = type == null;
+    var statusFlag = type == "status" || type == null;
 
     if (keywordFlag && statusFlag) {
       if (this.searchKeyword == "") {
         alert("검색어를 입력해주세요.");
       } else {
-        // 키워드에 포함된 포스트 찾기
+        // 키워드, 제목에 포함된 포스트 찾기
         this.displayPosts = this.setPostContainsKeyword(this.searchKeyword);
-
-        //
       }
     } else {
-      if (keywordFlag) {
+      if (type == "status") {
+        this.displayPosts = this.setPostWithStatus(value);
+      } else {
         this.displayPosts = this.setPostWithKeyword(type);
       }
-
-      if (statusFlag) {
-        this.displayPosts = this.setPostWithStatus(value);
-      }
     }
-
-    if ((await this.displayPosts.length) > 0) this.setPostBg();
+  },
+  searchKeyup(evt) {
+    if (evt.keyCode == "13") {
+      this.setPosts(null, null);
+    }
   },
 };

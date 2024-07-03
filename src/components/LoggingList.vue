@@ -6,25 +6,15 @@
       >
       <v-chip
         class="category"
-        v-for="category in categorys.filter((e) => e.type == 'status')"
+        v-for="category in categorys"
         :key="category"
         :prepend-icon="
           this.commonjs.keywordPIcon(category.type, category.value)
         "
         :color="this.commonjs.keywordColor(category.type, category.value)"
-        @click="setPosts(null, category.value)"
         link
+        @click="setPosts(category.type, category.value)"
         >{{ category.title }}</v-chip
-      >
-      <v-chip
-        class="category"
-        v-for="category in categorys.filter((e) => e.type != 'status')"
-        :key="category"
-        :prepend-icon="this.commonjs.keywordPIcon(category.type)"
-        :color="this.commonjs.keywordColor(category.type)"
-        link
-        @click="setPosts(category.type, null)"
-        >{{ category.value }}</v-chip
       >
     </v-col>
 
@@ -33,7 +23,9 @@
         variant="underlined"
         append-icon="mdi-magnify"
         v-model="searchKeyword"
-        @click:append="setPosts(undefined, undefined)"
+        @click:append="setPosts()"
+        @keyup="searchKeyup"
+        placeholder="검색어 입력"
       ></v-text-field>
     </v-col>
   </v-row>
@@ -92,12 +84,14 @@ export default {
   created() {
     this.posts = this.commonjs.getAllPosts();
     this.displayPosts = this.posts;
-    this.rows = Math.ceil(this.posts.length / 3);
-  },
-  mounted() {
-    this.setPostBg();
   },
   methods: methods,
+  watch: {
+    displayPosts() {
+      this.rows = Math.ceil(this.posts.length / 3);
+      setTimeout(this.setPostBg, 20);
+    },
+  },
 };
 </script>
 
