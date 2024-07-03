@@ -85,11 +85,14 @@ export default {
     this.posts = this.commonjs.getAllPosts();
     this.displayPosts = this.posts;
   },
+  mounted() {
+    setTimeout(this.setPostBg, 50);
+  },
   methods: methods,
   watch: {
     displayPosts() {
       this.rows = Math.ceil(this.posts.length / 3);
-      setTimeout(this.setPostBg, 20);
+      setTimeout(this.setPostBg, 50);
     },
   },
 };

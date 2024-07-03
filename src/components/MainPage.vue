@@ -2,11 +2,7 @@
 
 <template>
   <v-sheet class="mx-auto" width="100%">
-    <h2>간략 소개 🙋‍♂️</h2>
-  </v-sheet>
-  <v-divider></v-divider>
-  <v-sheet class="mx-auto" width="100%">
-    <h2>최신 LOG&nbsp;<v-chip size="small" color="red">new</v-chip></h2>
+    <h2>최신 deVLOG&nbsp;<v-chip size="small" color="red">new</v-chip></h2>
     <v-slide-group class="pa-5" show-arrows>
       <v-slide-group-item
         v-for="p in posts.filter((p, idx) => {
@@ -26,13 +22,17 @@
   <v-divider></v-divider>
   <v-sheet class="mx-auto" width="100%">
     <h2>
-      현재 진행 중인 LOG&nbsp;<v-chip size="small" color="primary">ing</v-chip>
+      현재 진행 중인 deVLOG&nbsp;<v-chip size="small" color="primary"
+        >ing</v-chip
+      >
     </h2>
     <v-slide-group class="pa-4" show-arrows>
       <v-slide-group-item
-        v-for="p in posts.filter((p) => {
-          if (p.proceeding) return p;
-        })"
+        v-for="p in posts
+          .filter((p) => {
+            if (p.proceeding) return p;
+          })
+          .reverse()"
         :key="p"
       >
         <v-card

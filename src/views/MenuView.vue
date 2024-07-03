@@ -38,7 +38,7 @@
 
       <v-list-item
         prepend-icon="mdi-note-edit-outline"
-        title="LOGGING"
+        title="deVLOG"
         value="blog"
         @click="moveMenu('/logging')"
         class="navItems"
