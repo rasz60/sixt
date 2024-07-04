@@ -127,6 +127,10 @@ export default {
     // ① data 기본 세팅
     this.displayPosts = this.getAllPosts(posts);
   },
+  mounted() {
+    // html 엘리먼트 mount 완료 후, 10ms 뒤에 setPostBg() 실행
+    setTimeout(this.setPostBg, 10);
+  },
   methods: {
     // 게시글 전체 가져오기
     getAllPosts(posts) {
@@ -263,14 +267,20 @@ export default {
 &nbsp;② created()<br/>
 ­­ + vue 파일이 로드되어 생성된 상태로 아직 html element가 생성되기 전이다.<br/>
 ­­ + data와 같이 element 요소 생성 전 미리 설정할 값을 이 부분에서 작업한다.<br/>
-­­ + 아래 methods 에 정의한 메서드를 불러올 때는 this.메서드명으로 불러온다.
+­­ + methods 에 정의한 메서드를 불러올 때는 this.메서드명으로 불러온다.
 <br/><br/>
 
-&nbsp;③ methods<br/>
+&nbsp;③ mounted()<br/>
+­­ + vue 파일이 로드되어 html element가 모두 mount된 시점이다. (document.ready)<br/>
+­­ + element에 class, style 등을 부여할 때 주로 사용한다.<br/>
+­­ + methods 에 정의한 메서드를 불러올 때는 this.메서드명으로 불러온다.
+­<br/><br/>
+
+&nbsp;④ methods<br/>
 ­­ + 해당 vue에서 사용할 메서드들을 정의한다.
 <br/><br/>
 
-&nbsp;④ watch<br/>
+&nbsp;⑤ watch<br/>
 ­­ + data 변수 값 변경을 감지하는 부분이다.<br/>
 ­­ + data변수명() {//실행 로직} 형식으로 입력하면 자동으로 해당 data 변수 값 변경 때마다 실행된다.<br/>
 ­­ + 동적으로 displayPosts가 변경되어 화면에 뿌려지면, 10ms후에 random으로 배경색을 지정하도록 설정했다.

@@ -18,20 +18,21 @@
         ></v-card>
       </v-slide-group-item>
     </v-slide-group>
+    <v-divider></v-divider>
   </v-sheet>
-  <v-divider></v-divider>
-  <v-sheet class="mx-auto" width="100%">
+  <v-sheet class="mx-auto" width="100%" v-for="g in groups" :key="g">
     <h2>
-      현재 진행 중인 deVLOG&nbsp;<v-chip size="small" color="primary"
-        >ing</v-chip
+      {{ g.groupTitle }}&nbsp;<v-chip
+        size="small"
+        :color="g.proceeding ? `primary` : ``"
       >
+        {{ g.proceeding ? `ing` : `done` }}
+      </v-chip>
     </h2>
     <v-slide-group class="pa-4" show-arrows>
       <v-slide-group-item
         v-for="p in posts
-          .filter((p) => {
-            if (p.proceeding) return p;
-          })
+          .filter((p) => p.groupSeq == g.groupSeq && p.type == 'dev')
           .reverse()"
         :key="p"
       >
@@ -43,6 +44,7 @@
         ></v-card>
       </v-slide-group-item>
     </v-slide-group>
+    <v-divider></v-divider>
   </v-sheet>
 </template>
 
@@ -52,10 +54,12 @@ export default {
   data() {
     return {
       posts: [],
+      groups: [],
     };
   },
   created() {
     this.posts = this.commonjs.getAllPosts();
+    this.groups = this.commonjs.getAllGroups();
   },
   mounted() {
     this.setPostBg();

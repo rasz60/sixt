@@ -1,0 +1,52 @@
+#postsList {
+  height: 100%;
+  padding: 1.2rem;
+}
+
+.newPostsBadge {
+  position: absolute;
+  z-index: 1;
+}
+
+#categorys {
+  display: flex;
+  align-items: center;
+
+  .category {
+    margin: 0.3rem;
+  }
+}
+
+.post:hover {
+  top: -0.3em;
+  box-shadow: 0.3em 0.3em 1em lightgray;
+}
+
+.postLink {
+  text-decoration: none;
+}
+
+.v-card-title {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: pre-wrap !important;
+  height: 10em;
+}
+
+.keywords {
+  padding: 0.3rem;
+  height: 6em;
+
+  .keyword {
+    margin: 0.2rem;
+  }
+}
+
+.dateDiff {
+  padding: 10px 20px 10px 20px;
+  text-align: right;
+  font-style: italic;
+  color: darkgrey;
+}

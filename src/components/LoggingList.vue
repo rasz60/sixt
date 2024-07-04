@@ -1,6 +1,6 @@
 <template>
-  <v-row class="category">
-    <v-col cols="9">
+  <v-row id="listTop">
+    <v-col cols="9" id="categorys">
       <v-chip prepend-icon="mdi-list-box-outline" link @click="seeAll"
         >전체보기</v-chip
       >
@@ -23,7 +23,7 @@
         variant="underlined"
         append-icon="mdi-magnify"
         v-model="searchKeyword"
-        @click:append="setPosts()"
+        @click:append="setPosts"
         @keyup="searchKeyup"
         placeholder="검색어 입력"
       ></v-text-field>
@@ -36,7 +36,6 @@
       })"
       :key="post"
       cols="4"
-      @click="this.$router.push('/logging/' + post.seq)"
     >
       <v-badge
         class="newPostsBadge"
@@ -44,30 +43,32 @@
         color="red"
         content="new"
       ></v-badge>
-      <v-card class="post" link>
-        <v-card-title class="postTitle">
-          {{ post.title }}
-        </v-card-title>
+      <router-link :to="'/logging/' + post.seq" class="postLink">
+        <v-card class="post" link>
+          <v-card-title class="postTitle">
+            {{ post.title }}
+          </v-card-title>
 
-        <v-divider></v-divider>
+          <v-divider></v-divider>
 
-        <div class="keywords">
-          <v-chip
-            v-for="keyword in post.keywords"
-            :key="keyword"
-            :prepend-icon="this.commonjs.keywordPIcon(keyword.type)"
-            :color="this.commonjs.keywordColor(keyword.type)"
-            size="small"
-            link
-            class="keyword"
-            >{{ keyword.value }}</v-chip
-          >
-        </div>
+          <div class="keywords">
+            <v-chip
+              v-for="keyword in post.keywords"
+              :key="keyword"
+              :prepend-icon="this.commonjs.keywordPIcon(keyword.type)"
+              :color="this.commonjs.keywordColor(keyword.type)"
+              size="small"
+              link
+              class="keyword"
+              >{{ keyword.value }}</v-chip
+            >
+          </div>
 
-        <div class="dateDiff">
-          {{ post.dateDiff }}
-        </div>
-      </v-card>
+          <div class="dateDiff">
+            {{ post.dateDiff }}
+          </div>
+        </v-card>
+      </router-link>
     </v-col>
   </v-row>
 </template>
@@ -100,46 +101,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
-#postsList {
-  height: 100%;
-  padding: 1.2rem;
-}
-
-.newPostsBadge {
-  position: absolute;
-  z-index: 1;
-}
-
-.category {
-  margin: 0.3rem;
-}
-
-.post:hover {
-  top: -0.3em;
-  box-shadow: 0.3em 0.3em 1em lightgray;
-}
-.v-card-title {
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  white-space: pre-wrap !important;
-  height: 10em;
-}
-
-.keywords {
-  padding: 0.3rem;
-  height: 6em;
-
-  .keyword {
-    margin: 0.2rem;
-  }
-}
-
-.dateDiff {
-  padding: 10px 20px 10px 20px;
-  text-align: right;
-  font-style: italic;
-  color: darkgrey;
-}
+@import "@/assets/style/loggingList.scss";
 </style>

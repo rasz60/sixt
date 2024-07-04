@@ -86,27 +86,4 @@ export default {
 <style lang="scss">
 @import "@/assets/style/loggingDetails.scss";
 @import "@/assets/style/markdownDoc.scss";
-
-#btnBox {
-  display: flex;
-  justify-content: flex-end;
-  padding: 20px;
-}
-
-#relatedPosts {
-  padding-left: 20px;
-  padding-right: 20px;
-
-  .relatedPostTitle {
-    padding: 0.4rem 0 0.4rem 0;
-  }
-
-  .relatedPostList {
-    padding-left: 0.4rem;
-    min-height: 2rem;
-
-    color: darkgray;
-    text-decoration: underline;
-  }
-}
 </style>

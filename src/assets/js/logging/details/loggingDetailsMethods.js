@@ -8,7 +8,7 @@ export default {
       .filter((e) => e.seq == param)[0];
     this.post = displayPost;
     const post = await import(
-      "/public/posts/" + this.post.serizes + "/" + this.post.name + ".md"
+      "/public/posts/" + this.post.serizes + "/" + this.post.fileName
     );
     this.contents = htmlConverter(post.default);
   },

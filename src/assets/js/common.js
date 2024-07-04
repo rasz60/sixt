@@ -1,4 +1,5 @@
 import jsonPosts from "/public/json/_posts.json";
+import jsonGroups from "/public/json/_groups.json";
 import keywordConfig from "/public/json/_keyword.json";
 
 // 모든 post array 가져오기
@@ -9,6 +10,14 @@ const getAllPosts = () => {
 
   return posts.sort(function (a, b) {
     return a.realDateDiff - b.realDateDiff;
+  });
+};
+
+const getAllGroups = () => {
+  let groups = jsonGroups;
+
+  return groups.sort(function (a, b) {
+    return a.groupSeq - b.groupSeq;
   });
 };
 
@@ -108,6 +117,7 @@ const dateDiff = (posts) => {
 
 export default {
   getAllPosts: getAllPosts,
+  getAllGroups: getAllGroups,
   keywordColor: keywordColor,
   keywordPIcon: keywordPIcon,
   randomColor: randomColor,
