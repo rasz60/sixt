@@ -126,12 +126,10 @@ export default {
     // vue 생성 시
     // ① data 기본 세팅
     this.displayPosts = this.getAllPosts(posts);
-    this.rows = Math.ceil(this.displayPosts.length / 3); // row 수 구하기
   },
   mounted() {
-    // vue dom mount완료 시 (== document.ready())
-    // ② element 요소 기본 세팅
-    this.setPostBg();
+    // html 엘리먼트 mount 완료 후, 10ms 뒤에 setPostBg() 실행
+    setTimeout(this.setPostBg, 10);
   },
   methods: {
     // 게시글 전체 가져오기
@@ -197,7 +195,6 @@ export default {
     // 랜덤 배경색 설정
     setPostBg() {
       let postTitle = document.querySelectorAll(".postTitle");
-
       for (var i = 0; i < postTitle.length; i++) {
         var rColor = Math.floor(Math.random() * 256);
         var gColor = Math.floor(Math.random() * 256);
@@ -208,6 +205,15 @@ export default {
       }
     },
   },
+  watch() {
+    // data 값 변경 감지
+    displayPosts(v) {
+      // row 수 설정
+      this.rows = Math.ceil(v.length / 3);
+      // displayPosts 값 변경 시, 10ms 뒤에 setPostBg() 실행
+      setTimeout(this.setPostBg, 10);
+    }
+  }
 };
 </script>
 
@@ -248,8 +254,7 @@ export default {
 
 ```
 
-쓰다보니 너무 복잡하다..🤦‍♂️<br/>
-script 부분을 하나씩 떼어내서 살펴보자.
+쓰다보니 너무 복잡하다.. script 부분을 하나씩 떼어내서 살펴보자.🤦‍♂️
 <br/><br/>
 
 &nbsp;① data()<br/>
@@ -262,19 +267,23 @@ script 부분을 하나씩 떼어내서 살펴보자.
 &nbsp;② created()<br/>
 ­­ + vue 파일이 로드되어 생성된 상태로 아직 html element가 생성되기 전이다.<br/>
 ­­ + data와 같이 element 요소 생성 전 미리 설정할 값을 이 부분에서 작업한다.<br/>
-­­ + 아래 methods 에 정의한 메서드를 불러올 때는 this.메서드명으로 불러온다.
+­­ + methods 에 정의한 메서드를 불러올 때는 this.메서드명으로 불러온다.
 <br/><br/>
 
 &nbsp;③ mounted()<br/>
-­­ + html element가 생성된 이 후이다. document.ready()와 같은 개념이라고 볼 수 있다.<br/>
-­­ + 게시글 제목이 출력되는 element의 랜덤으로 배경색을 설정하는 메서드를 실행했다.<br/>
-­­ + 가끔,,아니 꽤나 자주 mounted()에서도 element를 찾지 못하는 경우가 있는데 필요에 따라 async-await나 setTimeout등을 사용하여 sync를 맞추어주어야 한다.<br/>
-­­ + 아래 methods 에 정의한 메서드를 불러올 때는 this.메서드명으로 불러온다.
-<br/><br/>
+­­ + vue 파일이 로드되어 html element가 모두 mount된 시점이다. (document.ready)<br/>
+­­ + element에 class, style 등을 부여할 때 주로 사용한다.<br/>
+­­ + methods 에 정의한 메서드를 불러올 때는 this.메서드명으로 불러온다.
+­<br/><br/>
 
 &nbsp;④ methods<br/>
 ­­ + 해당 vue에서 사용할 메서드들을 정의한다.
+<br/><br/>
 
+&nbsp;⑤ watch<br/>
+­­ + data 변수 값 변경을 감지하는 부분이다.<br/>
+­­ + data변수명() {//실행 로직} 형식으로 입력하면 자동으로 해당 data 변수 값 변경 때마다 실행된다.<br/>
+­­ + 동적으로 displayPosts가 변경되어 화면에 뿌려지면, 10ms후에 random으로 배경색을 지정하도록 설정했다.
 <br/><br/>
 
 다음 포스트에서는 제목 검색 게시글을 검색하여 리스트를 변경하는 기능을 구현해보겠다.😎

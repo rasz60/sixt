@@ -14,7 +14,7 @@ src/components/MainPage.vue
 ```
 <template>
   <div id="main">
-    <h1>금방 만들어보겠습니다🙋‍♂️</h1>
+    <h1>OOO의 블로그입니다.🙋‍♂️</h1>
   </div>
 </template>
 

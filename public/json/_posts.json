@@ -181,5 +181,59 @@
     ],
     "newPost": false,
     "proceeding": false
+  },
+  {
+    "seq": 11,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq1.md",
+    "title": "Github Pages에 Blog 배포하기🔨 #1\n- Github ↔ 프로젝트 연동",
+    "date": "2024-07-01 11:24:06",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "frontend" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": false
+  },
+  {
+    "seq": 12,
+    "groupSeq": 2,
+    "type": "issue",
+    "serizes": "g2",
+    "fileName": "issue1.md",
+    "title": "Github Pages에 Blog 배포하기🩺 issue#1\n- .gitignore 설정",
+    "date": "2024-07-01 11:35:24",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "issue", "value": "issue" },
+      { "type": "front", "value": "frontend" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": false
+  },
+  {
+    "seq": 13,
+    "groupSeq": 2,
+    "type": "issue",
+    "serizes": "g2",
+    "fileName": "issue2.md",
+    "title": "Github Pages에 Blog 배포하기🩺 issue#2\n- publicPath 설정",
+    "date": "2024-07-01 11:38:42",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "issue", "value": "issue" },
+      { "type": "front", "value": "frontend" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": false
   }
 ]
