@@ -2,6 +2,11 @@
   {
     "groupSeq": 1,
     "groupTitle": "Vue3로 블로그 만들기🔨",
+    "proceeding": false
+  },
+  {
+    "groupSeq": 2,
+    "groupTitle": "Github Page에 Blog 배포하기🚀",
     "proceeding": true
   }
 ]

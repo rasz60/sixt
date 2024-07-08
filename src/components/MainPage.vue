@@ -29,7 +29,7 @@
         {{ g.proceeding ? `ing` : `done` }}
       </v-chip>
     </h2>
-    <v-slide-group class="pa-4" show-arrows>
+    <v-slide-group class="pa-4">
       <v-slide-group-item
         v-for="p in posts
           .filter((p) => p.groupSeq == g.groupSeq && p.type == 'dev')
@@ -80,6 +80,10 @@ export default {
 <style lang="scss">
 .v-sheet {
   padding: 1rem;
+
+  .v-slide-group__content {
+    justify-content: flex-start;
+  }
 
   .v-card {
     width: 21.4rem;

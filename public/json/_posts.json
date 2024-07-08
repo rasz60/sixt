@@ -198,7 +198,7 @@
       { "type": "front", "value": "vuetify" }
     ],
     "newPost": false,
-    "proceeding": false
+    "proceeding": true
   },
   {
     "seq": 12,
@@ -229,6 +229,24 @@
     "dateDiff": null,
     "keywords": [
       { "type": "issue", "value": "issue" },
+      { "type": "front", "value": "frontend" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": false
+  },
+  {
+    "seq": 14,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq2.md",
+    "title": "Github Pages에 Blog 배포하기🔨 #2\n- 디테일 변경",
+    "date": "2024-07-02 16:11:19",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
       { "type": "front", "value": "frontend" },
       { "type": "front", "value": "vue" },
       { "type": "front", "value": "vuetify" }

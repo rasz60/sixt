@@ -3,6 +3,7 @@ import MainPage from "@/components/MainPage.vue";
 import AboutMe from "@/components/AboutMe.vue";
 import LoggingList from "@/components/LoggingList.vue";
 import LoggingDetails from "@/components/LoggingDetails.vue";
+
 const routes = [
   {
     path: "/",

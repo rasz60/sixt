@@ -15,7 +15,7 @@ export default {
     for (var i in this.posts) {
       var keywords = this.posts[i].keywords;
       for (var j = 0; j < keywords.length; j++) {
-        if (keywords[j].type == type) {
+        if (keywords[j].type.toUpperCase() == type.toUpperCase()) {
           conditionPosts.push(this.posts[i]);
           break;
         }
@@ -38,12 +38,12 @@ export default {
       var chk = false;
       var keywords = this.posts[i].keywords;
       for (var j = 0; j < keywords.length; j++) {
-        if (keywords[j].type.indexOf(type) > -1) {
+        if (keywords[j].type.toUpperCase().indexOf(type.toUpperCase()) > -1) {
           conditionPosts.push(this.posts[i]);
           chk = true;
           break;
         }
-        if (keywords[j].value.indexOf(type) > -1) {
+        if (keywords[j].value.toUpperCase().indexOf(type.toUpperCase()) > -1) {
           conditionPosts.push(this.posts[i]);
           chk = true;
           break;
@@ -51,7 +51,7 @@ export default {
       }
       if (!chk) {
         var title = this.posts[i].title;
-        if (title.indexOf(type) > -1) {
+        if (title.toUpperCase().indexOf(type.toUpperCase()) > -1) {
           conditionPosts.push(this.posts[i]);
           chk = true;
         }
