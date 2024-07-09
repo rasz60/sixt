@@ -1,6 +1,6 @@
 <template>
   <v-row id="listTop">
-    <v-col cols="9" id="categorys">
+    <v-col cols="8" id="categorys">
       <v-chip prepend-icon="mdi-list-box-outline" link @click="seeAll"
         >전체보기</v-chip
       >
@@ -26,7 +26,16 @@
         @click:append="setPosts"
         @keyup="searchKeyup"
         placeholder="검색어 입력"
+        hide-details
       ></v-text-field>
+    </v-col>
+    <v-col cols="1" id="listType">
+      <v-btn
+        :icon="listTypeIcon"
+        @click="fnListType"
+        variant="tonal"
+        color="lime-lighten-1"
+      ></v-btn>
     </v-col>
   </v-row>
   <v-row v-for="(row, i) in rows" :key="row" class="loggingRow">

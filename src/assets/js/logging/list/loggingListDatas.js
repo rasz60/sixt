@@ -10,4 +10,6 @@ export default {
     { type: "status", title: "마감", value: false },
   ],
   rows: 0,
+  listType: 0,
+  listTypeIcon: "mdi-format-list-numbered",
 };

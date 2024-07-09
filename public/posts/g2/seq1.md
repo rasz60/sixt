@@ -1,140 +1,141 @@
-### Github와 프로젝트 연동하기
+### Spring-boot 프로젝트 만들기
 
-Vue3로 만든 블로그를 실제 온라인에서 접속할 수 있게끔 하려한다.<br/>
-여러가지 방법이 있지만 간단하게 Github Pages를 이용해서 호스팅해보겠다.
+이전 포스트에서 누누히(❓) 말했듯 나의 포지션은 백엔드이다.<br/>
+개인 공부로 유익했던 Github Pages Blog 만들기를 마치고 이번엔 back단까지 모두 손대보려한다.✌
 <br/><br/>
 
-블로그를 만드는 포스트에서 말했듯이, 정적인 웹페이지만 올릴 수 있기 때문에 모델링한 데이터를 json파일로 저장하였고,<br/>
-게시글 상세 내용도 markdown 파일로 작성하였다.
+우선은 이번 프로젝트 구성을 먼저 살펴보자.
+<br/>
 
-###### ㄴ [Vue3로 내 블로그 만들기 포스트 보러가기🔗](#/logging/1)
+##### IDE
+
+`IntelliJ Community v.2023.2.6` | `Gradle v.8.3` | `VS Code v.1.91.0`
+
+##### RDBM
+
+`MySQL v.8.0.29`
+
+##### Backend (Dependencies)
+
+`JAVA 17` | `Spring-boot v3.3.1` | `JPA` | `Spring-security` | `MySQL Connector-j` | `Lombok`
+
+##### Frontend
+
+`Vue3` | `Vue-router` | `Axios` | `Vuetify`
+<br/><br/>
+
+시작 단계에서 구상한 프로젝트 구성 요소는 위와 같고, 기능 구현에 필요한 요소들을 하나씩 추가해보겠다.
+<br/><br/>
+
+#### ① JAVA 17 설치
+
+Spring Boot v3.x 이상 부터는 JAVA 17 버전 이상만 호환된다.<br/>
+[🔗JAVA 17 설치](https://ssue-dev.tistory.com/entry/%EC%84%A4%EC%B9%98-%EC%9C%88%EB%8F%84%EC%9A%B010%EC%97%90-Java-17-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0)는 이미 되어 있어서, 링크를 참고하여 설치한다.
+<br/><br/>
+
+#### ② Spring Starter
+
+[🔗Spring Starter](https://start.spring.io/) 페이지로 접속해서 위와 같은 프로젝트 구성으로 프로젝트를 생성한다.<br/>
+해당 페이지는 접속할 때마다 선택할 수 있는 버전이 상이하다. 블로그 글을 보면서 따라만들 때 제일 고생한 부분이다.<br/>
+Gradle build 파일에 버전을 명시하여 각각의 버전을 선택할 수 있어서 우선은 안정적인 버전으로 프로젝트를 생성하고나서 사용하는 라이브러리와 호환하는 버전으로 변경하는 방식으로 작업했다.
+<br/><br/>
+
+![img1](/sixt/spring-boot.jpg)
 
 <br/>
-우선 Vue3 프로젝트를 웹에 배포하기 위해 소스를 module화하여 build한다.<br/>
-Vue3 블로그 프로젝트를 VS Code에 띄우고 터미널에 아래와 같이 입력한다.<br/>
-
-```
-npm run build
-```
-
-이렇게 하면 dist라는 폴더가 생성되고, 그 아래로 우리가 작성한 소스가 module화되어 저장된다.
+캡처 이미지처럼 모든 선택사항을 추가하고 GENERATE 버튼을 클릭하면 ${프로젝트명}.zip파일 형태로 파일이 다운로드된다.<br/>
+이 파일의 압축을 풀어서 IntelliJ에서 불러와보자.
 <br/><br/>
 
-다음으로 git repository를 생성하고 프로젝트에 github 연동 초기 설정을 해주었다. VS Code 터미널에서 git init을 입력한다.<br/>
+`IntelliJ` > File > Open을 클릭하여 압축 해제한 폴더 선택하면 Spring Starter로 만든 프로젝트를 불러올 수 있다.<br/>
+폴더를 불러온 후에 Gradle이 자동으로 build를 실행하는데, 여기서.. 첫 번째 이슈를 만났다.🤦‍♂️ [🔗issue#1. Gradle Version 이슈](/#/logging/16)<br/>
+Gradle 버전에 의해서 Build가 되지 않는 현상이 있어 gradle-wrapper.properties의 gradle 버전을 변경해주었더니 해결되었다.
+<br/><br/>
+
+그 다음으로 `IntelliJ` > File > Project Structure .. > Platform Settings > SDKs 에서 설치한 자바 버전에 맞게 설정해주었다.
+<br/><br/>
+
+### Spring Boot 구동해보기
+
+일단 다른 설정을 추가하기 전에 모든 프로그래밍에 시작인 index 페이지에 'Hello, World!'를 띄워기를 해보자.<br/>
+기본 설정으로만 프로젝트를 run하기 위해서 아직 설정하지 않은 JPA dependency를 주석처리한다.
+<br/><br/>
+
+build.gradle
 
 ```
-git init
-```
-
-이렇게 하면 프로젝트 내에 숨김폴더로 .git이라는 폴더와 .gitignore 파일이 생성된다.<br/>
-.gitignore 파일은 git에 소스를 commit할 때 제외할 소스를 정의해놓는 파일이다.<br/>
-이 파일을 열어보면 /dist 경로가 제외 경로로 지정되어있는데 이 부분을 삭제한다. [@issue#1 .gitignore 설정](#/logging/12)
-
-```
-.DS_Store
-node_modules
-/dist ---> 삭제
 .
+.
+dependencies {
+	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //주석처리
+	//implementation 'org.springframework.boot:spring-boot-starter-security' //주석처리
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
 .
 .
 ```
 
 <br/>
-다음으로 github Pages를 통해 배포되는 웹페이지의 URL에 맞추어 프로젝트의 publicPath를 지정해주어야하는데,<br/>
-vue.config.js 파일에 아래와 같이 publicPath를 추가해준다. [@issue#2 publicPath 지정](#/logging/13)
+
+다음으로는 프로젝트를 웹으로 띄우기 위한 port 설정을 추가한다. application.properties나 application.yml 둘 중 편한 형식으로 설정해준다.
 <br/><br/>
 
-vue.config.js
+src/main/resources/application.yml
 
 ```
-const { defineConfig } = require("@vue/cli-service");
-module.exports = defineConfig({
-  transpileDependencies: true,
-  chainWebpack: (config) => {
-    config.module
-      .rule("*.md")
-      .test(/\.md?$/)
-      .use("raw-loader")
-      .loader("raw-loader")
-      .end();
-  },
-  indexPath: "index.html",
-  publicPath: "/${git repository 이름}/", // 본인의 repository 이름 작성
-});
+server:
+  port: ${설정할 포트번호}
 ```
 
-다음으로 Github 로그인하여 새로운 repository를 생성하고, VS Code 터미널에서 아래 순서대로 입력하면 소스코드가 git repository에 올라간다.<br/>
+src/main/resources/application.properties
 
 ```
-// 현재 경로의 소스 전체 git 대기열에 추가
-git add .
-
-// 대기열에 추가된 소스 staging
-git commit -m "${commit 상세 기록}"
-
-// branch 생성
-git branch -M ${branch 이름}
-
-// 로컬과 git repository를 연결하는 remote 생성
-git remote add ${remote이름} https://github.com/${본인계정}/${repository이름}.git
-
-// remote로 연결된 git repository에 staging된 소스를 push
-git push ${remote이름} ${branch 이름}
+server.port=${설정할 포트번호}
 ```
 
-다음으로는 소스를 업로드한 Repository에 Github Pages 설정을 해야한다.
+<br/>
+
+그 다음 Hello, World! 라는 화면을 띄워 줄 index.html을 추가한다.
 <br/><br/>
 
-① git repository > Settings > 좌측 메뉴에서 Pages 선택<br/>
-② Build and deployment 항목에 source를 GitHub Actions로 변경<br/>
-③ 페이지 새로고침되고 하단에 static HTML의 Configure 클릭<br/>
-④ 2가지 항목 수정 및 1가지 항목 추가 후 우측 상단 Commit Changes 버튼 클릭하여 commit
+src/main/resources/static/index.html
 
 ```
-.
-.
-.
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: true // 수정 : GitHub Actions workflows 실행 동시성 제어
-
-jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      .
-      .
-      .
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: "./dist" // 수정 : 실제 module화 된 build 소스가 있는 경로
-      .
-      .
-      .
-      // 추가 : vue3 프로젝트 실행 설정
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          # cache: 'npm'
-      - run: npm ci --legacy-peer-deps
-      - run: npm run build
-        env:
-          CI: false
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello, world!</title>
+</head>
+<body>
+Hello, world!
+</body>
+</html>
 ```
 
-Github Actions은 github repository의 commit이 생기면 자동으로 소스를 빌드하여 변경사항을 반영해준다.<br/>
-git에 소스를 커밋한 후, github repository에서 Actions 탭으로 들어가면 현재 build 상태와 history를 확인할 수 있다.<br/>
+<br/>
 
-이것으로 Github Pages로 블로그 소스를 배포하기 위한 설정을 마쳤다.<br/>
-https://${git아이디}.github.io/${git repository 이름} 으로 접속하면 배포된 페이지를 확인할 수 있다.😎
+마지막으로 Project를 Run 시킬 설정을 추가한다. IntelliJ Community 버전을 사용하고 있기 때문에 위치와 설정 값이 조금씩 다를 수 있다.
 <br/><br/>
 
-다음 포스트에서는 로컬에서와 달리 제대로 동작하지 않는 몇 가지를 수정해보겠다.
+⑴ 우측 상단 run 버튼 옆 Current File 옆 드롭단추 클릭<br/>
+⑵ Edit Configurations... 클릭<br/>
+⑶ 좌측 상단 '+' 버튼 혹은 Add New... 클릭<br/>
+⑷ Application 선택 > Name 입력, 값은 상관 없음<br/>
+⑸ Build and Run 아래 3개 선택 값 설정<br/>
+＋ 첫 번째 콤보 박스 : 설치된 자바 버전 선택<br/>
+＋ 두 번째 콤보 박스 : ${프로젝트명}.main 선택<br/>
+＋ 세 번째 콤보 박스 : 우측 리스트 버튼 클릭 후 ${프로젝트명}Application.java 클래스 선택
+<br/><br/>
+
+위와 같이 설정하여 run을 실행한 후, localhost:${설정한 포트번호}로 접속하면 Hello, world!가 출력된다.<br/>
+이 것으로 Spring-boot 프로젝트의 기본 설정을 마쳤고, 다음으로는 데이터 베이스를 설정해보겠다.😎

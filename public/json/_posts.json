@@ -5,7 +5,7 @@
     "type": "dev",
     "serizes": "g1",
     "fileName": "seq1.md",
-    "title": "Vue3로 내 Blog 만들기🔨 #1\n- 초기 설정",
+    "title": "Github Pages Blog 만들기🔨 #1\n- 초기 설정",
     "date": "2024-06-24 11:25:13",
     "dateDiff": null,
     "keywords": [
@@ -23,7 +23,7 @@
     "type": "issue",
     "serizes": "g1",
     "fileName": "issue1.md",
-    "title": "Vue3로 내 Blog 만들기 🩺issue#1\n- VS CODE Terminal 권한 설정",
+    "title": "Github Pages Blog 만들기 🩺#1\n- VS CODE Terminal 권한 설정",
     "date": "2024-06-24 12:30:10",
     "realDateDiff": 0,
     "dateDiff": null,
@@ -42,7 +42,7 @@
     "type": "issue",
     "serizes": "g1",
     "fileName": "issue2.md",
-    "title": "Vue3로 내 Blog 만들기 🩺issue#2\n- dependency 설정 관련",
+    "title": "Github Pages Blog 만들기 🩺#2\n- dependency 설정 관련",
     "date": "2024-06-24 14:22:18",
     "realDateDiff": 0,
     "dateDiff": null,
@@ -61,7 +61,7 @@
     "type": "issue",
     "serizes": "g1",
     "fileName": "issue3.md",
-    "title": "Vue3로 내 Blog 만들기 🩺issue#3\n- eslint, prettier 충돌",
+    "title": "Github Pages Blog 만들기 🩺#3\n- eslint, prettier 충돌",
     "date": "2024-06-24 15:00:30",
     "realDateDiff": 0,
     "dateDiff": null,
@@ -80,7 +80,7 @@
     "type": "dev",
     "serizes": "g1",
     "fileName": "seq2.md",
-    "title": "Vue3로 내 Blog 만들기🔨 #2\n- 프로젝트 구성 및 초기 화면",
+    "title": "Github Pages Blog 만들기🔨 #2\n- 프로젝트 구성 및 초기 화면",
     "date": "2024-06-25 17:35:57",
     "dateDiff": null,
     "keywords": [
@@ -98,7 +98,7 @@
     "type": "dev",
     "serizes": "g1",
     "fileName": "seq3.md",
-    "title": "Vue3로 내 Blog 만들기🔨 #3\n- 초기 화면 상세",
+    "title": "Github Pages Blog 만들기🔨 #3\n- 초기 화면 상세",
     "date": "2024-06-25 18:05:23",
     "dateDiff": null,
     "keywords": [
@@ -116,7 +116,7 @@
     "type": "dev",
     "serizes": "g1",
     "fileName": "seq4.md",
-    "title": "Vue3로 내 Blog 만들기🔨 #4\n- vue-router 적용",
+    "title": "Github Pages Blog 만들기🔨 #4\n- vue-router 적용",
     "date": "2024-06-26 17:41:55",
     "dateDiff": null,
     "keywords": [
@@ -134,7 +134,7 @@
     "type": "dev",
     "serizes": "g1",
     "fileName": "seq5.md",
-    "title": "Vue3로 내 Blog 만들기🔨 #5\n- 게시글 목록 페이지 만들기",
+    "title": "Github Pages Blog 만들기🔨 #5\n- 게시글 목록 페이지 만들기",
     "date": "2024-06-27 16:22:37",
     "dateDiff": null,
     "keywords": [
@@ -152,7 +152,7 @@
     "type": "dev",
     "serizes": "g1",
     "fileName": "seq6.md",
-    "title": "Vue3로 내 Blog 만들기🔨 #6\n- 게시글 목록 검색 기능 추가",
+    "title": "Github Pages Blog 만들기🔨 #6\n- 게시글 목록 검색 기능 추가",
     "date": "2024-06-28 10:15:19",
     "dateDiff": null,
     "keywords": [
@@ -170,7 +170,7 @@
     "type": "dev",
     "serizes": "g1",
     "fileName": "seq7.md",
-    "title": "Vue3로 내 Blog 만들기🔨 #7\n- 게시글 상세 페이지",
+    "title": "Github Pages Blog 만들기🔨 #7\n- 게시글 상세 페이지",
     "date": "2024-06-28 16:57:03",
     "dateDiff": null,
     "keywords": [
@@ -184,11 +184,11 @@
   },
   {
     "seq": 11,
-    "groupSeq": 2,
+    "groupSeq": 1,
     "type": "dev",
-    "serizes": "g2",
-    "fileName": "seq1.md",
-    "title": "Github Pages에 Blog 배포하기🔨 #1\n- Github ↔ 프로젝트 연동",
+    "serizes": "g1",
+    "fileName": "seq8.md",
+    "title": "Github Pages Blog 만들기🔨 #8\n- Github Pages ↔ 프로젝트 연동",
     "date": "2024-07-01 11:24:06",
     "dateDiff": null,
     "keywords": [
@@ -198,15 +198,15 @@
       { "type": "front", "value": "vuetify" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 12,
-    "groupSeq": 2,
+    "groupSeq": 1,
     "type": "issue",
-    "serizes": "g2",
-    "fileName": "issue1.md",
-    "title": "Github Pages에 Blog 배포하기🩺 issue#1\n- .gitignore 설정",
+    "serizes": "g1",
+    "fileName": "issue4.md",
+    "title": "Github Pages Blog 만들기🩺 #4\n- .gitignore 설정",
     "date": "2024-07-01 11:35:24",
     "dateDiff": null,
     "keywords": [
@@ -220,11 +220,11 @@
   },
   {
     "seq": 13,
-    "groupSeq": 2,
+    "groupSeq": 1,
     "type": "issue",
-    "serizes": "g2",
-    "fileName": "issue2.md",
-    "title": "Github Pages에 Blog 배포하기🩺 issue#2\n- publicPath 설정",
+    "serizes": "g1",
+    "fileName": "issue5.md",
+    "title": "Github Pages Blog 만들기🩺 #5\n- publicPath 설정",
     "date": "2024-07-01 11:38:42",
     "dateDiff": null,
     "keywords": [
@@ -238,11 +238,11 @@
   },
   {
     "seq": 14,
-    "groupSeq": 2,
+    "groupSeq": 1,
     "type": "dev",
-    "serizes": "g2",
-    "fileName": "seq2.md",
-    "title": "Github Pages에 Blog 배포하기🔨 #2\n- 디테일 변경",
+    "serizes": "g1",
+    "fileName": "seq9.md",
+    "title": "Github Pages Blog 만들기🔨 #9\n- 디테일 변경",
     "date": "2024-07-02 16:11:19",
     "dateDiff": null,
     "keywords": [
@@ -253,5 +253,41 @@
     ],
     "newPost": false,
     "proceeding": false
+  },
+  {
+    "seq": 15,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq1.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #1\n- Spring-boot 프로젝트 만들기",
+    "date": "2024-07-08 17:31:51",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "full", "value": "fullstack" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "db", "value": "MySQL" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 16,
+    "groupSeq": 2,
+    "type": "issue",
+    "serizes": "g2",
+    "fileName": "issue1.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🩺 #1\n- Could not move temporary workspace",
+    "date": "2024-07-08 17:44:10",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]
