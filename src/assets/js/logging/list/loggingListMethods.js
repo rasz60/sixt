@@ -83,12 +83,7 @@ export default {
       this.setPosts(null, null);
     }
   },
-
   fnListType() {
-    var curr = this.listType;
-
-    this.listType = curr == 0 ? 1 : 0;
-    this.listTypeIcon =
-      curr == 0 ? "mdi-tune-variant" : "mdi-format-list-numbered";
+    this.listType = this.listType == 0 ? 1 : 0;
   },
 };

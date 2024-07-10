@@ -1,5 +1,6 @@
 export default {
   searchKeyword: "",
+  groups: null,
   posts: null,
   displayPosts: new Array(),
   postStatus: [],
@@ -12,4 +13,5 @@ export default {
   rows: 0,
   listType: 0,
   listTypeIcon: "mdi-format-list-numbered",
+  listTypeText: "목록형",
 };
