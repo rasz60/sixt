@@ -13,7 +13,7 @@
 
 ##### RDBM
 
-`MySQL v.8.0.29`
+`MySQL Community v.8.0.38`
 
 ##### Backend (Dependencies)
 
@@ -40,7 +40,7 @@ Spring Boot v3.x 이상 부터는 JAVA 17 버전 이상만 호환된다.<br/>
 Gradle build 파일에 버전을 명시하여 각각의 버전을 선택할 수 있어서 우선은 안정적인 버전으로 프로젝트를 생성하고나서 사용하는 라이브러리와 호환하는 버전으로 변경하는 방식으로 작업했다.
 <br/><br/>
 
-![img1](/sixt/spring-boot.jpg)
+![img1](/sixt/images/spring-boot.jpg)
 
 <br/>
 캡처 이미지처럼 모든 선택사항을 추가하고 GENERATE 버튼을 클릭하면 ${프로젝트명}.zip파일 형태로 파일이 다운로드된다.<br/>

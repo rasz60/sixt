@@ -289,5 +289,58 @@
     ],
     "newPost": false,
     "proceeding": true
+  },
+  {
+    "seq": 17,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq2.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #2\n- Spring-boot 프로젝트 DB 연동 하기",
+    "date": "2024-07-09 16:04:56",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "JPA" },
+      { "type": "db", "value": "MySQL" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 18,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "issue2.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🩺 #2\n- JPA Column Default 설정 무시되는 현상",
+    "date": "2024-07-09 17:55:27",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "JPA" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 19,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq3.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #3\n- Spring-boot, Vue3 프로젝트 연동하기",
+    "date": "2024-07-10 16:11:01",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]

@@ -8,7 +8,9 @@ export default {
     }
   },
   async seeAll() {
-    this.displayPosts = this.posts;
+    this.displayPosts = [];
+    this.post = await this.commonjs.getAllPosts();
+    this.displayPosts = await this.posts;
   },
   setPostWithKeyword(type) {
     let conditionPosts = [];
