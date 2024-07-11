@@ -78,6 +78,9 @@ export default {
   },
   mounted() {
     this.setRelatedPosts();
+    document.querySelectorAll("#doc a").forEach((ele) => {
+      ele.target = "_blank"; // 참조 링크 새 탭에서 열기
+    });
   },
   methods: methods,
 };

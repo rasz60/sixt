@@ -173,7 +173,6 @@ export default {
   methods: methods,
   watch: {
     displayPosts() {
-      console.log("change");
       this.rows = Math.ceil(this.posts.length / 3);
       setTimeout(this.setPostBg, 50);
     },
