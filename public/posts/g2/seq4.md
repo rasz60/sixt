@@ -296,15 +296,15 @@ export default {
   data() {
     return {
       member: {
-        memId: "rassayz60",
-        memPw: "sixxrasz60!@",
-        memEmail: "rassayzsixt@gmail.com",
-        memPhone: "01021138583",
+        memId: "",
+        memPw: "",
+        memEmail: "",
+        memPhone: "",
         zipcode: "",
         memAddr1: "",
         memAddr2: "",
       },
-      pwChk: "sixxrasz60!@",
+      pwChk: "",
       chk: {
         idDupChkd: false,
         pwChkd: false,
@@ -452,11 +452,6 @@ export default {
       let chk = await this.$refs.signupFrm.validate();
 
       chk = chk.valid ? 0 : -1;
-      console.log(chk);
-      if (chk == 0) {
-        console.log(this.chk);
-      }
-      console.log(chk);
 
       if (chk == 0) this.frmSubmit();
       else if (chk == 1) alert("아이디 중복을 확인해주세요.");
