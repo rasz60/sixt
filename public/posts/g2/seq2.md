@@ -147,46 +147,56 @@ src/main/java/com/example/rmfr/member/entity/Members.java
 ```
 package com.example.rmfr.member.entity;
 
+import com.example.rmfr.member.dto.MemberDto;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.GenericGenerator;
+
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "members")
+@Data
 @DynamicInsert
 @DynamicUpdate
-@Data
 public class Members {
     // MEMBERS Entity 테이블
     @Id
+    @GeneratedValue(generator="uuid2")
+    @GenericGenerator(name="uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "VARCHAR(100)")
+    private String memUuid;
+
     @Column(columnDefinition = "VARCHAR(40)")
-    private String mId;
+    private String memId;
 
     @Column(columnDefinition = "VARCHAR(100)", nullable=false)
-    private String mPw;
+    private String memPw;
 
     @Column(columnDefinition = "VARCHAR(200)", nullable=false)
-    private String mEmail;
+    private String memEmail;
 
     @Column(columnDefinition = "INT DEFAULT 1")
-    private Integer mLevel;
+    private Integer memLevel;
 
     @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime mPwUpdateDate;
+    private LocalDateTime memPwUpdateDate;
 
     @Column(columnDefinition = "VARCHAR(11)")
-    private String mPhone;
+    private String memPhone;
 
     @Column(columnDefinition = "VARCHAR(1000)")
-    private String mAddr1;
+    private String zipcode;
 
     @Column(columnDefinition = "VARCHAR(1000)")
-    private String mAddr2;
+    private String memAddr1;
 
     @Column(columnDefinition = "VARCHAR(1000)")
-    private String mAddr3;
+    private String memAddr2;
+}
 
 }
 ```
@@ -213,6 +223,21 @@ public class Members {
 
 `@Id`<br/>
 &nbsp;＋ 테이블 생성 시 해당 속성을 PK로 지정한다.
+<br/><br/>
+
+`@GenericGenerator`<br/>
+&nbsp;＋ Hibernate 에서 제공하는 @GenericGenerator 를 사용하면, Optimizer 를 직접 지정해서 최적화할 수 있다.<br/>
+&nbsp;＋ MySQL은 sequence를 제공하지 않기 때문에, uuid로 지정했다.<br/>
+<br/><br/>
+
+`@GeneratedValue`<br/>
+&nbsp;＋ 기본키를 자동으로 생성해주는 어노테이션이다.<br/>
+&nbsp;＋ strategy에 정의된 방식으로 Id 값을 생성한다.<br/>
+&nbsp; ⓐ GenerationType.IDENTITY : 식별자 생성을 데이터베이스에 위임한다.<br/>
+&nbsp; ⓑ GenerationType.SEQUENCE : 데이터베이스의 sequence를 이용한다.<br/>
+&nbsp; ⓒ GenerationType.TABLE : 기 생성용 테이블을 사용한다.(???)<br/>
+&nbsp; ⓓ GenerationType.AUTO : 데이터 베이스 방언에 따라 자동 지정된다. (Default)<br/>
+&nbsp;＋ generator="${@GenericGenerator.Name}"으로 지정하면 GenericGenerator로 정의한 strategy로 value가 생성된다.
 <br/><br/>
 
 `@Column`<br/>
