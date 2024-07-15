@@ -349,12 +349,28 @@
     "type": "dev",
     "serizes": "g2",
     "fileName": "seq4.md",
-    "title": "Spring-boot, Vue3 페이지 만들기🔨 #4\n- 회원가입 페이지 만들기",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #4\n- 회원가입 페이지 만들기 (1)",
     "date": "2024-07-12 16:17:32",
     "dateDiff": null,
     "keywords": [
       { "type": "dev", "value": "dev" },
-      { "type": "back", "value": "Spring-Boot" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 21,
+    "groupSeq": 2,
+    "type": "issue",
+    "serizes": "g2",
+    "fileName": "issue3.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🩺 #3\n- @RequestBody 속성명 매핑 이슈",
+    "date": "2024-07-15 17:07:47",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "issue", "value": "issue" },
       { "type": "front", "value": "vue" },
       { "type": "front", "value": "vuetify" }
     ],

@@ -53,6 +53,8 @@ MySQL Workbench에서 실제 컬럼의 속성을 조회해보아도 Default 값�
 JPA에서 Insert, Update 시 Default 설정을 무시하고 parameter 값을 그대로 넣고 있다.
 <br/><br/>
 
+### 🙆‍♂️ 해결
+
 Default 설정을 제대로 적용시키려면 Entity 클래스에 `@DynamicInsert` | `@DynamicUpdate` 어노테이션을 추가한다.<br/>
 이렇게 하면 동적으로 parameter를 인식하여 null인 경우 default 값을 적용하게 된다.<br/>
 
