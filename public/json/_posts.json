@@ -349,7 +349,7 @@
     "type": "dev",
     "serizes": "g2",
     "fileName": "seq4.md",
-    "title": "Spring-boot, Vue3 페이지 만들기🔨 #4\n- 회원가입 페이지 만들기 (1)",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #4\n- 회원가입 페이지 만들기 (1) - Frontend",
     "date": "2024-07-12 16:17:32",
     "dateDiff": null,
     "keywords": [
@@ -363,6 +363,23 @@
   {
     "seq": 21,
     "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq5.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #5\n- 회원가입 페이지 만들기 (2) - Backend",
+    "date": "2024-07-15 17:03:02",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "JPA" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 22,
+    "groupSeq": 2,
     "type": "issue",
     "serizes": "g2",
     "fileName": "issue3.md",
@@ -371,8 +388,9 @@
     "dateDiff": null,
     "keywords": [
       { "type": "issue", "value": "issue" },
-      { "type": "front", "value": "vue" },
-      { "type": "front", "value": "vuetify" }
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "JPA" },
+      { "type": "lib", "value": "lombok" }
     ],
     "newPost": false,
     "proceeding": true

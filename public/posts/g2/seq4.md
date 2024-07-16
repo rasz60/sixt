@@ -1,4 +1,4 @@
-### 회원가입 페이지 만들기
+### 회원가입 페이지 만들기 (1 / Frontend) - 화면 구성
 
 회원가입 구현을 위해서 front단 부터 구성했다.
 <br/><br/>
@@ -127,7 +127,7 @@ export default {
 
       <h3 class="text-h6 mb-4">Email Verified</h3>
       <div class="text-body-2">
-        {{ member.memEmail }}로 발송된 인증번호를 <br />아래 칸에 입력해주세요.
+        {{ memEmail }}로 발송된 인증번호를 <br />아래 칸에 입력해주세요.
       </div>
 
       <div class="py-3">
@@ -159,12 +159,18 @@ export default {
       <v-col cols="11">
         <v-text-field
           label="* ID"
-          v-model="member.memId"
+          v-model="memId"
           :rules="idRules"
         ></v-text-field>
       </v-col>
       <v-col cols="1" class="btnCols">
-        <v-btn prepend-icon="mdi-account-check-outline" @click="fnIdDupChk"
+        <v-btn
+          :prepend-icon="
+            chk.idDupChkd ? `mdi-account-check` : `mdi-account-check-outline`
+          "
+          :variant="chk.idDupChkd ? `tonal` : `elevated`"
+          :color="chk.idDupChkd ? `primary` : ``"
+          @click="fnIdDupChk"
           >중복확인</v-btn
         >
       </v-col>
@@ -174,7 +180,7 @@ export default {
         <v-text-field
           type="password"
           label="* Password"
-          v-model="member.memPw"
+          v-model="memPw"
           :rules="pwRules"
         ></v-text-field>
       </v-col>
@@ -193,7 +199,7 @@ export default {
       <v-col cols="11">
         <v-text-field
           label="* e-mail"
-          v-model="member.memEmail"
+          v-model="memEmail"
           :rules="emailRules"
           :readonly="chk.emailChkd"
         ></v-text-field>
@@ -203,6 +209,8 @@ export default {
           :prepend-icon="
             chk.emailChkd ? `mdi-email-check` : `mdi-email-check-outline`
           "
+          :variant="chk.emailChkd ? `tonal` : `elevated`"
+          :color="chk.emailChkd ? `primary` : `default`"
           @click="fnMailVerify"
           :text="chk.emailChkd ? `인증완료` : `인증하기`"
         ></v-btn>
@@ -210,16 +218,12 @@ export default {
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-text-field label="Phone" v-model="member.memPhone"></v-text-field>
+        <v-text-field label="Phone" v-model="memPhone"></v-text-field>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="11">
-        <v-text-field
-          label="Zipcode"
-          readonly
-          v-model="member.zipcode"
-        ></v-text-field>
+        <v-text-field label="Zipcode" readonly v-model="zipcode"></v-text-field>
       </v-col>
       <v-col cols="1" class="btnCols">
         <v-btn
@@ -234,13 +238,13 @@ export default {
         <v-text-field
           label="Address1"
           readonly
-          v-model="member.memAddr1"
+          v-model="memAddr1"
         ></v-text-field>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-text-field label="Address2" v-model="member.memAddr2"></v-text-field>
+        <v-text-field label="Address2" v-model="memAddr2"></v-text-field>
       </v-col>
     </v-row>
     <v-row>
@@ -265,6 +269,9 @@ export default {
   data() {
     return signupData;
   },
+  created() {
+    this.init();
+  },
   mounted() {
     this.fnLoadDaumPostcodeScript();
   },
@@ -278,11 +285,12 @@ export default {
       this.chk.pwChkd = v == this.pwChk;
     },
     pwChk(v) {
-      this.chk.pwChkd = v == this.member.memPw;
+      this.chk.pwChkd = v == this.memPw;
     },
   },
 };
 </script>
+
 ```
 
 기본 설명은 Blog 만들기에서 충분히 설명했으니, 대략적인 구조와 추가된 기능을 위주로 살펴보겠다.
@@ -312,7 +320,7 @@ script 각 속성별 소스 코드는 너무 길어서 파일로 따로따로 �
 ##### ② js 추가
 
 /frontend/src/assets/js/signup/signupDatas.js<br/><br/>
-&nbsp; + member {~} : 실제 back단으로 넘겨질 회원가입 정보, back단의 entity 속성명과 동일 [issue#3. @RequestBody 속성명 매핑 이슈](/#/logging/21)<br/>
+&nbsp; + memId ~ memAddr2 : 실제 back단으로 넘겨질 회원가입 정보, back단의 entity 속성명과 동일<br/>
 &nbsp; + pwChk : 비밀번호 확인 값<br/>
 &nbsp; + chk {~} : id 중복체크 / 비밀번호 확인 / 이메일 인증 3가지의 인증 완료 여부 flag<br/>
 &nbsp; + overlay : 이메일 인증 시 화면 overlay 활성화 여부 flag<br/>
@@ -322,15 +330,13 @@ script 각 속성별 소스 코드는 너무 길어서 파일로 따로따로 �
 
 ```
 export default {
-  member: {
-    memId: "",
-    memPw: "",
-    memEmail: "",
-    memPhone: "",
-    zipcode: "",
-    memAddr1: "",
-    memAddr2: "",
-  },
+  memId: "",
+  memPw: "",
+  memEmail: "",
+  memPhone: "",
+  zipcode: "",
+  memAddr1: "",
+  memAddr2: "",
   pwChk: "",
   chk: {
     idDupChkd: false,
@@ -346,6 +352,7 @@ export default {
 
 /frontend/src/assets/js/signup/signupMethods.js<br/><br/>
 &nbsp; + timer : 이메일 인증용 타이머로 사용될 setInterval 함수를 담을 변수<br/>
+&nbsp; + init() : 회원가입 페이지 최초 접근 시 데이터 초기화 메서드<br/>
 &nbsp; + fnRuleChk() : signupRuels.js에 선언된 validation을 가져와서 실행하는 메서드<br/>
 &nbsp; + fnIdDupChk() : 중복 ID 체크 로직, Axios 이용하여 back단 호출<br/>
 &nbsp; + fnMailVerify() : 이메일 인증하기 버튼 클릭 시 실행되는 메서드<br/>
@@ -362,6 +369,23 @@ export default {
 ```
 let timer = null;
 export default {
+  init() {
+    this.memId = "";
+    this.memPw = "";
+    this.memEmail = "";
+    this.memPhone = "";
+    this.zipcode = "";
+    this.memAddr1 = "";
+    this.memAddr2 = "";
+    this.pwChk = "";
+    this.chk.idDupChkd = false;
+    this.chk.pwChkd = false;
+    this.chk.emailChkd = false;
+    this.overlay = false;
+    this.limitTime = 179;
+    this.verifyCode = "";
+    this.otp = "";
+  },
   fnRuleChk(type) {
     var rules = null;
     var value = "";
@@ -370,19 +394,19 @@ export default {
     switch (type) {
       case 0:
         rules = this.idRules;
-        value = this.member.memId;
+        value = this.memId;
         break;
       case 1:
         rules = this.pwRules;
-        value = this.member.memPw;
+        value = this.memPw;
         break;
       case 2:
         rules = this.pwChkRules;
-        value = this.member.pwChk;
+        value = this.pwChk;
         break;
       default:
         rules = this.emailRules;
-        value = this.member.memEmail;
+        value = this.memEmail;
         break;
     }
 
@@ -402,13 +426,13 @@ export default {
 
     if (chk) {
       this.axios
-        .get("/signup/idDupChk/" + this.member.memId)
+        .get("/rest/signup/idDupChk/" + this.memId)
         .then((res) => {
           if (res.data > 0) {
             alert("중복되는 아이디가 존재합니다.");
           } else {
             alert("사용 가능한 아이디 입니다.");
-            this.idDupChkd = true;
+            this.chk.idDupChkd = true;
           }
         })
         .catch((err) => {
@@ -427,7 +451,7 @@ export default {
       if (chk) timer = this.fnSetTimer(); // set timer
     } else {
       if (confirm("인증이 완료된 메일을 변경할까요?")) {
-        this.member.memEmail = "";
+        this.memEmail = "";
         this.otp = "";
         this.verifyCode = "";
         this.chk.emailChkd = false;
@@ -445,7 +469,7 @@ export default {
   async fnSendVerifyCode() {
     var chk = false;
     await this.axios
-      .get("/signup/verifyCode/" + this.member.memEmail)
+      .get("/rest/signup/verifyCode/" + this.memEmail)
       .then((res) => {
         this.verifyCode = res.data.token;
         chk = true;
@@ -484,7 +508,7 @@ export default {
   /* valid code start */
   fnValidCode() {
     var otp = window.btoa(this.otp);
-
+    console.log(otp, this.verifyCode);
     if (this.verifyCode == otp) {
       alert("이메일 인증이 완료되었습니다.");
       this.chk.emailChkd = true;
@@ -513,8 +537,8 @@ export default {
       this.popup = new window.daum.Postcode({
         oncomplete: (data) => {
           // 우편번호 검색 완료 후의 처리 로직
-          this.member.zipcode = data.zonecode;
-          this.member.memAddr1 = data.address;
+          this.zipcode = data.zonecode;
+          this.memAddr1 = data.address;
         },
       });
 
@@ -528,21 +552,35 @@ export default {
   async fnValidate() {
     let chk = await this.$refs.signupFrm.validate();
 
-    chk = chk.valid ? 0 : -1;
+    if (chk.valid) {
+      chk = !this.chk.idDupChkd ? 1 : !this.chk.emailChkd ? 3 : 0;
+    } else {
+      chk = !this.chk.pwChkd ? 2 : -1;
+    }
 
     if (chk == 0) this.fnFrmSubmit();
     else if (chk == 1) alert("아이디 중복을 확인해주세요.");
     else if (chk == 2) alert("비밀번호를 확인해주세요.");
-    else if (chk == 3) alert("이메일 인증을 확인해주세요.");
+    else if (chk == 3) alert("이메일을 인증해주세요.");
     else alert("가입 정보를 다시 확인해주세요.");
   },
 
   async fnFrmSubmit() {
     if (confirm("회원으로 가입할까요?")) {
+      var data = {
+        memId: this.memId,
+        memPw: this.memPw,
+        memEmail: this.memEmail,
+        memPhone: this.memPhone,
+        zipcode: this.zipcode,
+        memAddr1: this.memAddr1,
+        memAddr2: this.memAddr2,
+      };
       await this.axios
-        .post("/signup", this.member)
+        .post("/rest/signup", data)
         .then((res) => {
           alert(res.data + "님의 가입을 환영합니다!");
+          this.$router.push("/");
         })
         .catch((err) => console.log(err));
     }
@@ -599,13 +637,17 @@ export default {
 
     const nullchk = (v) => {
       if (v) return true;
-      return "비빌번호를 확인해주세요.";
+      else return "비빌번호를 확인해주세요.";
     };
     rules.push(nullchk);
 
     const pwChk = (v) => {
-      if (v == this.member.memPw) return true;
-      return "비밀번호를 확인해주세요.";
+      if (this.memPw != "" && v == this.memPw) {
+        this.chk.pwChkd = true;
+        return true;
+      } else {
+        return "비밀번호를 확인해주세요.";
+      }
     };
     rules.push(pwChk);
 
@@ -814,14 +856,18 @@ module.exports = defineConfig({
   transpileDependencies: true,
   indexPath: "index.html",
   devServer: {
-    proxy: "http://localhost:8082", // proxy 추가
+    proxy: {
+      "/rest": {
+        target: "http://localhost:8082",
+        changeOrigin: true,
+      },
+    },
   },
 });
-
 ```
 
-axios를 통해 외부 URL을 호출하면 연결되는 proxy를 설정한다.<br/>
-연동을 위해 로컬 back단이 사용하는 8082 port를 proxy로 추가해준다.
+Vue 프로젝트에서 backend를 호출해야하는 URL을 proxy로 추가해두면, 해당 url 호출 시 backend로 요청을 보낸다.<br/>
+"/rest" 로 시작하는 url을 호출 시 8082 port에게 요청하도록 proxy 설정을 추가하였다.
 <br/><br/>
 
 다음으로는 화면 호출에 반응할 back단을 구성해보자.😎
