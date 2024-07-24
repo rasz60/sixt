@@ -113,46 +113,16 @@ export default {
 /frontend/src/views/SignupPage.vue
 
 ```
+<script setup>
+import VerifyDialog from "@/components/overlay/EmailVerifyDialog.vue";
+</script>
 <template>
   <v-overlay v-model="overlay" id="overlay" scroll-strategy="block" persistent>
-    <v-card
-      class="py-8 px-6 text-center mx-auto ma-4"
-      max-width="400"
-      width="100%"
-    >
-      <div class="d-flex">
-        <v-spacer></v-spacer>
-        <v-icon icon="mdi-close" @click="fnDelTimer" />
-      </div>
-
-      <h3 class="text-h6 mb-4">Email Verified</h3>
-      <div class="text-body-2">
-        {{ memEmail }}로 발송된 인증번호를 <br />아래 칸에 입력해주세요.
-      </div>
-
-      <div class="py-3">
-        <span id="timer">03:00</span>
-      </div>
-
-      <v-sheet color="surface">
-        <v-otp-input v-model="otp" type="text" variant="solo"></v-otp-input>
-      </v-sheet>
-
-      <v-btn
-        class="my-4"
-        color="purple"
-        height="40"
-        text="Verify"
-        variant="flat"
-        width="70%"
-        @click="fnValidCode"
-      ></v-btn>
-
-      <div class="text-caption">
-        인증번호를 받지 못했나요?
-        <a href="#" @click="fnVerifyReset">다시 발송하기</a>
-      </div>
-    </v-card>
+    <VerifyDialog
+      ref="verifyDialog"
+      @sendMessage="fnChildMessage"
+      :memEmail="memEmail"
+    />
   </v-overlay>
   <v-form @submit.prevent id="signup" ref="signupFrm">
     <v-row>
@@ -290,7 +260,82 @@ export default {
   },
 };
 </script>
+```
 
+/frontend/src/components/overlay/EmailVerifyDialog.vue
+
+```
+<template>
+  <v-skeleton-loader
+    class="py-8 px-6 text-center mx-auto ma-4"
+    min-width="400"
+    width="100%"
+    type="card"
+    v-if="loader"
+  ></v-skeleton-loader>
+  <v-card
+    class="py-8 px-6 text-center mx-auto ma-4"
+    max-width="400"
+    width="100%"
+    v-else
+  >
+    <div class="d-flex">
+      <v-spacer></v-spacer>
+      <v-icon icon="mdi-close" @click="fnDelTimer" />
+    </div>
+
+    <h3 class="text-h6 mb-4">Email Verified</h3>
+    <div class="text-body-2">
+      {{ mailAddr }}로 발송된 인증번호를 <br />아래 칸에 입력해주세요.
+    </div>
+
+    <div class="py-3">
+      <span id="timer">03:00</span>
+    </div>
+
+    <v-sheet color="surface">
+      <v-otp-input v-model="otp" type="text" variant="solo"></v-otp-input>
+    </v-sheet>
+
+    <v-btn
+      class="my-4"
+      color="purple"
+      height="40"
+      text="Verify"
+      variant="flat"
+      width="70%"
+      @click="fnValidCode"
+    ></v-btn>
+
+    <div class="text-caption">
+      인증번호를 받지 못했나요?
+      <a href="#" @click="fnVerifyReset">다시 발송하기</a>
+    </div>
+  </v-card>
+</template>
+
+<script>
+import emailVerifyMethods from "@/assets/js/overlay/emailVerify/emailVerifyMethods";
+
+export default {
+  props: ["memEmail"],
+  data() {
+    return {
+      limitTime: 179,
+      verifyCode: "",
+      otp: "",
+      mailAddr: this.memEmail,
+      loader: true,
+    };
+  },
+  async created() {
+    var chk = await this.fnSendVerifyCode();
+    if (chk) this.fnSetTimer();
+    this.loader = false;
+  },
+  methods: emailVerifyMethods,
+};
+</script>
 ```
 
 기본 설명은 Blog 만들기에서 충분히 설명했으니, 대략적인 구조와 추가된 기능을 위주로 살펴보겠다.
@@ -302,6 +347,22 @@ ContentView.vue의 RouterView에는 router/index.js에 매핑된 url별 componen
 <br/><br/>
 
 그냥 보기에도 복잡한.. SignupPage.vue를 살펴보자.
+<br/><br/>
+
+먼저 최상단 v-overlay는 화면 클릭을 막고 모달창을 띄우는 vuetify component이다.<br/>
+그 안에 Email 인증 모달 창을 import하고 overlay flag가 true가 될 때만 보여지게 했다.<br/>
+Email 인증 창을 import한 부분에는 부모 component와 자녀 component 간 메시지를 주고 받을 수 있는 설정 추가했다.
+<br/><br/>
+
+`<VerifyDialog ref="${ref이름}" @sendMessage="${methods}" :memEmail="${자녀component로 전송할 값}"/>`
+<br/>
+&nbsp;&nbsp;&nbsp; + ref : 부모 component에서 this.$refs.${ref이름}으로 해당 자녀 component를 동적으로 접근할 수 있도록 설정, 자녀 -> 부모 호출은 $emit 사용<br/>
+&nbsp;&nbsp;&nbsp; + @sendMessage<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 자녀 component에서 부모 component로 메시지 전송<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : value로 부모 component의 메서드를 지정하면 자녀 component에서 넘겨준 value를 동적으로 적용할 수 있다.<br/>
+&nbsp;&nbsp;&nbsp; + :${변수명} <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 부모 component에서 자녀 component로 전송할 값<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : 자녀 component script에서 props = ["${변수명}", "${변수명}", ... ]으로 받을 수 있다, 자녀 component 다른 변수 명과 중복될 수 없다.
 <br/><br/>
 
 회원가입 form은 Vuetify에서 제공하는 v-form을 사용했다.
@@ -324,9 +385,6 @@ script 각 속성별 소스 코드는 너무 길어서 파일로 따로따로 �
 &nbsp; + pwChk : 비밀번호 확인 값<br/>
 &nbsp; + chk {~} : id 중복체크 / 비밀번호 확인 / 이메일 인증 3가지의 인증 완료 여부 flag<br/>
 &nbsp; + overlay : 이메일 인증 시 화면 overlay 활성화 여부 flag<br/>
-&nbsp; + limitTime : 이메일 인증 시 제한 시간, 179s = 2m59s<br/>
-&nbsp; + verifyCode : back단에서 생성한 인증 번호, 메일 발송한 인증번호를 base64로 인코딩한 값<br/>
-&nbsp; + otp : 이메일 인증 번호로 입력한 값<br/>
 
 ```
 export default {
@@ -344,30 +402,22 @@ export default {
     emailChkd: false,
   },
   overlay: false,
-  limitTime: 179,
-  verifyCode: "",
-  otp: "",
 };
 ```
 
 /frontend/src/assets/js/signup/signupMethods.js<br/><br/>
-&nbsp; + timer : 이메일 인증용 타이머로 사용될 setInterval 함수를 담을 변수<br/>
+
 &nbsp; + init() : 회원가입 페이지 최초 접근 시 데이터 초기화 메서드<br/>
 &nbsp; + fnRuleChk() : signupRuels.js에 선언된 validation을 가져와서 실행하는 메서드<br/>
 &nbsp; + fnIdDupChk() : 중복 ID 체크 로직, Axios 이용하여 back단 호출<br/>
 &nbsp; + fnMailVerify() : 이메일 인증하기 버튼 클릭 시 실행되는 메서드<br/>
-&nbsp; + fnVeirfyReset() : 인증 dialog 창에서 인증번호 재발송 시 실행되는 메서드<br/>
-&nbsp; + fnSendVerifyCode() : back단의 인증 번호 메일 발송을 호출하는 메서드, back단의 return 값을 받아옴<br/>
-&nbsp; + fnSetTimer() : 인증 번호 발송 성공 후, 입력 제한시간 타이머를 setting<br/>
-&nbsp; + fnDelTimer() : 인증 창 닫기 / 인증 번호 재발송(type = -1) / 인증 성공 시 활성화된 타이머 삭제<br/>
-&nbsp; + fnValidCode() : 인증 번호 확인 로직, 입력 값을 base64로 인코딩하여 확인<br/>
 &nbsp; + fnLoadDaumPostcodeScript() : 다음 주소 api script meta tag 추가<br/>
 &nbsp; + fnExecDaumPostcode() : 다음 주소 검색 호출<br/>
 &nbsp; + fnValidate() : v-form submit 시 각 항목의 validation 실행<br/>
 &nbsp; + frmSubmit() : validate() 성공 시 form을 submit()<br/>
+&nbsp; + fnChildMessage() : 자녀 component인 email 인증 창에서 넘겨준 값(overlay 활성화 여부, 메일 인증 완료 여부)에 대한 동적 처리<br/>
 
 ```
-let timer = null;
 export default {
   init() {
     this.memId = "";
@@ -382,9 +432,6 @@ export default {
     this.chk.pwChkd = false;
     this.chk.emailChkd = false;
     this.overlay = false;
-    this.limitTime = 179;
-    this.verifyCode = "";
-    this.otp = "";
   },
   fnRuleChk(type) {
     var rules = null;
@@ -446,9 +493,7 @@ export default {
     var chk = this.chk.emailChkd;
     if (!chk) {
       chk = this.fnRuleChk(3); // check rules
-      if (chk) chk = await this.fnSendVerifyCode(); // send code
       if (chk) this.overlay = true; // open overlay
-      if (chk) timer = this.fnSetTimer(); // set timer
     } else {
       if (confirm("인증이 완료된 메일을 변경할까요?")) {
         this.memEmail = "";
@@ -458,66 +503,6 @@ export default {
       }
     }
   },
-  async fnVerifyReset() {
-    this.fnDelTimer(-1); // del timer
-    if (await this.fnSendVerifyCode() /* send code */) {
-      alert("인증번호를 재전송하였습니다.");
-      timer = this.fnSetTimer(); // set timer
-    }
-  },
-  /* send code start */
-  async fnSendVerifyCode() {
-    var chk = false;
-    await this.axios
-      .get("/rest/signup/verifyCode/" + this.memEmail)
-      .then((res) => {
-        this.verifyCode = res.data.token;
-        chk = true;
-      })
-      .catch(() => {
-        alert("다시 시도해주세요.");
-      });
-    return chk;
-  },
-  /* send code end */
-  /* timer start */
-  fnSetTimer() {
-    var time = this.limitTime;
-    let interval = setInterval(function () {
-      if (time == 0) {
-        alert("인증시간이 만료되었습니다.");
-        clearInterval(timer);
-      }
-      var timerSpan = document.querySelector("#timer");
-      var m = "0" + Math.floor(time / 60);
-      var s = Math.floor(time % 60);
-      s = s < 10 ? "0" + s : s;
-      timerSpan.innerHTML = m + ":" + s;
-      time--;
-    }, 1000);
-    return interval;
-  },
-  fnDelTimer(type) {
-    clearInterval(timer);
-    if (type != -1) {
-      this.verifyCode = "";
-      this.overlay = false;
-    }
-  },
-  /* timer end */
-  /* valid code start */
-  fnValidCode() {
-    var otp = window.btoa(this.otp);
-    console.log(otp, this.verifyCode);
-    if (this.verifyCode == otp) {
-      alert("이메일 인증이 완료되었습니다.");
-      this.chk.emailChkd = true;
-      this.fnDelTimer();
-    } else {
-      alert("인증번호를 다시 확인해주세요.");
-    }
-  },
-  /* valid code end */
   // 다음 주소 api script tag 추가
   fnLoadDaumPostcodeScript() {
     const script = document.createElement("script");
@@ -584,6 +569,10 @@ export default {
         })
         .catch((err) => console.log(err));
     }
+  },
+  fnChildMessage(obj) {
+    this.overlay = obj.overlay;
+    this.chk.emailChkd = obj.chkd;
   },
 };
 ```
@@ -672,6 +661,89 @@ export default {
 
     return rules;
   },
+};
+```
+
+/frontend/src/assets/js/overlay/emailVerify/emailVerifyMethods.js<br/><br/>
+&nbsp; + timer : 이메일 인증용 타이머로 사용될 setInterval 함수를 담을 변수<br/>
+&nbsp; + fnVeirfyReset() : 인증 dialog 창에서 인증번호 재발송 시 실행되는 메서드<br/>
+&nbsp; + fnSendVerifyCode() : back단의 인증 번호 메일 발송을 호출하는 메서드, back단의 return 값을 받아옴<br/>
+&nbsp; + fnSetTimer() : 인증 번호 발송 성공 후, 입력 제한시간 타이머를 setting<br/>
+&nbsp; + fnDelTimer() : 인증 창 닫기 / 인증 번호 재발송(type = -1) / 인증 성공 시 활성화된 타이머 삭제<br/>
+&nbsp; + fnValidCode() : 인증 번호 확인 로직, 입력 값을 base64로 인코딩하여 확인<br/>
+
+```
+let timer = null;
+export default {
+  async fnVerifyReset() {
+    this.fnDelTimer(-1); // del timer
+    this.loader = await true;
+    if (await this.fnSendVerifyCode() /* send code */) {
+      timer = this.fnSetTimer(); // set timer
+      this.loader = await false;
+    }
+  },
+  /* send code start */
+  async fnSendVerifyCode() {
+    var chk = false;
+    await this.axios
+      .get("/rest/signup/verifyCode/" + this.mailAddr)
+      .then((res) => {
+        this.verifyCode = res.data.token;
+        chk = true;
+      })
+      .catch(() => {
+        alert("다시 시도해주세요.");
+      });
+    return chk;
+  },
+  /* send code end */
+  /* timer start */
+  fnSetTimer() {
+    var time = this.limitTime;
+    let interval = setInterval(function () {
+      if (time == 0) {
+        alert("인증시간이 만료되었습니다.");
+        clearInterval(timer);
+      }
+      var timerSpan = document.querySelector("#timer");
+
+      if (timerSpan && timerSpan != null) {
+        var m = "0" + Math.floor(time / 60);
+        var s = Math.floor(time % 60);
+        s = s < 10 ? "0" + s : s;
+
+        timerSpan.innerHTML = m + ":" + s;
+        time--;
+      } else {
+        clearInterval(timer);
+      }
+    }, 1000);
+    timer = interval;
+  },
+  fnDelTimer(type) {
+    clearInterval(timer);
+    if (type != -1) {
+      this.verifyCode = "";
+
+      // this.$emit("sendMessage", ${value}) : 부모 component로 값을 전달하는 sendMessage 실행
+      this.$emit("sendMessage", { overlay: false, chkd: false });
+    }
+  },
+  /* timer end */
+  /* valid code start */
+  fnValidCode() {
+    var otp = window.btoa(this.otp);
+    console.log(otp, this.verifyCode);
+    if (this.verifyCode == otp) {
+      alert("이메일 인증이 완료되었습니다.");
+      this.fnDelTimer();
+      this.$emit("sendMessage", { overlay: false, chkd: true });
+    } else {
+      alert("인증번호를 다시 확인해주세요.");
+    }
+  },
+  /* valid code end */
 };
 ```
 
