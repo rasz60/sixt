@@ -394,5 +394,23 @@
     ],
     "newPost": false,
     "proceeding": true
+  },
+  {
+    "seq": 23,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq6.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #6\n- 로그인 구현하기 (1/2)",
+    "date": "2024-07-17 16:55:31",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "Spring Security" },
+      { "type": "back", "value": "JPA" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]
