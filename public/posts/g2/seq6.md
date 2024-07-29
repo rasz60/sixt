@@ -7,7 +7,7 @@
 `로그인 처리 순서`<br/>
 &nbsp; ① 화면에서 RestAPI로 로그인 URL을 호출 (/rest/login)<br/>
 &nbsp; ② Spring Security에서 인증처리<br/>
-&nbsp; ③-⑴ 로그인 성공 시, 전달받은 로그인 정보를 브라우저 local storage에 입력 (로그인 여부, credential, 만료일자)<br/>
+&nbsp; ③-⑴ 로그인 성공 시, 전달받은 로그인 정보를 브라우저 local storage에 입력 (로그인 여부, token, 만료일자)<br/>
 &nbsp; ③-⑵ 로그인 실패 시, alert 창 안내 문구 출력 (로그인 정보 오류 or 통신 오류)<br/>
 &nbsp; ④ root URL로 redirect<br/>
 &nbsp; ⑤ local storage에 로그인 정보 확인하여 로그인/로그아웃 버튼 활성화 여부 결정
@@ -68,13 +68,16 @@ tasks.named('test') {
 }
 ```
 
-그 다음부터는 굉장히 복잡했다. 구글링으로 찾은 [@kide77](https://velog.io/@kide77/Spring-Boot-3.x-Security-Rest-API-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%9A%94%EC%B2%AD%EB%B6%80-%EA%B5%AC%ED%98%84-1)님의 블로그를 참고하면서 작성했다.<br/>
-form 로그인은 비교적 간단한데, RestAPI 방식으로 로그인할 때는 약간..이지만 꽤 많은 커스텀이 필요했다.
+이 다음부터가 복잡했다. form 로그인은 비교적 간단한데, RestAPI 방식으로 로그인할 때는 약간..이 아니고 꽤나 많은 커스텀이 필요했다.<br/>
+하우에버❗❕ form 로그인은 예전에 해봤기 때문에 이번에는 기필코 Rest 방식으로 해보려고 한다.😎
+<br/><br/>
+
+구글링으로 찾은 [@kide77](https://velog.io/@kide77/Spring-Boot-3.x-Security-Rest-API-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%EC%9A%94%EC%B2%AD%EB%B6%80-%EA%B5%AC%ED%98%84-1)님의 블로그를 참고하면서 작성했다.
 <br/><br/>
 
 /src/java/main/com/example/rmfr/config/custom/CustomAuthenticationFilter.java
 
-###### '/rest/login' URL로 들어왔을 때, 인증을 처리할 filter 클래스
+###### -> '/rest/login' URL로 들어왔을 때, 인증을 처리할 filter 클래스
 
 ```
 package com.example.rmfr.config.custom;
@@ -134,9 +137,11 @@ public class CustomAuthenticationFilter extends AbstractAuthenticationProcessing
 }
 ```
 
+<br/><br/>
+
 /src/java/main/com/example/rmfr/config/custom/CustomAuthenticationToken.java
 
-###### ID와 PW를 이용하여 인증 token을 생성하는 클래스, principal = ID / credentials = PW
+###### -> ID와 PW를 이용하여 인증 token을 생성하는 클래스, principal = ID / credentials = PW
 
 ```
 package com.example.rmfr.config.custom;
@@ -198,9 +203,11 @@ public class CustomAuthenticationToken extends AbstractAuthenticationToken {
 }
 ```
 
+<br/><br/>
+
 /src/java/main/com/example/rmfr/config/AppConfig.java
 
-###### Spring Sequrity 비밀번호 암호화 인코더 Bean 설정 [#issue]()
+###### -> Spring Sequrity 비밀번호 암호화 인코더 Bean 설정 [#issue]()
 
 ```
 package com.example.rmfr.config;
@@ -216,13 +223,15 @@ public class AppConfig {
 }
 ```
 
+<br/><br/>
+
 /src/java/main/com/example/rmfr/member/service/MemberServiceImpl.java
 
-###### Spring Security 비밀번호 encoder 변수 추가
+###### -> Spring Security 비밀번호 encoder 변수 추가
 
-###### 회원 가입 시 입력한 비밀번호 암호화 로직 추가 ( 적용 전 가입한 데이터가 있다면 삭제할 것 ❗ )
+###### -> 회원 가입 시 입력한 비밀번호 암호화 로직 추가 ( 적용 전 가입한 데이터가 있다면 삭제할 것 ❗ )
 
-###### Spring Security에서 로그인 시 아이디를 parameter로 회원 정보를 가져오는 메서드 추가
+###### -> Spring Security에서 로그인 시 아이디를 parameter로 회원 정보를 가져오는 메서드 추가
 
 ```
 package com.example.rmfr.member.service;
@@ -282,9 +291,11 @@ public class MemberServiceImpl implements MemberService, UserDetailsService { //
 }
 ```
 
+<br/><br/>
+
 /src/java/main/com/example/rmfr/config/custom/CustomAuthenticationProvider.java
 
-######
+###### -> MemberService를 호출하여 입력된 값이 맞는지 검증하고 credential 값(PW) 설정
 
 ```
 package com.example.rmfr.config.custom;
@@ -328,301 +339,262 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 }
 ```
 
-##### ① 로그인 화면 구성
-
-로그인 페이지는 상단 메뉴에 위치하고, 로그인되지 않았을 때만 활성화한다.<br/>
-이메일 인증 때 사용했던 vuetify overlay component를 이용해서 만들었다.
 <br/><br/>
 
-/frontend/src/views/HeaderView.vue
+/src/main/java/com/example/rmfr/config/custom/CustomAuthenticationSuccessHandler.java
+
+###### -> 인증 성공 시 Response
+
+###### &nbsp;&nbsp;&nbsp;① response.setStatus() : 응답 상태 값, HttpStatus.OK.value() => 200
+
+###### &nbsp;&nbsp;&nbsp;② response.setContentType() : 응답 컨텐츠 타입, JSON
+
+###### &nbsp;&nbsp;&nbsp;③ objectMapper.writeValue(writer, value) : Member.memUuid를 base64로 인코딩하여 response.data로 화면에 전송
 
 ```
-<script setup>
-import LoginDialog from "@/components/overlay/LoginDialog.vue";
-</script>
-<template>
-  <v-overlay
-    v-model="loginDisplay"
-    id="overlay"
-    scroll-strategy="block"
-    persistent
-  >
-    <LoginDialog @sendMessage="setLoginDisplay" />
-  </v-overlay>
+package com.example.rmfr.config.custom;
 
-  <v-layout id="header">
-    <v-app-bar id="headerMenu">
-      <template v-slot:prepend>
-        <v-app-bar-title id="logo">
-          <router-link to="/">
-            <v-icon icon="mdi-alpha-r" class="logo-icons alpha" />
-            <v-icon icon="mdi-alpha-m" class="logo-icons alpha" />
-            <v-icon icon="mdi-alpha-f" class="logo-icons alpha" />
-            <v-icon icon="mdi-alpha-r" class="logo-icons alpha" />
-            <v-icon icon="mdi-help" class="logo-icons" />
-          </router-link>
-        </v-app-bar-title>
-      </template>
+import com.example.rmfr.member.entity.Members;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.util.Base64Util;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
-      <template v-slot:append>
-        <div id="buttonBox">
-          <v-btn
-            class="headerBtn"
-            @click="$router.push('/signup')"
-            v-show="!loginFlag"
-          >
-            <v-icon icon="mdi-account-plus"></v-icon>
-            <v-tooltip location="bottom center" activator="parent">
-              Signup
-            </v-tooltip>
-          </v-btn>
+import java.io.IOException;
 
-          <v-btn
-            class="headerBtn"
-            @click.stop="loginDisplay = !loginDisplay"
-            v-show="!loginFlag"
-          >
-            <v-icon icon="mdi-key"></v-icon>
-            <v-tooltip location="bottom center" activator="parent">
-              login
-            </v-tooltip>
-          </v-btn>
+@Component
+public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
-          <v-btn class="headerBtn" @click.stop="fnLogout" v-show="loginFlag">
-            <v-icon icon="mdi-logout"></v-icon>
-            <v-tooltip location="bottom center" activator="parent">
-              logout
-            </v-tooltip>
-          </v-btn>
-        </div>
-      </template>
-    </v-app-bar>
-  </v-layout>
-</template>
+    private ObjectMapper objectMapper = new ObjectMapper();
 
-<script>
-export default {
-  name: "headerView",
-  data() {
-    return {
-      loginDisplay: false,
-      loginFlag: false,
-    };
-  },
-  created() {
-    this.loginFlag = this.$loginInfo.login;
-  },
-  methods: {
-    setLoginDisplay(obj) {
-      this.loginDisplay = obj.loginDisplay;
-    },
-    fnLogout() {
-      this.$loginInfo.expired = -1;
-      location.href = "/logout";
-    },
-  },
-};
-</script>
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        Authentication authentication) throws IOException {
 
-<style>
-.findInfo {
-  color: darkblue;
-  text-decoration: underline;
+        Members member =  (Members)authentication.getPrincipal();
+
+        response.setStatus(HttpStatus.OK.value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+
+        objectMapper.writeValue(response.getWriter(), Base64Util.encode(member.getMemUuid()));
+    }
+}
+```
+
+<br/><br/>
+
+/src/main/java/com/example/rmfr/config/custom/CustomAuthenticationFailureHandler.java
+
+###### -> 인증 실패 시 Response
+
+###### &nbsp;&nbsp;&nbsp;① response.setStatus() : 응답 상태 값, HttpStatus.UNAUTHORIZED.value() => 401
+
+###### &nbsp;&nbsp;&nbsp;② response.setContentType() : 응답 컨텐츠 타입, JSON
+
+###### &nbsp;&nbsp;&nbsp;③ response.setCharacterEncoding() : 응답 컨텐츠 인코딩 값, 에러 메시지가 한글이기 때문에 UTF-8로 설정
+
+###### &nbsp;&nbsp;&nbsp;③ objectMapper.writeValue(writer, value) : 에러메시지를 response.data로 화면에 전송
+
+```
+package com.example.rmfr.config.custom;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+@Component
+public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
+    private ObjectMapper objectMapper = new ObjectMapper();
+
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request,
+                                        HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException {
+
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.setCharacterEncoding("UTF-8");
+
+        String errMsg = "아이디나 비밀번호를 다시 확인해주세요.";
+
+        if (exception instanceof BadCredentialsException) {
+            errMsg = "아이디나 비밀번호를 다시 확인해주세요.";
+        }
+
+        else if(exception instanceof DisabledException) {
+            errMsg = "오랜 시간 접속하지 않아 잠긴 계정입니다.";
+        }
+
+        else if(exception instanceof CredentialsExpiredException) {
+            errMsg = "비밀번호가 만료되었습니다.";
+        }
+
+        objectMapper.writeValue(response.getWriter(), errMsg);
+    }
+}
+```
+
+<br/><br/>
+
+/src/main/java/com/example/rmfr/config/custom/CustomAuthenticationEntrypoint.java
+
+###### -> 로그인되지 않은 계정 접근 시 exception 처리
+
+```
+package com.example.rmfr.config.custom;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Component
+public class CustomAuthenticationEntrypoint implements AuthenticationEntryPoint {
+    @Override
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException) throws IOException {
+
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "UnAuthorized");
+    }
+}
+```
+
+<br/><br/>
+/src/main/java/com/example/rmfr/config/custom/CustomAuthenticationDeniedHandler.java
+
+###### -> 로그인 계정의 리소스 접근 권한 미보유 시 exception 처리
+
+```
+package com.example.rmfr.config.custom;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Component
+public class CustomAuthenticationDeniedHandler implements AccessDeniedHandler {
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       AccessDeniedException accessDeniedException) throws IOException {
+        response.sendError(HttpServletResponse.SC_FORBIDDEN, "Access is denied");
+    }
+}
+```
+
+<br/><br/>
+
+이제 RestAPI 로그인을 위한 filter 처리를 마쳤고, Spring Security 설정을 해보자.
+
+<br/><br/>
+
+/src/main/java/com/example/rmfr/config/SecurityConfig.java
+
+###### -> Spring Security의 설정 클래스
+
+```
+package com.example.rmfr.config;
+
+import com.example.rmfr.config.custom.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.DelegatingSecurityContextRepository;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.RequestAttributeSecurityContextRepository;
+
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
+
+@Configuration
+@RequiredArgsConstructor
+public class SecurityConfig {
+
+    private final CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+    private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+    private final CustomAuthenticationEntrypoint authenticationEntryPoint;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final CustomAuthenticationDeniedHandler accessDeniedHandler;
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        // security v6.1.0부터 람다식 함수형으로 설정
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
+                .headers((headerConfig) ->
+                        headerConfig.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+                )
+                .authorizeHttpRequests((authorizeRequests) ->authorizeRequests.anyRequest().permitAll()) // 모든 URL 접근 가능 설정
+                .exceptionHandling(config -> config
+                        .authenticationEntryPoint(authenticationEntryPoint) // 로그인하지 않은 계정 접근 시
+                        .accessDeniedHandler(accessDeniedHandler) // 로그인 계정의 리소스 접근 권한 미보유 시
+                )
+                .logout((logoutConfig) ->
+                        logoutConfig
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/")
+                )
+                .addFilterBefore(ajaxAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class) // ajax 요청일 때 filter 추가
+        ;
+
+        return http.build();
+    }
+
+    @Bean
+    public CustomAuthenticationFilter ajaxAuthenticationFilter() throws Exception { // ajax 요청일 때, custom한 filter 클래스가 동작하게 설정
+        CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter();
+        customAuthenticationFilter.setAuthenticationManager(authenticationManager());
+        customAuthenticationFilter.setAuthenticationSuccessHandler(customAuthenticationSuccessHandler); // 성공 시 처리
+        customAuthenticationFilter.setAuthenticationFailureHandler(customAuthenticationFailureHandler); // 실패 시 처리
+
+        customAuthenticationFilter.setSecurityContextRepository(
+                new DelegatingSecurityContextRepository(
+                        new RequestAttributeSecurityContextRepository(),
+                        new HttpSessionSecurityContextRepository()
+                ));
+
+        return customAuthenticationFilter;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager() throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 }
 
-.findInfo:hover {
-  color: purple;
-  cursor: pointer;
-}
-</style>
-
 ```
 
-/frontend/src/components/overlay/LoginDialog.vue
-
-```
-<script setup>
-import VerifyDialog from "@/components/overlay/EmailVerifyDialog.vue";
-</script>
-<template>
-  <v-overlay v-model="overlay" id="overlay" scroll-strategy="block" persistent>
-    <VerifyDialog
-      ref="verifyDialog"
-      @sendMessage="fnChildMessage"
-      :memEmail="find.memEmail"
-    />
-  </v-overlay>
-  <v-card
-    class="py-8 px-6 text-center mx-auto ma-4"
-    min-width="400"
-    width="100%"
-  >
-    <div class="d-flex">
-      <v-spacer></v-spacer>
-      <v-icon icon="mdi-close" @click="fnLoginDisplayReset" />
-    </div>
-
-    <h3 class="text-h5 mb-4">{{ cardTitle }}</h3>
-
-    <v-sheet color="surface" class="mb-4">
-      <v-text-field
-        variant="underlined"
-        label="ID"
-        v-show="!findId"
-        v-model="login.memId"
-        :rules="loginChk"
-      ></v-text-field>
-      <v-text-field
-        variant="underlined"
-        label="Password"
-        type="password"
-        v-show="!findId"
-        v-model="login.memPw"
-        :rules="loginChk"
-      ></v-text-field>
-      <v-text-field
-        variant="underlined"
-        label="Email"
-        type="email"
-        v-show="findId || findPw"
-        v-model="login.memEmail"
-        :append-icon="flag ? `mdi-email` : `mdi-email-outline`"
-        @click:append="fnValid"
-      ></v-text-field>
-    </v-sheet>
-
-    <div class="text-caption">
-      <span class="findInfo" @click.stop="findId = true" v-if="!findId"
-        >아이디 찾기</span
-      >
-      &nbsp;&nbsp;
-      <span class="findInfo" @click.stop="findPw = true" v-if="!findPw"
-        >비밀번호 찾기</span
-      >
-      &nbsp;&nbsp;
-      <span
-        class="findInfo"
-        @click.stop="
-          findId = false;
-          findPw = false;
-        "
-        v-if="findId || findPw"
-        >로그인 하기</span
-      >
-    </div>
-
-    <v-btn
-      class="my-4"
-      color="primary"
-      height="40"
-      text="Login"
-      variant="flat"
-      width="70%"
-      @click="fnLogin"
-    ></v-btn>
-  </v-card>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      login: {
-        memId: "",
-        memPw: "",
-      },
-      find: {
-        memId: "",
-        memEmail: "",
-        flag: false,
-      },
-      cardTitle: "Login",
-      findId: false,
-      findPw: false,
-      overlay: false,
-    };
-  },
-  computed: {
-    loginChk() {
-      const rules = [];
-
-      const nullChk = (v) => {
-        if (v) return true;
-        return "필수 입력사항입니다.";
-      };
-
-      rules.push(nullChk);
-      return rules;
-    },
-  },
-  methods: {
-    fnLoginDisplayReset() {
-      this.$emit("sendMessage", { loginDisplay: false });
-    },
-    async fnLogin() {
-      if (
-        this.loginChk[0](this.login.memId) == true &&
-        this.loginChk[0](this.login.memPw) == true
-      ) {
-        let data = {
-          memId: this.login.memId,
-          memPw: this.login.memPw,
-        };
-
-        await this.axios
-          .post("/rest/login", data)
-          .then((res) => {
-            if (res.status == 200) {
-              // 로그인 창 닫기
-              this.fnLoginDisplayReset();
-
-              // 로그인 정보 localStorage 입력
-              this.$loginInfo.login = true;
-              this.$loginInfo.credentials = res.data;
-              this.$loginInfo.expired =
-                new Date().getTime() + 24 * 60 * 60 * 1000;
-
-              if (this.$route.fullPath == "/") {
-                this.$router.go(0); // referer화면이 root URL일 때는 새로고침
-              } else {
-                this.$router.push("/"); // root URL로 화면 전환
-              }
-            }
-          })
-          .catch((err) => {
-            if (err.code == "ERR_BAD_REQUEST") {
-              // 로그인 실패 메시지 (아이디, 비밀번호 확인)
-              alert(err.response.data);
-            } else {
-              // 통신 오류
-              alert("시스템 오류로 인해 로그인에 실패했습니다.");
-            }
-          });
-      } else {
-        alert("필수 입력사항을 입력해주세요.");
-        return false;
-      }
-    },
-  },
-  watch: {
-    findId(v) {
-      if (v) {
-        this.findPw = false;
-        this.cardTitle = "Find ID";
-      } else {
-        if (!this.findPw) this.cardTitle = "Login";
-      }
-    },
-    findPw(v) {
-      if (v) {
-        this.findId = false;
-        this.cardTitle = "Find Password";
-      } else {
-        if (!this.findId) this.cardTitle = "Login";
-      }
-    },
-  },
-};
-</script>
-
-```
+Spring Security 동작을 위한 클래스 추가를 마쳤다.<br/>
+다음으로는 로그인 처리를 위한 화면을 구성해보자.😎
