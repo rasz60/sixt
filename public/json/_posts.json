@@ -284,7 +284,7 @@
     "date": "2024-07-08 17:44:10",
     "dateDiff": null,
     "keywords": [
-      { "type": "dev", "value": "dev" },
+      { "type": "issue", "value": "issue" },
       { "type": "back", "value": "Spring-Boot" }
     ],
     "newPost": false,
@@ -318,7 +318,7 @@
     "date": "2024-07-09 17:55:27",
     "dateDiff": null,
     "keywords": [
-      { "type": "dev", "value": "dev" },
+      { "type": "issue", "value": "issue" },
       { "type": "back", "value": "Spring-Boot" },
       { "type": "back", "value": "JPA" }
     ],
@@ -349,13 +349,14 @@
     "type": "dev",
     "serizes": "g2",
     "fileName": "seq4.md",
-    "title": "Spring-boot, Vue3 페이지 만들기🔨 #4\n- 회원가입 페이지 만들기 (1/2)",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #4\n- 회원가입 구현하기 (1/2)",
     "date": "2024-07-12 16:17:32",
     "dateDiff": null,
     "keywords": [
       { "type": "dev", "value": "dev" },
       { "type": "front", "value": "vue" },
-      { "type": "front", "value": "vuetify" }
+      { "type": "front", "value": "vuetify" },
+      { "type": "front", "value": "axios" }
     ],
     "newPost": false,
     "proceeding": true
@@ -366,7 +367,7 @@
     "type": "dev",
     "serizes": "g2",
     "fileName": "seq5.md",
-    "title": "Spring-boot, Vue3 페이지 만들기🔨 #5\n- 회원가입 페이지 만들기 (2/2)",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #5\n- 회원가입 구현하기 (2/2)",
     "date": "2024-07-15 17:03:02",
     "dateDiff": null,
     "keywords": [
@@ -426,6 +427,42 @@
       { "type": "issue", "value": "issue" },
       { "type": "back", "value": "Spring-Boot" },
       { "type": "back", "value": "Spring Security" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 25,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq7.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #7\n- 로그인 구현하기 (2/2)",
+    "date": "2024-07-30 11:19:19",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" },
+      { "type": "front", "value": "axios" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 26,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq8.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #8\n- 아이디/비밀번호 찾기 구현하기",
+    "date": "2024-07-30 16:17:10",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" },
+      { "type": "front", "value": "axios" }
     ],
     "newPost": false,
     "proceeding": true

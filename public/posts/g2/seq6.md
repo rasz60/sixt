@@ -1,4 +1,4 @@
-### 로그인 구현
+### 로그인 구현 (1/2)
 
 회원가입 페이지 작성을 마쳤으니 이제 로그인 기능이 필요하다.<br/>
 구현할 로그인 기능의 처리 순서는 아래와 같고, backend 부터 하나씩 구현해보았다.
@@ -207,7 +207,7 @@ public class CustomAuthenticationToken extends AbstractAuthenticationToken {
 
 /src/java/main/com/example/rmfr/config/AppConfig.java
 
-###### -> Spring Sequrity 비밀번호 암호화 인코더 Bean 설정 [#issue]()
+###### -> Spring Sequrity 비밀번호 암호화 인코더 Bean 설정 [🔗issue#4. BCryptPasswordEncoder 순환참조 이슈](/#/logging/24)
 
 ```
 package com.example.rmfr.config;
