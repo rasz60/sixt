@@ -89,7 +89,6 @@
   </v-row>
 
   <!-- 그룹형 -->
-
   <v-row
     v-for="g in displayGroups"
     :key="g"
