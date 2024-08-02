@@ -162,11 +162,10 @@ import java.time.LocalDateTime;
 @Data
 @DynamicInsert
 @DynamicUpdate
-public class Members {
-    // MEMBERS Entity 테이블
+public class Members {    // MEMBERS Entity 테이블
     @Id
-    @GeneratedValue(generator="uuid2")
     @GenericGenerator(name="uuid2", strategy = "uuid2")
+    @GeneratedValue(generator="uuid2")
     @Column(columnDefinition = "VARCHAR(100)")
     private String memUuid;
 
@@ -196,6 +195,16 @@ public class Members {
 
     @Column(columnDefinition = "VARCHAR(1000)")
     private String memAddr2;
+
+    @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime memRegDate;
+
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime memDelDate;
+
+    @Column(columnDefinition = "VARCHAR(1) DEFAULT 'N'")
+    private String memDelYn;
+
 }
 
 }

@@ -272,7 +272,7 @@
       { "type": "front", "value": "vuetify" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 16,
@@ -288,7 +288,7 @@
       { "type": "back", "value": "Spring-Boot" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 17,
@@ -306,7 +306,7 @@
       { "type": "db", "value": "MySQL" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 18,
@@ -323,7 +323,7 @@
       { "type": "back", "value": "JPA" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 19,
@@ -341,7 +341,7 @@
       { "type": "front", "value": "vuetify" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 20,
@@ -359,7 +359,7 @@
       { "type": "front", "value": "axios" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 21,
@@ -376,7 +376,7 @@
       { "type": "back", "value": "JPA" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 22,
@@ -394,7 +394,7 @@
       { "type": "lib", "value": "lombok" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 23,
@@ -412,7 +412,7 @@
       { "type": "back", "value": "JPA" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 24,
@@ -429,7 +429,7 @@
       { "type": "back", "value": "Spring Security" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 25,
@@ -447,7 +447,7 @@
       { "type": "front", "value": "axios" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
   },
   {
     "seq": 26,
@@ -456,7 +456,7 @@
     "serizes": "g2",
     "fileName": "seq8.md",
     "title": "Spring-boot, Vue3 페이지 만들기🔨 #8\n- 아이디/비밀번호 찾기 구현하기",
-    "date": "2024-07-30 16:17:10",
+    "date": "2024-07-31 16:17:10",
     "dateDiff": null,
     "keywords": [
       { "type": "dev", "value": "dev" },
@@ -465,6 +465,24 @@
       { "type": "front", "value": "axios" }
     ],
     "newPost": false,
-    "proceeding": true
+    "proceeding": false
+  },
+  {
+    "seq": 27,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq9.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #9\n- 회원 정보 수정/삭제 구현하기",
+    "date": "2024-08-01 16:26:37",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" },
+      { "type": "front", "value": "axios" }
+    ],
+    "newPost": false,
+    "proceeding": false
   }
 ]

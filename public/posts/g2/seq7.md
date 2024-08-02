@@ -264,6 +264,7 @@ export default {
 export default {
   fnLoginDisplayReset() {
     this.$emit("sendMessage", { loginDisplay: false });
+    this.initValue();
     this.findId = false;
     this.findPw = false;
     this.dpLogin = true;

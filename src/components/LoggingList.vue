@@ -91,7 +91,7 @@
   <!-- 그룹형 -->
 
   <v-row
-    v-for="g in groups"
+    v-for="g in displayGroups"
     :key="g"
     v-show="listType == 1"
     :class="`group g` + g.groupSeq"
@@ -182,6 +182,7 @@ export default {
 
       if (v == 1) {
         this.groups = this.commonjs.getAllGroups();
+        this.displayGroups = this.groups;
         this.displayPosts = this.commonjs.getAllPosts().reverse();
         setTimeout(this.setPostBg, 50);
       } else {
@@ -196,6 +197,8 @@ export default {
 <style lang="scss">
 @import "@/assets/style/loggingList.scss";
 .group {
+  margin-top: 2rem !important;
+
   .groupTitle {
     display: flex;
     align-items: center;

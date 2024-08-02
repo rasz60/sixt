@@ -1,8 +1,9 @@
 export default {
   searchKeyword: "",
   groups: null,
+  displayGroups: [],
   posts: null,
-  displayPosts: new Array(),
+  displayPosts: [],
   postStatus: [],
   categorys: [
     { type: "dev", title: "dev" },

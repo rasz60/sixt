@@ -177,7 +177,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Long idDupChk(String memId) {
-        return memberRepository.countByMemId(memId);
+        return memberRepository.countByMemIdAndMemDelYn(memId, "N");
     }
 
     @Override
@@ -207,7 +207,19 @@ public class MemberServiceImpl implements MemberService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return rst;    @Transactional
+    @Override
+    public String signup(MemberDto memberDto) {
+        String rst = "";
+        try {
+            Members member = Members.builder().memberDto(memberDto).build();
+            member.setMemRegDate(LocalDateTime.now());
+            rst = memberRepository.save(member).getMemId();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return rst;
+    }
     }
 
     public String createVerifyCode() {
@@ -235,7 +247,7 @@ findBy${속성명}, countBy${속성명} 등 메서드명을 보면 어느정도 
 <br/><br/>
 
 /src/main/java/com/example/rmfr/repository/MemberRepository.java<br/>
-&nbsp; + countByMemId() : countBy + ${속성명} 으로 메서드명을 지정하면 parameter를 조건으로 하는 해당 속성에 개수를 조회해준다.
+&nbsp; + countByMemIdAndMemDelYn() : countBy + ${속성명} (+ And + ${속성명} ... )으로 메서드명을 지정하면 parameter를 조건으로 하는 해당 속성에 개수를 조회해준다.
 
 ```
 package com.example.rmfr.member.repository;
@@ -244,7 +256,7 @@ import com.example.rmfr.member.entity.Members;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<Members, Long> {
-    Long countByMemId(String memId);
+    Long countByMemIdAndMemDelYn(String memId, String memDelYn);
 }
 ```
 

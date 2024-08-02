@@ -45,10 +45,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Members, Long> {
-    public Long countByMemId(String memId);
+    Long countByMemIdAndMemDelYn(String memId, String memYN);
+    public Optional<Members> findByMemIdAndMemDelYn(String username, String memYN);
     public Optional<Members> findByMemId(String username);
-    public Long countByMemEmail(String memEmail); // 이메일로 가입된 아이디 개수 조회
-    public List<Members> findByMemEmail(String memEmail); // 이메일 주소로 가입된 회원 DB 조회
+    public Long countByMemEmailAndMemDelYn(String memEmail, String memDelYn); // 이메일로 가입된 아이디 개수 조회(탈퇴하지 않은 계정만)
+    public List<Members> findByMemEmailAndMemDelYn(String memEmail, String memDelYn); // 이메일 주소로 가입된 회원 DB 조회(탈퇴하지 않은 계정만)
 }
 ```
 
@@ -114,7 +115,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     public int countByMemEmail(String memEmail) {
         int cnt = 0;
         try {
-            cnt = memberRepository.countByMemEmail(memEmail).intValue(); // 메일 주소로 가입한 아이디 개수 조회
+            cnt = memberRepository.countByMemEmailAndMemDelYn(memEmail, "N").intValue(); // 메일 주소로 가입한 아이디 개수 조회
             if ( cnt <= 0 ) throw new Exception("MEM_EMAIL NOT FOUND.");
         } catch (Exception e) {
             log.error(e.getMessage());
@@ -126,7 +127,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     public Map<String, Object> sendIdList(String memEmail) {
         Map<String, Object> rst = null;
         try {
-            List<Members> members = memberRepository.findByMemEmail(memEmail); // 메일 주소로 가입한 전체 회원 조회
+            List<Members> members = memberRepository.findByMemEmailAndMemDelYn(memEmail, "N"); // 메일 주소로 가입한 전체 회원 조회
 
             if ( members.isEmpty() )
                 throw new Exception("MEM_EMAIL NOT FOUND.");
@@ -143,7 +144,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService {
     public Map<String, Object> sendTempPw(String memId, String memEmail) {
         Map<String, Object> rst = new HashMap<>();
         try {
-            Optional<Members> mem = memberRepository.findByMemId(memId); // 아이디로 회원 정보 찾기
+            Optional<Members> mem = memberRepository.findByMemIdAndMemDelYn(memId, "N"); // 아이디로 회원 정보 찾기
 
             if ( mem.isPresent() ) {
                 Members member = mem.get();

@@ -283,7 +283,7 @@ public class MemberServiceImpl implements MemberService, UserDetailsService { //
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { // 추가
-        Members member = memberRepository.findByMemId(username)
+        Members member = memberRepository.findByMemIdAndMemDelYn(username, "N")
                 .orElseThrow(() -> new UsernameNotFoundException("username not found"));
 
         return member;
@@ -430,7 +430,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.setCharacterEncoding("UTF-8");
 
-        String errMsg = "아이디나 비밀번호를 다시 확인해주세요.";
+        String errMsg = "가입되지 않은 아이디입니다.";
 
         if (exception instanceof BadCredentialsException) {
             errMsg = "아이디나 비밀번호를 다시 확인해주세요.";

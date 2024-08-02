@@ -27,7 +27,8 @@ export default {
   },
   setPostWithStatus(value) {
     let conditionPosts = new Array();
-    for (var i in this.posts) {
+
+    for (var i = 0; i < this.posts.length; i++) {
       if (this.posts[i].proceeding == value) {
         conditionPosts.push(this.posts[i]);
       }
