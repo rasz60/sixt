@@ -484,5 +484,39 @@
     ],
     "newPost": false,
     "proceeding": false
+  },
+  {
+    "seq": 28,
+    "groupSeq": 2,
+    "type": "dev",
+    "serizes": "g2",
+    "fileName": "seq10.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🔨 #10\n- VUEX Store 사용하여 리팩토링",
+    "date": "2024-08-02 13:06:51",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuex" }
+    ],
+    "newPost": false,
+    "proceeding": false
+  },
+  {
+    "seq": 29,
+    "groupSeq": 2,
+    "type": "issue",
+    "serizes": "g2",
+    "fileName": "issue5.md",
+    "title": "Spring-boot, Vue3 페이지 만들기🩺 #5\n- 예외: TypeError: 'caller', 'callee', and 'arguments' properties may not be accessed on strict mode functions or the arguments objects for calls to them at Function.",
+    "date": "2024-08-02 15:12:17",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuex" }
+    ],
+    "newPost": false,
+    "proceeding": false
   }
 ]
