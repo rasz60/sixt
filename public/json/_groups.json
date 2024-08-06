@@ -1,13 +1,19 @@
 [
   {
     "groupSeq": 1,
-    "groupTitle": "Github Pages Blog 만들기🔨",
+    "groupTitle": "Github Pages Blog 만들기",
     "proceeding": false,
     "fold": false
   },
   {
     "groupSeq": 2,
-    "groupTitle": "Spring-boot, Vue3 페이지 만들기🔨",
+    "groupTitle": "Spring-boot, Vue3 회원가입/로그인 구현하기",
+    "proceeding": false,
+    "fold": false
+  },
+  {
+    "groupSeq": 3,
+    "groupTitle": "Spring-boot, Vue3 게시판 만들기",
     "proceeding": true,
     "fold": false
   }

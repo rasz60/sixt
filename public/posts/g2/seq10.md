@@ -26,6 +26,9 @@ export const store = createStore({
 ```
 
 /frontend/src/store/mutation_types.js
+<br/>
+&nbsp; - 일종의 인터페이스 처럼, 메서드 명을 상수로 선언하여 actions와 mutations의 동일하게 적용되도록 하는 것 같다.<br/>
+&nbsp; - 다른 블로그를 참조하면서 생겼는데, 나중에 메서드가 많은 store를 구현할 때 유용할 듯 하다.<br/>
 
 ```
 // 메서드명 상수 선언
@@ -36,10 +39,11 @@ export const MEMBER = {
 ```
 
 /frontend/src/store/modules/memberStores.js
+<br/>
 &nbsp; ① state : 변수처럼 사용할 데이터 값, vue script에 data와 같은 것으로 생각하면 된다.<br/>
-&nbsp; ② mutations : 일정 로직을 실행하여 state 값을 변경하는 함수, 2번째 선언된 변수로 parameter를 받을 수 있고 값을 return할 수 없다.
-&nbsp; ③ getters : 일정 로직을 실행하여 state 값을 return 하는 함수, parameter를 받을 수 없고 state를 return할 수 있다.
-&nbsp; ④ actions : mutations를 실행시키는 함수, 굳이 나눈 이유는 interface 같은 형태를 원한걸까..? 좀 더 공부해봐야할 것 같다.
+&nbsp; ② mutations : 일정 로직을 실행하여 state 값을 변경하는 함수, 2번째 선언된 변수로 parameter를 받을 수 있고 값을 return할 수 없다.<br/>
+&nbsp; ③ getters : 일정 로직을 실행하여 state 값을 return 하는 함수, parameter를 받을 수 없고 state를 return할 수 있다.<br/>
+&nbsp; ④ actions : mutations를 실행시키는 함수, 굳이 나눈 이유는 interface 같은 형태를 원한걸까..? 좀 더 공부해봐야할 것 같다.<br/>
 
 ```
 import { MEMBER } from "../mutation_types";

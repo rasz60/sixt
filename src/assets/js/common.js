@@ -7,7 +7,7 @@ const getAllPosts = () => {
   let posts = jsonPosts;
 
   dateDiff(posts);
-
+  setPostListTitle(posts);
   return posts.sort(function (a, b) {
     return a.realDateDiff - b.realDateDiff;
   });
@@ -112,6 +112,17 @@ const dateDiff = (posts) => {
     }
 
     posts[i].dateDiff = rst;
+  }
+};
+const setPostListTitle = (posts) => {
+  var max = 130;
+  for (var i = 0; i < posts.length; i++) {
+    var t = posts[i].title;
+    posts[i].dpTitle = t.length > max ? t.substr(0, max) + " ..." : t;
+
+    var gs = posts[i].groupSeq;
+    posts[i].gTitle = jsonGroups[gs - 1].groupTitle;
+    posts[i].gColor = jsonGroups[gs - 1].groupColor;
   }
 };
 

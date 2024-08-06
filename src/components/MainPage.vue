@@ -12,7 +12,7 @@
       >
         <v-card
           class="ma-3"
-          :title="p.title"
+          :title="p.dpTitle"
           link
           @click="this.$router.push('/logging/' + p.seq)"
         ></v-card>
@@ -38,7 +38,7 @@
       >
         <v-card
           class="ma-3"
-          :title="p.title"
+          :title="p.dpTitle"
           link
           @click="this.$router.push('/logging/' + p.seq)"
         ></v-card>

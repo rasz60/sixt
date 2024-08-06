@@ -59,10 +59,11 @@
         color="red"
         content="new"
       ></v-badge>
+      <p class="gTitle"></p>
       <router-link :to="'/logging/' + post.seq" class="postLink">
         <v-card class="post" link>
           <v-card-title class="postTitle">
-            {{ post.title }}
+            {{ post.dpTitle }}
           </v-card-title>
 
           <v-divider></v-divider>
@@ -80,8 +81,19 @@
             >
           </div>
 
-          <div class="dateDiff">
-            {{ post.dateDiff }}
+          <div class="lastRow">
+            <v-row>
+              <v-col cols="9" class="gTitle">
+                <p>
+                  <v-icon icon="mdi-code-braces" size="15px" />&nbsp;{{
+                    post.gTitle
+                  }}
+                </p>
+              </v-col>
+              <v-col cols="3" class="dateDiff">
+                {{ post.dateDiff }}
+              </v-col>
+            </v-row>
           </div>
         </v-card>
       </router-link>
@@ -125,7 +137,7 @@
         <router-link :to="'/logging/' + post.seq" class="postLink">
           <v-card class="post" link>
             <v-card-title class="postTitle">
-              {{ post.title }}
+              {{ post.dpTitle }}
             </v-card-title>
 
             <v-divider></v-divider>
@@ -143,8 +155,12 @@
               >
             </div>
 
-            <div class="dateDiff">
-              {{ post.dateDiff }}
+            <div class="lastRow">
+              <v-row>
+                <v-col cols="12" class="dateDiff">
+                  {{ post.dateDiff }}
+                </v-col>
+              </v-row>
             </div>
           </v-card>
         </router-link>
