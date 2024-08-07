@@ -518,22 +518,5 @@
     ],
     "newPost": false,
     "proceeding": false
-  },
-  {
-    "seq": 30,
-    "groupSeq": 3,
-    "type": "dev",
-    "serizes": "g3",
-    "fileName": "seq1.md",
-    "title": "🔨게시판 Entity 설계",
-    "date": "2024-08-05 18:56:11",
-    "dateDiff": null,
-    "keywords": [
-      { "type": "dev", "value": "dev" },
-      { "type": "back", "value": "Spring-Boot" },
-      { "type": "back", "value": "JPA" }
-    ],
-    "newPost": false,
-    "proceeding": false
   }
 ]
