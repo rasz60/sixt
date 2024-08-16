@@ -33,7 +33,7 @@
       <v-col cols="6">
         <v-list>
           <v-list-item class="relatedPostTitle"
-            >다른 시리즈 게시물 보기</v-list-item
+            >같은 시리즈 게시물 보기</v-list-item
           >
           <v-list-item
             class="relatedPostList"

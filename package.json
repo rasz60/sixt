@@ -8,10 +8,10 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
     "@mdi/font": "^7.4.47",
     "axios": "^1.7.2",
     "core-js": "^3.8.3",
-    "emailjs-com": "^3.2.0",
     "eslint-plugin-vue": "^9.26.0",
     "raw-loader": "^4.0.2",
     "showdown": "^2.1.0",

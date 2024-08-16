@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       scrolled: false,
+      overlay: false,
     };
   },
   mounted() {

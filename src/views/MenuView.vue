@@ -13,7 +13,81 @@
             icon="mdi-github"
             @click.stop="newWindow(`https://github.com/rasz60`)"
           />
-          <v-icon icon="mdi-email-fast-outline"></v-icon>
+          <v-dialog v-model="dialog" max-width="800">
+            <template v-slot:activator="{ props: activatorProps }">
+              <v-icon
+                icon="mdi-email-fast-outline"
+                v-bind="activatorProps"
+              ></v-icon>
+            </template>
+
+            <v-card prepend-icon="mdi-email-fast-outline">
+              <v-card-text>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="TO"
+                      hide-details
+                      v-model="emailTo"
+                      readonly
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="4">
+                    <v-text-field
+                      label="FROM"
+                      v-model="fromName"
+                      :rules="fromNameChk"
+                      placeholder="보내는 사람"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="8">
+                    <v-text-field
+                      label="FROM"
+                      v-model="fromAddr"
+                      :rules="fromAddrChk"
+                      placeholder="답장받을 메일 주소"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      label="TITLE"
+                      v-model="title"
+                      :rules="titleChk"
+                      placeholder="제목"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-textarea
+                      label="Contents"
+                      v-model="fromContents"
+                      :rules="fromContentsChk"
+                      placeholder="내용"
+                      rows="10"
+                    ></v-textarea>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                  text="Close"
+                  variant="plain"
+                  @click="dialog = false"
+                ></v-btn>
+
+                <v-btn
+                  color="primary"
+                  text="Send"
+                  variant="tonal"
+                  @click="sendEmail"
+                ></v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
         </div>
       </v-list-item>
 
@@ -23,7 +97,7 @@
         prepend-icon="mdi-account-search"
         title="INTRODUCE"
         value="introduce"
-        @click="moveMenu('/about')"
+        @click.stop="moveMenu('/about')"
         class="navItems"
       >
         <template v-slot:append>
@@ -57,16 +131,90 @@
 </template>
 
 <script>
+import emailjs from "@emailjs/browser";
+
 export default {
   name: "menuView",
   data() {
     return {
+      dialog: false,
+      emailTo: "devsixt60@gmail.com",
+      title: "",
+      fromName: "",
+      fromAddr: "",
+      fromContents: "",
+      status: "",
       updateIntroduce: false,
       newPostCnt: 0,
     };
   },
   mounted() {
+    this.overlay = this.overlayFlag;
     this.newPostCnt = this.commonjs.newPostCnt();
+  },
+  computed: {
+    titleChk() {
+      const rules = [];
+
+      const nullChk = (v) => {
+        if (v) return true;
+        else return "필수 입력사항입니다.";
+      };
+      rules.push(nullChk);
+
+      const lengthChk = (v) => {
+        if (v.length <= 100) return true;
+        else return "100자를 초과할 수 없습니다.";
+      };
+      rules.push(lengthChk);
+
+      return rules;
+    },
+    fromNameChk() {
+      const rules = [];
+
+      const lengthChk = (v) => {
+        if (v.length <= 10) return true;
+        else return "10자를 초과할 수 없습니다.";
+      };
+      rules.push(lengthChk);
+
+      return rules;
+    },
+    fromAddrChk() {
+      const rules = [];
+
+      const nullChk = (v) => {
+        if (v) return true;
+        else return "필수 입력사항입니다.";
+      };
+      rules.push(nullChk);
+
+      const lengthChk = (v) => {
+        if (v.length <= 100) return true;
+        else return "100자를 초과할 수 없습니다.";
+      };
+      rules.push(lengthChk);
+
+      return rules;
+    },
+    fromContChk() {
+      const rules = [];
+
+      const nullChk = (v) => {
+        if (v) return true;
+        else return "필수 입력사항입니다.";
+      };
+      rules.push(nullChk);
+
+      const lengthChk = (v) => {
+        if (v.length <= 100) return true;
+        else return "100자를 초과할 수 없습니다.";
+      };
+      rules.push(lengthChk);
+
+      return rules;
+    },
   },
   methods: {
     newWindow(url) {
@@ -77,6 +225,60 @@ export default {
         this.$router.go(0);
       } else {
         this.$router.push(url);
+      }
+    },
+    async sendEmail() {
+      try {
+        // EmailJS 초기화
+        emailjs.init("5hySWbttq9fiGLQfh"); // 여기서 YOUR_USER_ID는 EmailJS 대시보드에서 확인한 사용자 ID입니다.
+
+        console.log(
+          this.fromName,
+          this.fromAddr,
+          this.title,
+          this.fromContents
+        );
+
+        // 이메일 전송
+        const response = await emailjs.send(
+          "service_crjinns",
+          "template_kmhu5ku",
+          {
+            from_name: this.fromName,
+            from_email: this.fromAddr,
+            subject: "[New Message From sixt.github.io] : " + this.title,
+            message: this.fromContents,
+          }
+        );
+
+        if (response.status == 200) {
+          alert("이메일 전송에 성공했습니다. 확인 후 답변드리겠습니다. :)");
+          this.dialog = !this.dialog;
+          this.fromName = "";
+          this.fromAddr = "";
+          this.title = "";
+          this.fromContents = "";
+        } else {
+          alert("오류가 발생하여 이메일 발송에 실패하였습니다. :(");
+        }
+      } catch (error) {
+        console.error("FAILED...", error);
+      }
+    },
+  },
+  watch: {
+    dialog(v) {
+      var menu = document.querySelector("#menuSection");
+      if (v) {
+        menu.style.position = "sticky";
+        menu.style.marginTop = document.scrollingElement.scrollTop + "px";
+      } else {
+        menu.style.position = "relative";
+        menu.style.marginTop = 0;
+        this.fromName = "";
+        this.fromAddr = "";
+        this.title = "";
+        this.fromContents = "";
       }
     },
   },
