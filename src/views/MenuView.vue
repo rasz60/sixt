@@ -23,49 +23,51 @@
 
             <v-card prepend-icon="mdi-email-fast-outline">
               <v-card-text>
-                <v-row>
-                  <v-col cols="12">
-                    <v-text-field
-                      label="TO"
-                      hide-details
-                      v-model="emailTo"
-                      readonly
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="4">
-                    <v-text-field
-                      label="FROM"
-                      v-model="fromName"
-                      :rules="fromNameChk"
-                      placeholder="보내는 사람"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="8">
-                    <v-text-field
-                      label="FROM"
-                      v-model="fromAddr"
-                      :rules="fromAddrChk"
-                      placeholder="답장받을 메일 주소"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      label="TITLE"
-                      v-model="title"
-                      :rules="titleChk"
-                      placeholder="제목"
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12">
-                    <v-textarea
-                      label="Contents"
-                      v-model="fromContents"
-                      :rules="fromContentsChk"
-                      placeholder="내용"
-                      rows="10"
-                    ></v-textarea>
-                  </v-col>
-                </v-row>
+                <v-form ref="mailFrm">
+                  <v-row>
+                    <v-col cols="12">
+                      <v-text-field
+                        label="TO"
+                        hide-details
+                        v-model="emailTo"
+                        readonly
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="4">
+                      <v-text-field
+                        label="FROM"
+                        v-model="fromName"
+                        :rules="fromNameChk"
+                        placeholder="보내는 사람"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="8">
+                      <v-text-field
+                        label="FROM"
+                        v-model="fromAddr"
+                        :rules="fromAddrChk"
+                        placeholder="답장받을 메일 주소"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                        label="TITLE"
+                        v-model="title"
+                        :rules="titleChk"
+                        placeholder="제목"
+                      ></v-text-field>
+                    </v-col>
+                    <v-col cols="12">
+                      <v-textarea
+                        label="Contents"
+                        v-model="fromContents"
+                        :rules="fromContentsChk"
+                        placeholder="내용"
+                        rows="10"
+                      ></v-textarea>
+                    </v-col>
+                  </v-row>
+                </v-form>
               </v-card-text>
 
               <v-divider></v-divider>
@@ -83,7 +85,7 @@
                   color="primary"
                   text="Send"
                   variant="tonal"
-                  @click="sendEmail"
+                  @click="validate"
                 ></v-btn>
               </v-card-actions>
             </v-card>
@@ -191,14 +193,14 @@ export default {
       rules.push(nullChk);
 
       const lengthChk = (v) => {
-        if (v.length <= 100) return true;
-        else return "100자를 초과할 수 없습니다.";
+        if (v.length <= 200) return true;
+        else return "200자를 초과할 수 없습니다.";
       };
       rules.push(lengthChk);
 
       return rules;
     },
-    fromContChk() {
+    fromContentsChk() {
       const rules = [];
 
       const nullChk = (v) => {
@@ -208,8 +210,8 @@ export default {
       rules.push(nullChk);
 
       const lengthChk = (v) => {
-        if (v.length <= 100) return true;
-        else return "100자를 초과할 수 없습니다.";
+        if (v.length <= 5000) return true;
+        else return "5000자를 초과할 수 없습니다.";
       };
       rules.push(lengthChk);
 
@@ -227,17 +229,14 @@ export default {
         this.$router.push(url);
       }
     },
+    async validate() {
+      var chk = await this.$refs.mailFrm.validate();
+      if (chk.valid) this.sendEmail();
+    },
     async sendEmail() {
       try {
         // EmailJS 초기화
-        emailjs.init("5hySWbttq9fiGLQfh"); // 여기서 YOUR_USER_ID는 EmailJS 대시보드에서 확인한 사용자 ID입니다.
-
-        console.log(
-          this.fromName,
-          this.fromAddr,
-          this.title,
-          this.fromContents
-        );
+        emailjs.init("5hySWbttq9fiGLQfh");
 
         // 이메일 전송
         const response = await emailjs.send(
