@@ -3,7 +3,7 @@
 <template>
   <v-sheet class="mx-auto" width="100%">
     <h2>최신 deVLOG&nbsp;<v-chip size="small" color="red">new</v-chip></h2>
-    <v-slide-group class="pa-5" show-arrows>
+    <v-slide-group class="pa-10" show-arrows>
       <v-slide-group-item
         v-for="p in posts.filter((p, idx) => {
           if (idx < 5) return p;
@@ -29,7 +29,7 @@
         {{ g.proceeding ? `ing` : `done` }}
       </v-chip>
     </h2>
-    <v-slide-group class="pa-4">
+    <v-slide-group class="pa-10">
       <v-slide-group-item
         v-for="p in posts
           .filter((p) => p.groupSeq == g.groupSeq && p.type == 'dev')
