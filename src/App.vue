@@ -11,11 +11,12 @@ import ContentView from "@/views/ContentView.vue";
         <v-btn
           icon="mdi-account-question-outline"
           @click="moveMenu('/about')"
+          size="small"
         />
         <v-tooltip activator="parent" location="start">About Me</v-tooltip>
       </v-list-item>
       <v-list-item>
-        <v-btn icon="mdi-math-log" @click="moveMenu('/logging')" />
+        <v-btn icon="mdi-math-log" @click="moveMenu('/logging')" size="small" />
         <v-tooltip activator="parent" location="start">deVLOG</v-tooltip>
       </v-list-item>
       <v-list-item>
@@ -25,6 +26,7 @@ import ContentView from "@/views/ContentView.vue";
               icon="mdi-email-fast-outline"
               v-bind="activatorProps"
               @click.stop="fnSendMail"
+              size="small"
             ></v-btn>
           </template>
 
@@ -99,6 +101,14 @@ import ContentView from "@/views/ContentView.vue";
         </v-dialog>
         <v-tooltip activator="parent" location="start">Send E-mail</v-tooltip>
       </v-list-item>
+      <v-list-item>
+        <v-btn
+          icon="mdi-github"
+          @click="newWindow(`https://github.com/rasz60`)"
+          size="small"
+        />
+        <v-tooltip activator="parent" location="start">GITHUB</v-tooltip>
+      </v-list-item>
     </v-list>
   </v-overlay>
   <HeaderView :scrolled="scrolled" @sendMessage="fnSendMessage" />
@@ -110,20 +120,11 @@ import ContentView from "@/views/ContentView.vue";
       </v-col>
       -->
       <v-spacer></v-spacer>
-      <v-col cols="9">
+      <v-col cols="12" sm="8">
         <ContentView />
       </v-col>
       <v-spacer></v-spacer>
     </v-row>
-    <v-btn
-      v-show="!scrolled"
-      variant="tonal"
-      icon="mdi-home"
-      color="primary"
-      id="home"
-      @click="moveMenu(`/`)"
-    >
-    </v-btn>
     <v-btn
       v-show="!scrolled"
       variant="tonal"
@@ -304,6 +305,9 @@ export default {
         console.error("FAILED...", error);
       }
     },
+    newWindow(url) {
+      window.open("about:blank").location.href = url;
+    },
   },
 };
 </script>
@@ -315,7 +319,7 @@ export default {
 
   .v-list {
     background-color: transparent;
-    width: 5vw;
+    width: 5em;
     text-align: center;
   }
 }
@@ -346,11 +350,20 @@ export default {
 
   #dial {
     position: absolute;
-    right: 2.5rem;
-    width: 2em;
-    height: 2em;
-    font-size: 1.3em;
+    right: 0.8rem;
+    width: 1.5em;
+    height: 1.5em;
+    font-size: 1em;
     top: 0;
+  }
+
+  @media (width > 800px) {
+    #dial {
+      right: 2.5rem;
+      width: 2em;
+      height: 2em;
+      font-size: 1.3em;
+    }
   }
 }
 </style>

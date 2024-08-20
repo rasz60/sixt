@@ -86,3 +86,9 @@
     width: 60vw;
   }
 }
+
+@media (width < 800px) {
+  #doc {
+    font-size: 0.8em;
+  }
+}

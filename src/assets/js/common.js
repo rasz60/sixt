@@ -6,6 +6,10 @@ import keywordConfig from "/public/json/_keyword.json";
 const getAllPosts = () => {
   let posts = jsonPosts;
 
+  for (var i in posts) {
+    posts[i].bgcolor = "rgb(" + randomColor() + ", 0.1)";
+  }
+
   dateDiff(posts);
   setPostListTitle(posts);
   return posts.sort(function (a, b) {

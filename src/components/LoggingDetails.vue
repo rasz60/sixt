@@ -30,7 +30,7 @@
     <div id="doc" v-html="contents"></div>
     <v-divider></v-divider>
     <v-row id="relatedPosts">
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <v-list>
           <v-list-item class="relatedPostTitle"
             >같은 시리즈 게시물 보기</v-list-item
@@ -46,7 +46,7 @@
           </v-list-item>
         </v-list>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
         <v-list>
           <v-list-item class="relatedPostTitle">관련 게시물 보기</v-list-item>
           <v-list-item

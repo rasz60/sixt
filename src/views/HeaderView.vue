@@ -2,10 +2,10 @@
   <v-layout id="header" :class="scrolled ? `notScrolled` : `scrolled`">
     <v-app-bar id="headerMenu" :class="scrolled ? `notScrolled` : `scrolled`">
       <v-row>
-        <v-col cols="12" sm="5" class="d-flex align-center pl-5">
+        <v-col cols="4">
           <v-btn icon="mdi-menu" @click.stop="fnMenu"></v-btn>
         </v-col>
-        <v-col cols="12" sm="2" id="logo">
+        <v-col cols="4" id="logo">
           <v-avatar
             id="avatar"
             size="80"
@@ -15,11 +15,11 @@
             <v-img src="https://avatars.githubusercontent.com/u/96821067?v=4" />
           </v-avatar>
         </v-col>
-        <v-col cols="12" sm="5" id="btnbox" class="pr-10 pt-5">
-          SIXT(Jinwoong Kim)
+        <v-col cols="4" id="btnbox">
           <v-btn
-            icon="mdi-github"
-            @click.stop="newWindow(`https://github.com/rasz60`)"
+            v-if="!scrolled"
+            icon="mdi-home"
+            @click.stop="moveMenu('/')"
           ></v-btn>
         </v-col>
       </v-row>
@@ -79,8 +79,13 @@ export default {
     .v-row {
       height: 100%;
 
+      .v-col {
+        display: flex;
+        align-items: center;
+      }
+
       #logo {
-        text-align: center;
+        justify-content: center;
         margin-top: 0.25em;
         #avatar {
           background-color: whitesmoke;
