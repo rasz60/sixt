@@ -6,13 +6,10 @@ export default {
   displayPosts: [],
   postStatus: [],
   categorys: [
-    { type: "dev", title: "dev" },
-    { type: "issue", title: "issue" },
-    { type: "status", title: "진행중", value: true },
-    { type: "status", title: "마감", value: false },
+    { type: "dev", title: "dev", icon: null, color: null },
+    { type: "issue", title: "issue", icon: null, color: null },
+    { type: "status", title: "진행중", value: true, icon: null, color: null },
+    { type: "status", title: "마감", value: false, icon: null, color: null },
   ],
   rows: 0,
-  listType: 0,
-  listTypeIcon: "mdi-format-list-numbered",
-  listTypeText: "목록형",
 };

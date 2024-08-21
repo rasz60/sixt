@@ -19,6 +19,5 @@ export default {
 <style lang="scss">
 #contents {
   height: 100%;
-  padding-left: 10px;
 }
 </style>
