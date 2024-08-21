@@ -1,12 +1,4 @@
 export default {
-  async setPostBg() {
-    let postTitle = document.querySelectorAll(".postTitle");
-
-    for (var i = 0; i < postTitle.length; i++) {
-      postTitle[i].style.backgroundColor =
-        "rgb(" + this.commonjs.randomColor() + ", 0.1)";
-    }
-  },
   async seeAll() {
     this.displayPosts = [];
     this.post = await this.commonjs.getAllPosts();

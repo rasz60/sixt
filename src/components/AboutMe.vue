@@ -28,18 +28,18 @@
     <v-list>
       <v-list-item class="pa-5 pl-10">
         <v-row>
-          <v-col cols="12" sm="1">
+          <v-col cols="3" sm="1">
             <v-icon icon="mdi-email-outline" size="small" />
           </v-col>
-          <v-col cols="12" sm="3">devsixt60@gmail.com</v-col>
-          <v-col cols="12" sm="1">
+          <v-col cols="9" sm="3">devsixt60@gmail.com</v-col>
+          <v-col cols="3" sm="1">
             <v-icon icon="mdi-bug-play-outline" size="small" />
           </v-col>
-          <v-col cols="12" sm="3">rasz60.github.io/sixt</v-col>
-          <v-col cols="12" sm="1">
+          <v-col cols="9" sm="3">rasz60.github.io/sixt</v-col>
+          <v-col cols="3" sm="1">
             <v-icon icon="mdi-github" size="small" />
           </v-col>
-          <v-col cols="12" sm="3">github.com/rasz60</v-col>
+          <v-col cols="9" sm="3">github.com/rasz60</v-col>
         </v-row>
       </v-list-item>
 
@@ -126,6 +126,7 @@
             :key="s"
             :prepend-icon="s.logo != null ? s.logo : g.icon"
             :color="g.color"
+            size="small"
             class="ma-1"
           >
             {{ s.name }}

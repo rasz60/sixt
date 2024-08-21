@@ -3,7 +3,13 @@
     <v-app-bar id="headerMenu" :class="scrolled ? `notScrolled` : `scrolled`">
       <v-row>
         <v-col cols="4">
-          <v-btn icon="mdi-menu" @click.stop="fnMenu"></v-btn>
+          <v-btn
+            id="menuDrop"
+            icon="mdi-menu"
+            @click.stop="fnMenu"
+            :variant="!scrolled ? `tonal` : null"
+            :color="!scrolled ? `orange` : null"
+          ></v-btn>
         </v-col>
         <v-col cols="4" id="logo">
           <v-avatar
@@ -17,8 +23,11 @@
         </v-col>
         <v-col cols="4" id="btnbox">
           <v-btn
+            id="home"
             v-if="!scrolled"
             icon="mdi-home"
+            variant="tonal"
+            color="primary"
             @click.stop="moveMenu('/')"
           ></v-btn>
         </v-col>
@@ -54,76 +63,5 @@ export default {
       }
     },
   },
-  watch: {},
 };
 </script>
-
-<style lang="scss">
-#header {
-  margin: 0 !important;
-  width: 100%;
-  height: 7em;
-  overflow: visible !important;
-  position: fixed !important;
-  z-index: 2001 !important;
-  top: 0;
-
-  #headerMenu {
-    height: 7em;
-    box-shadow: none;
-
-    .v-toolbar__content {
-      height: 100% !important;
-    }
-
-    .v-row {
-      height: 100%;
-
-      .v-col {
-        display: flex;
-        align-items: center;
-      }
-
-      #logo {
-        justify-content: center;
-        margin-top: 0.25em;
-        #avatar {
-          background-color: whitesmoke;
-        }
-
-        #avatar:hover {
-          cursor: pointer;
-        }
-
-        #avatar:hover img {
-          transition-property: all; /*모든부분 변화*/
-          transition-duration: 0.2s; /*0.2s동안 변화*/
-          transition-timing-function: linear; /*일정한 속도로 변화*/
-          transition-delay: 0; /*즉시변화-> 0이 default값이므로 생략 가능*/
-          transform: scale(1.15); /* 1.15배 크기로 변화*/
-        }
-      }
-
-      #btnbox {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-      }
-    }
-  }
-}
-#header.notScrolled {
-  background-color: white;
-  border-bottom: 1px solid #ececec;
-  #headerMenu.notScrolled {
-    background-color: rgba(247, 165, 1, 0.55);
-  }
-}
-#header.scrolled {
-  background-color: transparent;
-  border-bottom: none;
-  #headerMenu.scrolled {
-    background-color: transparent;
-  }
-}
-</style>

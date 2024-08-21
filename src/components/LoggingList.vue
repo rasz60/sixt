@@ -5,8 +5,9 @@
         :prepend-icon="postCnt > 1 ? `mdi-list-box-outline` : null"
         link
         @click="seeAll"
-        >전체보기</v-chip
       >
+        전체보기
+      </v-chip>
       <v-chip
         class="category"
         v-for="category in categorys"
@@ -15,8 +16,9 @@
         :color="category.color"
         link
         @click="setPosts(category.type, category.value)"
-        >{{ category.title }}</v-chip
       >
+        {{ category.title }}
+      </v-chip>
     </v-col>
 
     <v-col :cols="postCnt == 1 ? 12 : 3">
@@ -24,7 +26,7 @@
         variant="underlined"
         append-icon="mdi-magnify"
         v-model="searchKeyword"
-        @click:append="setPosts"
+        @click:append="setPosts(null, null)"
         @keyup="searchKeyup"
         placeholder="검색어 입력"
         hide-details
@@ -33,7 +35,7 @@
   </v-row>
   <!-- 그룹형 -->
   <v-row v-for="g in displayGroups" :key="g" :class="`group g` + g.groupSeq">
-    <v-col cols="12" class="groupTitle">
+    <v-col cols="11" class="groupTitle">
       <h2>{{ g.groupTitle }}</h2>
     </v-col>
     <v-divider></v-divider>
@@ -103,13 +105,19 @@
 <script>
 import datas from "@/assets/js/logging/list/loggingListDatas.js";
 import methods from "@/assets/js/logging/list/loggingListMethods.js";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+
 export default {
   name: "loggingList",
+  props: {
+    cwidth: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return datas;
   },
-  async created() {
+  created() {
     this.groups = this.commonjs.getAllGroups().reverse();
     this.displayGroups = this.groups;
     this.posts = this.commonjs.getAllPosts().reverse();
@@ -122,52 +130,31 @@ export default {
       this.categorys[i].icon = this.commonjs.keywordPIcon(t, v);
       this.categorys[i].color = this.commonjs.keywordColor(t, v);
     }
-    this.updateScreenWidth();
-  },
-  setup() {
-    const screendWidth = ref(window.innerWidth);
-    const postCnt = ref(0);
 
-    const updateScreenWidth = () => {
-      screendWidth.value = window.innerWidth;
-
-      if (screendWidth.value >= 1850) {
-        postCnt.value = 3;
-      } else if (screendWidth.value >= 1200) {
-        postCnt.value = 2;
-      } else {
-        postCnt.value = 1;
-      }
-    };
-    onMounted(() => {
-      window.addEventListener("resize", updateScreenWidth);
-    });
-
-    onBeforeUnmount(() => {
-      window.removeEventListener("resize", updateScreenWidth);
-    });
-
-    return {
-      screendWidth,
-      postCnt,
-      updateScreenWidth,
-    };
+    if (this.cwidth >= 1850) {
+      this.postCnt = 3;
+    } else if (this.cwidth >= 1200) {
+      this.postCnt = 2;
+    } else {
+      this.postCnt = 1;
+    }
   },
   methods: methods,
   watch: {
-    displayPosts() {
-      this.rows = Math.ceil(this.posts.length / 3);
+    displayPosts(v) {
+      this.rows = Math.ceil(this.posts.length / this.postCnt);
+      this.displayGroups = [];
+      this.groups.forEach((g) => {
+        var gseq = g.groupSeq;
+        var childCnt = 0;
+        v.forEach((p) => {
+          p.groupSeq == gseq ? childCnt++ : 0;
+        });
+        g.childCnt = childCnt;
+        if (childCnt > 0) this.displayGroups.push(g);
+      });
     },
-    listType(v) {
-      if (v == 1) {
-        this.groups = this.commonjs.getAllGroups();
-        this.displayGroups = this.groups;
-        this.displayPosts = this.commonjs.getAllPosts().reverse();
-      } else {
-        this.seeAll();
-      }
-    },
-    screendWidth(v) {
+    cwidth(v) {
       if (v >= 1850) {
         this.postCnt = 3;
       } else if (v >= 1200) {
@@ -191,10 +178,11 @@ export default {
     align-items: center;
     margin-bottom: 10px;
 
-    @media (width <= 800) {
-      h2 {
-        font-size: 14px !important;
-      }
+    h2 {
+      font-size: 1.5em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 

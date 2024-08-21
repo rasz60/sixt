@@ -16,3 +16,9 @@ $font-stack:
 body {
   font-family: $font-stack;
 }
+
+@import url(app.scss);
+@import url(header.scss);
+@import url(loggingList.scss);
+@import url(loggingDetails.scss);
+@import url(markdownDoc.scss);

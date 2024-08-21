@@ -12,4 +12,5 @@ export default {
     { type: "status", title: "마감", value: false, icon: null, color: null },
   ],
   rows: 0,
+  postCnt: 0,
 };

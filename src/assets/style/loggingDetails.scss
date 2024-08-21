@@ -49,6 +49,14 @@
 
 @media (width < 800px) {
   #detailsTitle {
-    font-size: 20px;
+    font-size: 1.4em;
+  }
+
+  #subTitle {
+    font-size: 0.9em;
+  }
+
+  #btnBox {
+    justify-content: center;
   }
 }

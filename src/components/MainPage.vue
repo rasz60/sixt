@@ -1,4 +1,7 @@
-<script setup></script>
+<script setup>
+import SlideGroups from "@/components/SlideGroups.vue";
+//import WindowGroups from "@/components/WindowGroups.vue";
+</script>
 
 <template>
   <v-sheet class="mx-auto" width="100%">
@@ -7,8 +10,29 @@
         >new</v-chip
       >
     </h4>
+    <!-- 1200px 이상 -->
+    <SlideGroups
+      :displayPosts="
+        posts.filter((p, idx) => {
+          if (idx < 10) return p;
+        })
+      "
+      :widthFlag="widthFlag"
+    />
 
-    <v-window v-model="onboarding[0]">
+    <!-- 1200px 이하 -->
+    <!-- 작업 중
+    <WindowGroups
+      :displayPosts="
+        posts.filter((p, idx) => {
+          if (idx < 5) return p;
+        })
+      "
+      :widthFlag="widthFlag"
+      @sendMessage="fnSendBoarding"
+    />
+    -->
+    <v-window v-model="onboarding[0]" v-if="!widthFlag">
       <v-window-item
         v-for="p in posts.filter((p, idx) => {
           if (idx < 5) return p;
@@ -25,7 +49,7 @@
       </v-window-item>
     </v-window>
 
-    <v-sheet-actions class="justify-space-between">
+    <v-sheet-actions class="justify-space-between" v-if="!widthFlag">
       <v-item-group v-model="onboarding[0]" class="text-center" mandatory>
         <v-item
           v-for="n in posts.filter((p, idx) => {
@@ -46,23 +70,6 @@
       </v-item-group>
     </v-sheet-actions>
 
-    <!--
-    <v-slide-group class="pa-10" show-arrows>
-      <v-slide-group-item
-        v-for="p in posts.filter((p, idx) => {
-          if (idx < 5) return p;
-        })"
-        :key="p"
-      >
-        <v-card
-          class="ma-3"
-          :title="p.dpTitle"
-          link
-          @click="this.$router.push('/logging/' + p.seq)"
-        ></v-card>
-      </v-slide-group-item>
-    </v-slide-group>
-    -->
     <v-divider></v-divider>
   </v-sheet>
   <v-sheet class="mx-auto" width="100%" v-for="(g, idx) in groups" :key="g">
@@ -72,8 +79,17 @@
         {{ g.proceeding ? `ing` : `done` }}
       </v-chip>
     </h4>
-
-    <v-window v-model="onboarding[idx + 1]">
+    <!-- 1200px 이상 -->
+    <SlideGroups
+      :displayPosts="
+        posts
+          .filter((p) => p.groupSeq == g.groupSeq && p.type == 'dev')
+          .reverse()
+      "
+      :widthFlag="widthFlag"
+    />
+    <!-- 1200px 이하 -->
+    <v-window v-model="onboarding[idx + 1]" v-if="!widthFlag">
       <v-window-item
         v-for="p in posts
           .filter((p) => p.groupSeq == g.groupSeq && p.type == 'dev')
@@ -89,8 +105,7 @@
         ></v-card>
       </v-window-item>
     </v-window>
-
-    <v-sheet-actions class="justify-space-between">
+    <v-sheet-actions class="justify-space-between" v-if="!widthFlag">
       <v-item-group v-model="onboarding[idx + 1]" class="text-center" mandatory>
         <v-item
           v-for="n in posts
@@ -110,23 +125,6 @@
         </v-item>
       </v-item-group>
     </v-sheet-actions>
-    <!--
-    <v-slide-group class="pa-10">
-      <v-slide-group-item
-        v-for="p in posts
-          .filter((p) => p.groupSeq == g.groupSeq && p.type == 'dev')
-          .reverse()"
-        :key="p"
-      >
-        <v-card
-          class="ma-3"
-          :title="p.dpTitle"
-          link
-          @click="this.$router.push('/logging/' + p.seq)"
-        ></v-card>
-      </v-slide-group-item>
-    </v-slide-group>
-    -->
     <v-divider></v-divider>
   </v-sheet>
 </template>
@@ -134,11 +132,18 @@
 <script>
 export default {
   name: "mainPage",
+  props: {
+    cwidth: {
+      type: Number,
+      required: true,
+    },
+  },
   data() {
     return {
       onboarding: [],
       posts: [],
       groups: [],
+      widthFlag: true,
     };
   },
   async created() {
@@ -150,18 +155,16 @@ export default {
       this.onboarding[i + 1] = 0;
     }
 
-    console.log(this.posts);
-  },
-  mounted() {
-    this.setPostBg();
+    this.widthFlag = this.cwidth >= 1200;
   },
   methods: {
-    async setPostBg() {
-      let postTitle = document.querySelectorAll(".v-window-item .v-card");
-      for (var i = 0; i < postTitle.length; i++) {
-        postTitle[i].style.backgroundColor =
-          "rgb(" + this.commonjs.randomColor() + ", 0.1)";
-      }
+    fnSendBoarding(v) {
+      this.onboarding[v.index] = v.value;
+    },
+  },
+  watch: {
+    cwidth(v) {
+      this.widthFlag = v >= 1200;
     },
   },
 };
@@ -174,9 +177,8 @@ export default {
   .v-slide-group__content {
     justify-content: flex-start;
   }
-
   .v-card {
-    width: 21.4rem;
+    width: 20rem;
   }
 
   .v-window-item {
