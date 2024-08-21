@@ -85,8 +85,3 @@ export default {
   methods: methods,
 };
 </script>
-
-<style lang="scss">
-@import "@/assets/style/loggingDetails.scss";
-@import "@/assets/style/markdownDoc.scss";
-</style>

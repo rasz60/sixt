@@ -74,3 +74,24 @@
   display: flex;
   align-items: center;
 }
+
+.group {
+  margin-top: 2rem !important;
+
+  .groupTitle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+
+    h2 {
+      font-size: 1.5em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  hr {
+    margin-bottom: 1em;
+  }
+}

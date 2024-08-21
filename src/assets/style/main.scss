@@ -1,0 +1,25 @@
+.v-sheet {
+  padding: 1rem;
+
+  .v-slide-group__content {
+    justify-content: flex-start;
+  }
+  .v-card {
+    width: 20rem;
+  }
+
+  .v-window-item {
+    display: flex;
+    justify-content: center;
+
+    .v-card {
+      width: 100%;
+    }
+  }
+
+  .slideBtn {
+    color: darkgray;
+    font-size: 8px;
+    margin-right: 0.5em;
+  }
+}

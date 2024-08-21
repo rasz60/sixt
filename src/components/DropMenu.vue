@@ -108,6 +108,10 @@ export default {
   width: fit-content;
   text-align: left;
 
+  .v-list-item {
+    border: none !important;
+  }
+
   span.title {
     margin: 1em;
   }

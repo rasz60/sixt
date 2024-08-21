@@ -39,21 +39,10 @@
       <h2>{{ g.groupTitle }}</h2>
     </v-col>
     <v-divider></v-divider>
-    <v-col
-      cols="12"
-      v-for="(row, i) in Math.ceil(
-        displayPosts.filter((dp) => dp.groupSeq == g.groupSeq).length / postCnt
-      )"
-      :key="row"
-      class="loggingRow"
-    >
+    <v-col cols="12" v-for="(row, i) in rows" :key="row" class="loggingRow">
       <v-row>
         <v-col
-          v-for="post in displayPosts
-            .filter((dp) => dp.groupSeq == g.groupSeq)
-            .filter((p, idx) => {
-              if (idx >= i * postCnt && idx < (i + 1) * postCnt) return p;
-            })"
+          v-for="post in fnSetPostList(g.groupSeq, i)"
           :key="post"
           :cols="12 / postCnt"
         >
@@ -118,11 +107,15 @@ export default {
     return datas;
   },
   created() {
+    /* Groups settings */
     this.groups = this.commonjs.getAllGroups().reverse();
     this.displayGroups = this.groups;
+
+    /* Posts settings */
     this.posts = this.commonjs.getAllPosts().reverse();
     this.displayPosts = this.posts;
 
+    /* Keyword setting */
     for (var i = 0; i < this.categorys.length; i++) {
       var t = this.categorys[i].type;
       var v = this.categorys[i].value;
@@ -131,6 +124,7 @@ export default {
       this.categorys[i].color = this.commonjs.keywordColor(t, v);
     }
 
+    /* row per post Count setting */
     if (this.cwidth >= 1850) {
       this.postCnt = 3;
     } else if (this.cwidth >= 1200) {
@@ -166,28 +160,3 @@ export default {
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="scss">
-@import "@/assets/style/loggingList.scss";
-.group {
-  margin-top: 2rem !important;
-
-  .groupTitle {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-
-    h2 {
-      font-size: 1.5em;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
-
-  hr {
-    margin-bottom: 1em;
-  }
-}
-</style>

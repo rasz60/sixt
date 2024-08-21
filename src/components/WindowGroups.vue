@@ -1,17 +1,17 @@
 <template>
-  <v-window v-model="onboarding" v-if="!widthFlag">
+  <v-window v-model="onboarding">
     <v-window-item v-for="p in displayPosts" :key="p">
       <v-card
         class="ma-3"
         :title="p.dpTitle"
         :style="`background-color:` + p.bgcolor"
         link
-        @click="this.$router.push('/logging/' + p.seq)"
+        @click="$router.push('/logging/' + p.seq)"
       ></v-card>
     </v-window-item>
   </v-window>
 
-  <v-sheet-actions class="justify-space-between" v-if="!widthFlag">
+  <div class="justify-space-between">
     <v-item-group v-model="onboarding" class="text-center" mandatory>
       <v-item
         v-for="n in displayPosts.length"
@@ -28,7 +28,7 @@
         ></v-btn>
       </v-item>
     </v-item-group>
-  </v-sheet-actions>
+  </div>
 </template>
 <script>
 export default {
@@ -37,14 +37,10 @@ export default {
       type: Array,
       required: true,
     },
-    widthFlag: {
-      type: Boolean,
-      required: true,
-    },
   },
   data() {
     return {
-      onboarding: [],
+      onboarding: 0,
     };
   },
 };

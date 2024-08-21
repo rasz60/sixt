@@ -81,4 +81,11 @@ export default {
   fnListType() {
     this.listType = this.listType == 0 ? 1 : 0;
   },
+  fnSetPostList(groupSeq, i) {
+    return this.displayPosts
+      .filter((dp) => dp.groupSeq == groupSeq)
+      .filter((p, idx) => {
+        if (idx >= i * this.postCnt && idx < (i + 1) * this.postCnt) return p;
+      });
+  },
 };
