@@ -3,9 +3,14 @@
   padding: 1.2rem;
 }
 
-.newPostsBadge {
+.itemSeq {
   position: absolute;
   z-index: 1;
+  opacity: 0.85;
+
+  span {
+    padding: 1em;
+  }
 }
 
 #categorys {
@@ -102,7 +107,21 @@
     }
   }
 
+  .groupTitle:nth-child(2),
+  .groupTitle:nth-child(3) {
+    justify-content: end;
+  }
+
   hr {
     margin-bottom: 1em;
+  }
+}
+
+@media (max-width: 1200px) {
+  .postTitle {
+    height: 7em !important;
+  }
+  .keywords {
+    height: 3em !important;
   }
 }

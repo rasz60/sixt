@@ -21,7 +21,7 @@ const routes = [
     component: LoggingList,
   },
   {
-    path: "/logging/:seq",
+    path: "/logging/:g/:p",
     name: "loggingDetails",
     component: LoggingDetails,
   },

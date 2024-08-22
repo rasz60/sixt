@@ -2,10 +2,15 @@ import htmlConverter from "@/utils/HTMLConverter";
 
 export default {
   async setPost() {
-    const param = this.$route.params.seq;
-    let displayPost = this.commonjs
-      .getAllPosts()
-      .filter((e) => e.seq == param)[0];
+    const g = this.$route.params.g;
+    const p = this.$route.params.p;
+
+    console.log(g, p);
+
+    let displayPost = this.commonjs.getAllPosts().filter((e) => {
+      if (e.seq == p && e.groupSeq == g) return e;
+    })[0];
+    console.log(displayPost);
     this.post = displayPost;
     const post = await import(
       "/public/posts/" + this.post.serizes + "/" + this.post.fileName

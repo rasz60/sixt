@@ -36,7 +36,7 @@
   <!-- 그룹형 -->
   <v-row v-for="g in displayGroups" :key="g" :class="`group g` + g.groupSeq">
     <v-col cols="10" class="groupTitle" @click.stop="g.toggle = !g.toggle">
-      <h2>{{ g.groupTitle }}</h2>
+      <h2>{{ g.groupSeq }}.&nbsp;{{ g.groupTitle }}</h2>
     </v-col>
     <v-col cols="1" class="groupTitle">
       <v-badge color="info" :content="g.childCnt" inline></v-badge>
@@ -44,6 +44,7 @@
     <v-col cols="1" class="groupTitle" @click.stop="g.toggle = !g.toggle">
       <v-icon :icon="g.toggle ? `mdi-menu-down` : `mdi-menu-up`" />
     </v-col>
+
     <v-divider></v-divider>
     <v-col
       cols="12"
@@ -59,12 +60,14 @@
           :cols="12 / postCnt"
         >
           <v-badge
-            class="newPostsBadge"
-            v-show="post.newPost"
-            color="red"
-            content="new"
+            class="itemSeq"
+            color="secondary"
+            :content="`#` + post.groupItemSeq"
           ></v-badge>
-          <router-link :to="'/logging/' + post.seq" class="postLink">
+          <router-link
+            :to="'/logging/' + g.groupSeq + '/' + post.seq"
+            class="postLink"
+          >
             <v-card class="post" link>
               <v-card-title
                 class="postTitle"
