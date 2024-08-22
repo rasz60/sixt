@@ -88,4 +88,10 @@ export default {
         if (idx >= i * this.postCnt && idx < (i + 1) * this.postCnt) return p;
       });
   },
+  fnSetGroupRows(groupSeq) {
+    return Math.ceil(
+      this.displayPosts.filter((p) => p.groupSeq == groupSeq).length /
+        this.postCnt
+    );
+  },
 };

@@ -85,3 +85,9 @@ export default {
   methods: methods,
 };
 </script>
+
+<style lang="scss" scoped>
+.v-list-item {
+  border: none !important;
+}
+</style>

@@ -63,9 +63,20 @@
     }
 
     .dateDiff {
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       font-style: italic;
       color: darkgrey;
+
+      span {
+        color: #3b3b3b;
+        font-style: normal;
+        max-width: 70%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     }
   }
 }

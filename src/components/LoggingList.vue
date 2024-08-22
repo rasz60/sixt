@@ -35,11 +35,23 @@
   </v-row>
   <!-- 그룹형 -->
   <v-row v-for="g in displayGroups" :key="g" :class="`group g` + g.groupSeq">
-    <v-col cols="11" class="groupTitle">
+    <v-col cols="10" class="groupTitle" @click.stop="g.toggle = !g.toggle">
       <h2>{{ g.groupTitle }}</h2>
     </v-col>
+    <v-col cols="1" class="groupTitle">
+      <v-badge color="info" :content="g.childCnt" inline></v-badge>
+    </v-col>
+    <v-col cols="1" class="groupTitle" @click.stop="g.toggle = !g.toggle">
+      <v-icon :icon="g.toggle ? `mdi-menu-down` : `mdi-menu-up`" />
+    </v-col>
     <v-divider></v-divider>
-    <v-col cols="12" v-for="(row, i) in rows" :key="row" class="loggingRow">
+    <v-col
+      cols="12"
+      v-for="(row, i) in fnSetGroupRows(g.groupSeq)"
+      :key="row"
+      class="loggingRow"
+      v-show="g.toggle"
+    >
       <v-row>
         <v-col
           v-for="post in fnSetPostList(g.groupSeq, i)"
@@ -79,6 +91,10 @@
               <div class="lastRow">
                 <v-row>
                   <v-col cols="12" class="dateDiff">
+                    <span>
+                      <v-icon icon="mdi-code-braces" size="small" />
+                      {{ g.groupTitle }}
+                    </span>
                     {{ post.dateDiff }}
                   </v-col>
                 </v-row>
@@ -145,6 +161,7 @@ export default {
           p.groupSeq == gseq ? childCnt++ : 0;
         });
         g.childCnt = childCnt;
+        g.toggle = true;
         if (childCnt > 0) this.displayGroups.push(g);
       });
     },
