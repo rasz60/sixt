@@ -6,7 +6,7 @@
         :title="p.dpTitle"
         :style="`background-color:` + p.bgcolor"
         link
-        @click="$router.push('/logging/' + p.seq)"
+        @click="$router.push('/logging/' + p.groupSeq + '/' + p.seq)"
       ></v-card>
     </v-window-item>
   </v-window>

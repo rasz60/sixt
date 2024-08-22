@@ -33,81 +33,85 @@
       ></v-text-field>
     </v-col>
   </v-row>
-  <!-- 그룹형 -->
-  <v-row v-for="g in displayGroups" :key="g" :class="`group g` + g.groupSeq">
-    <v-col cols="10" class="groupTitle" @click.stop="g.toggle = !g.toggle">
-      <h2>{{ g.groupSeq }}.&nbsp;{{ g.groupTitle }}</h2>
-    </v-col>
-    <v-col cols="1" class="groupTitle">
-      <v-badge color="info" :content="g.childCnt" inline></v-badge>
-    </v-col>
-    <v-col cols="1" class="groupTitle" @click.stop="g.toggle = !g.toggle">
-      <v-icon :icon="g.toggle ? `mdi-menu-down` : `mdi-menu-up`" />
-    </v-col>
 
-    <v-divider></v-divider>
-    <v-col
-      cols="12"
-      v-for="(row, i) in fnSetGroupRows(g.groupSeq)"
-      :key="row"
-      class="loggingRow"
-      v-show="g.toggle"
-    >
-      <v-row>
-        <v-col
-          v-for="post in fnSetPostList(g.groupSeq, i)"
-          :key="post"
-          :cols="12 / postCnt"
-        >
-          <v-badge
-            class="itemSeq"
-            color="secondary"
-            :content="`#` + post.groupItemSeq"
-          ></v-badge>
-          <router-link
-            :to="'/logging/' + g.groupSeq + '/' + post.seq"
-            class="postLink"
+  <div v-for="g in displayGroups" :key="g">
+    <v-row :class="`group g` + g.groupSeq" @click.stop="g.toggle = !g.toggle">
+      <v-col cols="10" class="groupTitle">
+        <h2>{{ g.groupSeq }}.&nbsp;{{ g.groupTitle }}</h2>
+      </v-col>
+      <v-col cols="1" class="groupTitle">
+        <v-badge color="info" :content="g.childCnt" inline></v-badge>
+      </v-col>
+      <v-col cols="1" class="groupTitle">
+        <v-icon :icon="g.toggle ? `mdi-menu-up` : `mdi-menu-down`" />
+      </v-col>
+    </v-row>
+
+    <v-divider></v-divider><br />
+    <v-row>
+      <v-col
+        cols="12"
+        v-for="(row, i) in fnSetGroupRows(g.groupSeq)"
+        :key="row"
+        class="loggingRow"
+        v-show="g.toggle"
+      >
+        <v-row>
+          <v-col
+            v-for="post in fnSetPostList(g.groupSeq, i)"
+            :key="post"
+            :cols="12 / postCnt"
           >
-            <v-card class="post" link>
-              <v-card-title
-                class="postTitle"
-                :style="`background-color: ` + post.bgcolor"
-              >
-                {{ post.dpTitle }}
-              </v-card-title>
-
-              <v-divider></v-divider>
-
-              <div class="keywords">
-                <v-chip
-                  v-for="keyword in post.keywords"
-                  :key="keyword"
-                  :prepend-icon="this.commonjs.keywordPIcon(keyword.type)"
-                  :color="this.commonjs.keywordColor(keyword.type)"
-                  size="small"
-                  link
-                  class="keyword"
-                  >{{ keyword.value }}</v-chip
+            <v-badge
+              class="itemSeq"
+              color="secondary"
+              :content="`#` + post.groupItemSeq"
+            ></v-badge>
+            <router-link
+              :to="'/logging/' + g.groupSeq + '/' + post.seq"
+              class="postLink"
+            >
+              <v-card class="post" link>
+                <v-card-title
+                  class="postTitle"
+                  :style="`background-color: ` + post.bgcolor"
                 >
-              </div>
+                  {{ post.dpTitle }}
+                </v-card-title>
 
-              <div class="lastRow">
-                <v-row>
-                  <v-col cols="12" class="dateDiff">
-                    <span>
-                      <v-icon icon="mdi-code-braces" size="small" />
-                      {{ g.groupTitle }}
-                    </span>
-                    {{ post.dateDiff }}
-                  </v-col>
-                </v-row>
-              </div>
-            </v-card>
-          </router-link>
-        </v-col>
-      </v-row>
-    </v-col>
-  </v-row>
+                <v-divider></v-divider>
+
+                <div class="keywords">
+                  <v-chip
+                    v-for="keyword in post.keywords"
+                    :key="keyword"
+                    :prepend-icon="this.commonjs.keywordPIcon(keyword.type)"
+                    :color="this.commonjs.keywordColor(keyword.type)"
+                    size="small"
+                    link
+                    class="keyword"
+                    >{{ keyword.value }}</v-chip
+                  >
+                </div>
+
+                <div class="lastRow">
+                  <v-row>
+                    <v-col cols="12" class="dateDiff">
+                      <span>
+                        <v-icon icon="mdi-code-braces" size="small" />
+                        {{ g.groupTitle }}
+                      </span>
+                      {{ post.dateDiff }}
+                    </v-col>
+                  </v-row>
+                </div>
+              </v-card>
+            </router-link>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
