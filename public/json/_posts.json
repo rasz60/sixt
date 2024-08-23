@@ -638,23 +638,5 @@
     ],
     "newPost": false,
     "proceeding": true
-  },
-  {
-    "seq": 35,
-    "groupSeq": 3,
-    "groupItemSeq": 6,
-    "type": "dev",
-    "serizes": "g3",
-    "fileName": "seq6.md",
-    "title": "🔨게시판 작성 기능 구현하기 (1/2)",
-    "date": "2024-08-10 18:12:14",
-    "dateDiff": null,
-    "keywords": [
-      { "type": "dev", "value": "dev" },
-      { "type": "back", "value": "Spring-Boot" },
-      { "type": "back", "value": "JPA" }
-    ],
-    "newPost": false,
-    "proceeding": true
   }
 ]

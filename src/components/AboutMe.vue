@@ -145,8 +145,12 @@ export default {
   data() {
     return aboutMeDatas;
   },
-  created() {
+  async created() {
     this.fnSetCareer();
+    this.pj = await this.commonjs.getProject(2024);
+    this.skillGroup = await this.commonjs.getAllSkillGroup();
+    this.skills = await this.commonjs.getAllSkills();
+    this.displayPj = this.pj;
   },
   methods: {
     fnSetCareer() {

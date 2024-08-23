@@ -1,6 +1,8 @@
 import jsonPosts from "/public/json/_posts.json";
 import jsonGroups from "/public/json/_groups.json";
 import keywordConfig from "/public/json/_keyword.json";
+import skillGroup from "/public/json/about/_skillGroup.json";
+import skills from "/public/json/about/_skills.json";
 
 // 모든 post array 가져오기
 const getAllPosts = () => {
@@ -129,6 +131,40 @@ const setPostListTitle = (posts) => {
     posts[i].gColor = jsonGroups[gs - 1].groupColor;
   }
 };
+const getProject = async (yyyy) => {
+  return await import("/public/json/about/" + yyyy + "/_project.json").catch(
+    () => {
+      return null;
+    }
+  );
+};
+
+const getAllProjects = async () => {
+  var projects = {};
+  var maxYYYY = new Date().getFullYear();
+  for (var i = 2017; i < maxYYYY; i++) {
+    var pj = await import("/public/json/about/" + i + "/_project.json").catch(
+      () => {
+        return null;
+      }
+    );
+    if (pj != null) {
+      projects["Y" + i] = pj;
+    } else {
+      break;
+    }
+  }
+
+  return projects;
+};
+
+const getAllSkillGroup = async () => {
+  return await skillGroup;
+};
+
+const getAllSkills = async () => {
+  return await skills;
+};
 
 export default {
   getAllPosts: getAllPosts,
@@ -137,4 +173,8 @@ export default {
   keywordPIcon: keywordPIcon,
   randomColor: randomColor,
   newPostCnt: newPostCnt,
+  getProject: getProject,
+  getAllProjects: getAllProjects,
+  getAllSkillGroup: getAllSkillGroup,
+  getAllSkills: getAllSkills,
 };

@@ -1,0 +1,142 @@
+[
+  {
+    "main": true,
+    "type": 0,
+    "name": "JAVA",
+    "logo": "mdi-language-java"
+  },
+  {
+    "main": true,
+    "type": 0,
+    "name": "Spring-Framework",
+    "logo": null
+  },
+  {
+    "main": false,
+    "type": 0,
+    "name": "Spring-Boot",
+    "logo": null
+  },
+  {
+    "main": true,
+    "type": 0,
+    "name": "RestAPI",
+    "logo": "mdi-api"
+  },
+  {
+    "main": false,
+    "type": 0,
+    "name": "MyBatis",
+    "logo": null
+  },
+  {
+    "main": false,
+    "type": 0,
+    "name": "JPA",
+    "logo": null
+  },
+
+  {
+    "main": true,
+    "type": 1,
+    "name": "ORACLE",
+    "logo": null
+  },
+  {
+    "main": true,
+    "type": 1,
+    "name": "MSSQL",
+    "logo": null
+  },
+  {
+    "main": false,
+    "type": 1,
+    "name": "MySQL",
+    "logo": null
+  },
+
+  {
+    "main": true,
+    "type": 2,
+    "name": "OpneShift-PaaS",
+    "logo": "mdi-redhat"
+  },
+  {
+    "main": false,
+    "type": 2,
+    "name": "Github",
+    "logo": "mdi-github"
+  },
+  {
+    "main": false,
+    "type": 2,
+    "name": "Gitlab",
+    "logo": "mdi-gitlab"
+  },
+  {
+    "main": false,
+    "type": 2,
+    "name": "Maven",
+    "logo": "mdi-wrench-outline"
+  },
+  {
+    "main": false,
+    "type": 2,
+    "name": "Gradle",
+    "logo": "mdi-wrench-outline"
+  },
+  {
+    "main": true,
+    "type": 3,
+    "name": "JAVASCRIPT",
+    "logo": "mdi-language-javascript"
+  },
+  {
+    "main": false,
+    "type": 3,
+    "name": "JQuery",
+    "logo": "mdi-jquery"
+  },
+  {
+    "main": true,
+    "type": 3,
+    "name": "Ajax",
+    "logo": null
+  },
+  {
+    "main": false,
+    "type": 3,
+    "name": "HTML5",
+    "logo": "mdi-language-html5"
+  },
+  {
+    "main": false,
+    "type": 3,
+    "name": "JSP",
+    "logo": null
+  },
+  {
+    "main": false,
+    "type": 3,
+    "name": "CSS3",
+    "logo": "mdi-language-css3"
+  },
+  {
+    "main": false,
+    "type": 4,
+    "name": "Vue.js",
+    "logo": "mdi-vuejs"
+  },
+  {
+    "main": false,
+    "type": 4,
+    "name": "vuetify",
+    "logo": "mdi-vuetify"
+  },
+  {
+    "main": false,
+    "type": 4,
+    "name": "WebSquare5",
+    "logo": null
+  }
+]

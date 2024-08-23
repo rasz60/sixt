@@ -1,0 +1,27 @@
+[
+  {
+    "type": 0,
+    "name": "Backend",
+    "icon": "mdi-code-greater-than-or-equal",
+    "color": "primary"
+  },
+  {
+    "type": 1,
+    "name": "Database",
+    "icon": "mdi-database",
+    "color": "success"
+  },
+  { "type": 2, "name": "DevOps", "icon": "mdi-dev-to", "color": "cyan" },
+  {
+    "type": 3,
+    "name": "Frontend",
+    "icon": "mdi-code-json",
+    "color": "warning"
+  },
+  {
+    "type": 4,
+    "name": "ETC",
+    "icon": "mdi-power-plug-outline",
+    "color": "purple"
+  }
+]
