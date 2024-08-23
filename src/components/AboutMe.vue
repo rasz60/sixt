@@ -52,47 +52,62 @@
         <v-icon icon="mdi-briefcase" size="small" class="mr-4" />Career
         <span class="subcontent">({{ diff }})</span>
       </v-list-item>
-      <v-list-item
-        v-if="career"
-        class="pl-7"
-        :prepend-icon="
-          current ? `mdi-timeline-check` : `mdi-timeline-check-outline`
-        "
-        :append-icon="current ? `mdi-menu-up` : `mdi-menu-down`"
-        @click="current = !current"
-      >
-        2024
-        <div v-if="current" class="pa-5 pl-10">현재</div>
-      </v-list-item>
-      <v-list-item
-        v-if="career"
-        class="pl-7"
-        :prepend-icon="year1 ? `mdi-timeline-check` : `mdi-timeline-outline`"
-        :append-icon="year1 ? `mdi-menu-up` : `mdi-menu-down`"
-        @click="year1 = !year1"
-      >
-        2023
-        <div v-if="year1" class="pa-5 pl-10">2023</div>
-      </v-list-item>
-      <v-list-item
-        v-if="career"
-        class="pl-7"
-        :prepend-icon="year2 ? `mdi-timeline-check` : `mdi-timeline-outline`"
-        :append-icon="year2 ? `mdi-menu-up` : `mdi-menu-down`"
-        @click="year2 = !year2"
-      >
-        2022
-        <div v-if="year2" class="pa-5 pl-10">과거</div>
-      </v-list-item>
-      <v-list-item
-        v-if="career"
-        class="pl-7"
-        :prepend-icon="past ? `mdi-timeline-check` : `mdi-timeline-outline`"
-        :append-icon="past ? `mdi-menu-up` : `mdi-menu-down`"
-        @click="past = !past"
-      >
-        2017 - 2021
-        <div v-if="past" class="pa-5 pl-10">과거</div>
+      <v-list-item v-show="career" v-for="y in years" :key="y" class="pl-7">
+        <v-row @click="fnToggleProjects(y)">
+          <v-col cols="1">
+            <v-icon :icon="y.fold ? y.activeIcon : y.defaultIcon" />
+          </v-col>
+          <v-col cols="10">{{ y.year }}</v-col>
+          <v-col cols="1">
+            <v-badge
+              class="projectCnt"
+              color="primary"
+              :content="y.projectCnt"
+            ></v-badge>
+          </v-col>
+        </v-row>
+        <v-row v-show="y.fold" v-for="(p, idx) in y.projectCnt" :key="p">
+          <v-col cols="12">
+            <v-divider></v-divider>
+            <v-row>
+              <v-col cols="1"
+                ><v-icon :icon="`mdi-numeric-` + y.projects[idx].seq"
+              /></v-col>
+              <v-col cols="3" class="pjLabel">프로젝트 명</v-col>
+              <v-col cols="8">{{ y.projects[idx].projectTitle }}</v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="3" class="pjLabel">간략 소개</v-col>
+              <v-col cols="8">{{ y.projects[idx].projectSubTitle }}</v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="3" class="pjLabel">사용 기술</v-col>
+              <v-col cols="8">{{ y.projects[idx].projectSkills }}</v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="3" class="pjLabel">수행 기간</v-col>
+              <v-col cols="8">{{ y.projects[idx].projectDueTime }}</v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="3" class="pjLabel">상세 내용</v-col>
+              <v-col cols="8">{{ y.projects[idx].projectDetails }}</v-col>
+            </v-row>
+
+            <v-row>
+              <v-spacer></v-spacer>
+              <v-col cols="3" class="pjLabel">개선 사항</v-col>
+              <v-col cols="8">{{ y.projects[idx].projectImprovements }}</v-col>
+            </v-row>
+          </v-col>
+        </v-row>
       </v-list-item>
     </v-list>
 
@@ -147,10 +162,8 @@ export default {
   },
   async created() {
     this.fnSetCareer();
-    this.pj = await this.commonjs.getProject(2024);
     this.skillGroup = await this.commonjs.getAllSkillGroup();
     this.skills = await this.commonjs.getAllSkills();
-    this.displayPj = this.pj;
   },
   methods: {
     fnSetCareer() {
@@ -166,6 +179,40 @@ export default {
       var diffM = Math.ceil((timeDiff - diffY * y) / m);
 
       this.diff = diffY + "년 " + diffM + "개월";
+
+      this.fnSetYears();
+    },
+    async fnSetYears() {
+      this.current = new Date().getFullYear();
+
+      for (var i = 2024; i >= 2017; i--) {
+        var thisYear = this.current == i;
+        var idx = 2024 - i;
+
+        this.years[idx] = {
+          year: i,
+          thisYear: thisYear,
+          defaultIcon: thisYear
+            ? `mdi-timeline-clock-outline`
+            : `mdi-timeline-outline`,
+          activeIcon: thisYear ? `mdi-timeline-clock` : `mdi-timeline-check`,
+          fold: false,
+          projects: await this.commonjs.getProject(i),
+          projectCnt: 0,
+        };
+
+        this.years[idx].projectCnt =
+          this.years[idx].projects != null
+            ? this.years[idx].projects.length
+            : 0;
+      }
+    },
+    fnToggleProjects(y) {
+      if (y.projectCnt == 0) {
+        alert("준비중입니다. 조금만 기다려주세요.🤣");
+      } else {
+        y.fold = !y.fold;
+      }
     },
   },
   watch: {

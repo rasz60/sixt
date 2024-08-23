@@ -131,6 +131,7 @@ const setPostListTitle = (posts) => {
     posts[i].gColor = jsonGroups[gs - 1].groupColor;
   }
 };
+
 const getProject = async (yyyy) => {
   return await import("/public/json/about/" + yyyy + "/_project.json").catch(
     () => {

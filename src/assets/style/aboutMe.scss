@@ -14,3 +14,19 @@
   font-size: 14px;
   color: darkgray;
 }
+
+.projectCnt span {
+  bottom: -0.5em !important;
+  left: -0.5em !important;
+}
+
+.pjLabel {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+@media (width < 800px) {
+  .projectCnt span {
+    left: -1em !important;
+  }
+}
