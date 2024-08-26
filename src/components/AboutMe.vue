@@ -66,48 +66,85 @@
             ></v-badge>
           </v-col>
         </v-row>
-        <v-row v-show="y.fold" v-for="(p, idx) in y.projectCnt" :key="p">
-          <v-col cols="12">
-            <v-divider></v-divider>
-            <v-row>
-              <v-col cols="1"
-                ><v-icon :icon="`mdi-numeric-` + y.projects[idx].seq"
-              /></v-col>
-              <v-col cols="3" class="pjLabel">프로젝트 명</v-col>
-              <v-col cols="8">{{ y.projects[idx].projectTitle }}</v-col>
-            </v-row>
+        <v-card
+          v-show="y.fold"
+          v-for="(p, idx) in y.projectCnt"
+          :key="p"
+          class="pa-2 my-2"
+        >
+          <v-row>
+            <v-col cols="12">
+              <v-row>
+                <v-col cols="1"
+                  ><v-icon :icon="`mdi-numeric-` + y.projects[idx].seq"
+                /></v-col>
+                <v-col cols="11" sm="1" class="pjLabel">
+                  <v-icon icon="mdi-calendar-clock" size="small" />
+                </v-col>
+                <v-col cols="11" sm="10">
+                  {{ fnSetDateStr(y.projects[idx]) }}
+                </v-col>
+              </v-row>
 
-            <v-row>
-              <v-spacer></v-spacer>
-              <v-col cols="3" class="pjLabel">간략 소개</v-col>
-              <v-col cols="8">{{ y.projects[idx].projectSubTitle }}</v-col>
-            </v-row>
+              <v-row>
+                <v-spacer></v-spacer>
+                <v-col cols="11" sm="1" class="pjLabel">
+                  <v-icon icon="mdi-format-title" size="small" />
+                </v-col>
+                <v-col cols="11" sm="10">{{
+                  y.projects[idx].projectTitle
+                }}</v-col>
+              </v-row>
 
-            <v-row>
-              <v-spacer></v-spacer>
-              <v-col cols="3" class="pjLabel">사용 기술</v-col>
-              <v-col cols="8">{{ y.projects[idx].projectSkills }}</v-col>
-            </v-row>
+              <v-row>
+                <v-spacer></v-spacer>
+                <v-col cols="11" sm="1" class="pjLabel">
+                  <v-icon icon="mdi-information-outline" size="small" />
+                </v-col>
+                <v-col cols="11" sm="10">{{
+                  y.projects[idx].projectSubTitle
+                }}</v-col>
+              </v-row>
 
-            <v-row>
-              <v-spacer></v-spacer>
-              <v-col cols="3" class="pjLabel">수행 기간</v-col>
-              <v-col cols="8">{{ y.projects[idx].projectDueTime }}</v-col>
-            </v-row>
+              <v-row>
+                <v-spacer></v-spacer>
+                <v-col cols="11" sm="1" class="pjLabel">
+                  <v-icon icon="mdi-tag-multiple-outline" size="small" />
+                </v-col>
+                <v-col cols="11" sm="10">
+                  <v-chip
+                    v-for="s in fnSetSkills(y.projects[idx].projectSkills)"
+                    :key="s"
+                    :text="s"
+                    :icon="s.icon"
+                    size="small"
+                    class="mx-1"
+                  />
+                </v-col>
+              </v-row>
 
-            <v-row>
-              <v-spacer></v-spacer>
-              <v-col cols="3" class="pjLabel">상세 내용</v-col>
-              <v-col cols="8">{{ y.projects[idx].projectDetails }}</v-col>
-            </v-row>
+              <v-row>
+                <v-spacer></v-spacer>
+                <v-col cols="11" sm="1" class="pjLabel">
+                  <v-icon icon="mdi-text-search-variant" size="small" />
+                </v-col>
+                <v-col cols="11" sm="10">
+                  <pre>{{ y.projects[idx].projectDetails }}</pre>
+                </v-col>
+              </v-row>
 
-            <v-row>
-              <v-spacer></v-spacer>
-              <v-col cols="3" class="pjLabel">개선 사항</v-col>
-              <v-col cols="8">{{ y.projects[idx].projectImprovements }}</v-col>
-            </v-row>
-          </v-col>
-        </v-row>
+              <v-row>
+                <v-spacer></v-spacer>
+                <v-col cols="11" sm="1" class="pjLabel">
+                  <v-icon icon="mdi-chevron-triple-up" size="small" />
+                </v-col>
+                <v-col cols="11" sm="10">
+                  <pre>{{ y.projects[idx].projectImprovements }}</pre>
+                </v-col>
+              </v-row>
+            </v-col>
+          </v-row>
+        </v-card>
       </v-list-item>
     </v-list>
 
@@ -167,18 +204,9 @@ export default {
   },
   methods: {
     fnSetCareer() {
-      var currY = new Date();
-      var s = new Date(2022, 5, 13);
-      var timeDiff = currY.getTime() - s.getTime();
+      var careerStart = new Date(2022, 5, 13);
 
-      var d = 24 * 60 * 60 * 1000;
-      var m = 30 * d;
-      var y = 365 * d;
-
-      var diffY = Math.floor(timeDiff / y);
-      var diffM = Math.ceil((timeDiff - diffY * y) / m);
-
-      this.diff = diffY + "년 " + diffM + "개월";
+      this.diff = this.fnDateDiffStr(careerStart, new Date());
 
       this.fnSetYears();
     },
@@ -213,6 +241,62 @@ export default {
       } else {
         y.fold = !y.fold;
       }
+    },
+    fnSetDateStr(pjtime) {
+      var str = "";
+
+      if (pjtime.projectStartDate && pjtime.projectEndDate) {
+        var s = pjtime.projectStartDate;
+        var e = pjtime.projectEndDate;
+        str =
+          s +
+          " ~ " +
+          e +
+          " (" +
+          this.fnDateDiffStr(new Date(s), new Date(e)) +
+          ")";
+      }
+      return str;
+    },
+    fnDateDiffStr(s, e) {
+      var str = "";
+
+      var diff = e.getTime() - s.getTime();
+
+      var d = 24 * 60 * 60 * 1000;
+      var m = 30 * d;
+      var y = 365 * d;
+
+      if (diff > y) {
+        str += Math.floor(diff / y) + "년";
+        diff = diff % y;
+      }
+
+      if (diff > m) {
+        str += str != "" ? " " : str;
+        str += Math.floor(diff / m) + "개월";
+        diff = diff % m;
+      }
+
+      if (diff > d) {
+        str += str != "" ? " " : str;
+        str += Math.floor(diff / d) + "일";
+      }
+
+      return str;
+    },
+    fnSetSkills(skills) {
+      var sks = skills.split("|");
+
+      for (var i in sks.length) {
+        console.log(sks[i]);
+
+        sks[i].icon = this.skills.filter((s) => {
+          if (s.name == sks[i]) return s.logo;
+        });
+      }
+
+      return sks;
     },
   },
   watch: {
