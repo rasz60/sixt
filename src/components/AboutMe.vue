@@ -298,15 +298,10 @@ export default {
         diff = diff % y;
       }
 
-      if (diff > m) {
+      if (diff > 0) {
         str += str != "" ? " " : str;
-        str += Math.floor(diff / m) + "개월";
+        str += Math.ceil(diff / m) + "개월";
         diff = diff % m;
-      }
-
-      if (diff > d) {
-        str += str != "" ? " " : str;
-        str += Math.floor(diff / d) + "일";
       }
 
       return str;
