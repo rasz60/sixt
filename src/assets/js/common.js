@@ -1,5 +1,6 @@
 import jsonPosts from "/public/json/_posts.json";
 import jsonGroups from "/public/json/_groups.json";
+import projects from "/public/json/about/_project.json";
 import keywordConfig from "/public/json/_keyword.json";
 import skillGroup from "/public/json/about/_skillGroup.json";
 import skills from "/public/json/about/_skills.json";
@@ -133,30 +134,20 @@ const setPostListTitle = (posts) => {
 };
 
 const getProject = async (yyyy) => {
-  return await import("/public/json/about/" + yyyy + "/_project.json").catch(
-    () => {
-      return null;
-    }
-  );
+  var pjs = await getAllProjects();
+  var pj = null;
+
+  if (pjs != null) {
+    pj = pjs.filter((p) => {
+      if (p.year == yyyy) return p;
+    });
+  }
+  console.log(pj);
+  return pj;
 };
 
 const getAllProjects = async () => {
-  var projects = {};
-  var maxYYYY = new Date().getFullYear();
-  for (var i = 2017; i < maxYYYY; i++) {
-    var pj = await import("/public/json/about/" + i + "/_project.json").catch(
-      () => {
-        return null;
-      }
-    );
-    if (pj != null) {
-      projects["Y" + i] = pj;
-    } else {
-      break;
-    }
-  }
-
-  return projects;
+  return await projects;
 };
 
 const getAllSkillGroup = async () => {

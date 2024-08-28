@@ -2,7 +2,10 @@
 
 <template>
   <v-card class="pa-3">
+    <!-- title -->
     <v-card-title class="main-title">웹티비티한 개발자적 사고 ;)</v-card-title>
+
+    <!-- main skills -->
     <div class="pa-2 text-center">
       <v-icon class="mr-2" icon="mdi-tag-multiple" size="small" />
       <v-chip
@@ -21,11 +24,13 @@
     </div>
     <v-divider></v-divider>
 
+    <!-- subtitle -->
     <v-list-item type="subheader" class="subhd">
       <v-icon icon="mdi-account" size="small" class="mr-4" />devsixt
     </v-list-item>
 
     <v-list>
+      <!-- contact info start -->
       <v-list-item class="pa-5 pl-10">
         <v-row>
           <v-col cols="3" sm="1">
@@ -42,7 +47,11 @@
           <v-col cols="9" sm="3">github.com/rasz60</v-col>
         </v-row>
       </v-list-item>
+      <!-- contact info end -->
 
+      <!-- career start -->
+
+      <!-- Career - Maintitle -->
       <v-list-item
         type="subheader"
         class="subhd"
@@ -52,8 +61,10 @@
         <v-icon icon="mdi-briefcase" size="small" class="mr-4" />Career
         <span class="subcontent">({{ diff }})</span>
       </v-list-item>
+
       <v-list-item v-show="career" v-for="y in years" :key="y" class="pl-7">
-        <v-row @click="fnToggleProjects(y)">
+        <!-- Career - Subtitle(year) -->
+        <v-row @click="fnToggleProjects(y)" class="careerY">
           <v-col cols="1">
             <v-icon :icon="y.fold ? y.activeIcon : y.defaultIcon" />
           </v-col>
@@ -66,26 +77,34 @@
             ></v-badge>
           </v-col>
         </v-row>
+
+        <!-- Career - Contents -->
         <v-card
           v-show="y.fold"
           v-for="(p, idx) in y.projectCnt"
           :key="p"
-          class="pa-2 my-2"
+          class="pa-2 my-2 careerC"
         >
           <v-row>
             <v-col cols="12">
               <v-row>
+                <!-- Career - Contents - seq-icon -->
                 <v-col cols="1"
                   ><v-icon :icon="`mdi-numeric-` + y.projects[idx].seq"
                 /></v-col>
+
+                <!-- Career - Contents - prepend-icon -->
                 <v-col cols="11" sm="1" class="pjLabel">
                   <v-icon icon="mdi-calendar-clock" size="small" />
                 </v-col>
+
+                <!-- Career - Contents - start / end date -->
                 <v-col cols="11" sm="10">
                   {{ fnSetDateStr(y.projects[idx]) }}
                 </v-col>
               </v-row>
 
+              <!-- Career - Contents - Project Title -->
               <v-row>
                 <v-spacer></v-spacer>
                 <v-col cols="11" sm="1" class="pjLabel">
@@ -96,6 +115,7 @@
                 }}</v-col>
               </v-row>
 
+              <!-- Career - Contents - subTitle -->
               <v-row>
                 <v-spacer></v-spacer>
                 <v-col cols="11" sm="1" class="pjLabel">
@@ -106,6 +126,7 @@
                 }}</v-col>
               </v-row>
 
+              <!-- Career - Contents - Skills -->
               <v-row>
                 <v-spacer></v-spacer>
                 <v-col cols="11" sm="1" class="pjLabel">
@@ -123,6 +144,7 @@
                 </v-col>
               </v-row>
 
+              <!-- Career - Contents - Details -->
               <v-row>
                 <v-spacer></v-spacer>
                 <v-col cols="11" sm="1" class="pjLabel">
@@ -133,6 +155,7 @@
                 </v-col>
               </v-row>
 
+              <!-- Career - Contents - Improvements -->
               <v-row>
                 <v-spacer></v-spacer>
                 <v-col cols="11" sm="1" class="pjLabel">
@@ -147,7 +170,9 @@
         </v-card>
       </v-list-item>
     </v-list>
+    <!-- career end -->
 
+    <!-- skills info start -->
     <v-list-item
       type="subheader"
       class="subhd"
@@ -186,6 +211,7 @@
         </v-col>
       </v-row>
     </v-list-item>
+    <!-- skills info end -->
   </v-card>
 </template>
 
