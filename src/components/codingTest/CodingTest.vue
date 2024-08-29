@@ -1,6 +1,6 @@
 <template>
   <v-row id="listTop">
-    <v-col :cols="12" id="categorys">
+    <v-col cols="12" id="categorys">
       <v-chip
         v-for="i in 6"
         :key="i"
@@ -15,12 +15,18 @@
 
   <v-divider class="my-5" />
 
-  <v-card class="pa-3 mb-5" v-for="t in dptest" :key="t" v-show="!ndp">
-    <h2 class="question" @click="t.fold = !t.fold">
+  <v-card
+    class="pa-3 mb-5"
+    v-for="t in dptest"
+    :key="t"
+    v-show="!ndp"
+    @click="t.fold = !t.fold"
+  >
+    <h3 class="question">
       <v-chip color="secondary" :text="`Lv.` + t.level" size="small" />&nbsp;Q{{
         t.seq
       }}.&nbsp;{{ t.question }}
-    </h2>
+    </h3>
     <v-divider class="my-3" />
     <v-sheet class="answer" v-show="!t.fold">
       <v-row v-for="a in t.answer" :key="a">
@@ -68,5 +74,6 @@ export default {
 pre {
   background-color: rgb(239, 239, 239, 0.4);
   border-radius: 0.5em;
+  white-space: break-spaces;
 }
 </style>
