@@ -1,0 +1,38 @@
+[
+  {
+    "level": 0,
+    "seq": 1,
+    "fold": true,
+    "question": "배열 원소 평균 값 구하기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "for문 - devsixt",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "Stream 사용 - @reference",
+        "code": ""
+      }
+    ]
+  },
+  {
+    "level": 0,
+    "seq": 2,
+    "fold": true,
+    "question": "배열 인덱스로 잘라내기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "for문 - devsixt",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "Stream 사용 - @reference",
+        "code": ""
+      }
+    ]
+  }
+]

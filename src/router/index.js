@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import MainPage from "@/components/MainPage.vue";
-import AboutMe from "@/components/AboutMe.vue";
-import LoggingList from "@/components/LoggingList.vue";
-import LoggingDetails from "@/components/LoggingDetails.vue";
+import AboutMe from "@/components/about/AboutMe.vue";
+import LoggingList from "@/components/devlog/LoggingList.vue";
+import LoggingDetails from "@/components/devlog/LoggingDetails.vue";
+import CodingTest from "@/components/codingTest/CodingTest.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/logging/:g/:p",
     name: "loggingDetails",
     component: LoggingDetails,
+  },
+  {
+    path: "/codingTest",
+    name: "CodingTest",
+    component: CodingTest,
   },
 ];
 

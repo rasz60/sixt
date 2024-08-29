@@ -4,6 +4,9 @@ import projects from "/public/json/about/_project.json";
 import keywordConfig from "/public/json/_keyword.json";
 import skillGroup from "/public/json/about/_skillGroup.json";
 import skills from "/public/json/about/_skills.json";
+import tests from "/public/json/test/_test.json";
+
+import htmlConverter from "@/utils/HTMLConverter";
 
 // 모든 post array 가져오기
 const getAllPosts = () => {
@@ -158,6 +161,39 @@ const getAllSkills = async () => {
   return await skills;
 };
 
+const getAllTests = async () => {
+  return await tests;
+};
+
+const getAllLvTests = async (lv) => {
+  let lvTests = await tests.filter((t) => t.level == lv);
+
+  for (var i = 0; i < lvTests.length; i++) {
+    var answer = lvTests[i].answer;
+
+    if (answer != null) {
+      for (var j = 0; j < answer.length; j++) {
+        var codetxt = await import(
+          "/public/json/test/code/code" +
+            lvTests[i].seq +
+            "-" +
+            answer[j].seq +
+            ".md"
+        );
+
+        var txt = htmlConverter(codetxt.default);
+
+        txt = txt.replace("<pre><code>", "");
+        txt = txt.replace("</code></pre>", "");
+
+        answer[j].code = txt;
+      }
+    }
+  }
+
+  return lvTests;
+};
+
 export default {
   getAllPosts: getAllPosts,
   getAllGroups: getAllGroups,
@@ -169,4 +205,6 @@ export default {
   getAllProjects: getAllProjects,
   getAllSkillGroup: getAllSkillGroup,
   getAllSkills: getAllSkills,
+  getAllTests: getAllTests,
+  getAllLvTests: getAllLvTests,
 };

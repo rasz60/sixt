@@ -1,0 +1,20 @@
+[
+  {
+    "name": "aboutme",
+    "link": "/about",
+    "icon": "mdi-account-question-outline",
+    "type": 0
+  },
+  {
+    "name": "devlog",
+    "link": "/logging",
+    "icon": "mdi-math-log",
+    "type": 0
+  },
+  {
+    "name": "github",
+    "link": "https://github.com/rasz60",
+    "icon": "mdi-github",
+    "type": 1
+  }
+]

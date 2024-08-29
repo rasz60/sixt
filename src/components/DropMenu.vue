@@ -32,6 +32,34 @@ import SendMail from "@/components/SendMail.vue";
         ></v-icon>
       </span>
     </v-list-item>
+    <v-list-item @click="moveMenu('/codingtest')">
+      <v-btn
+        icon="mdi-head-question-outline"
+        @click.stop="moveMenu('/codingtest')"
+        size="small"
+      />
+      <span class="bg-white title">
+        <v-icon
+          v-for="char in `coding test`"
+          :key="char"
+          :icon="`mdi-alpha-` + char"
+        ></v-icon>
+      </span>
+    </v-list-item>
+    <v-list-item @click="newWindow(`https://github.com/rasz60`)">
+      <v-btn
+        icon="mdi-github"
+        @click.stop="newWindow(`https://github.com/rasz60`)"
+        size="small"
+      />
+      <span class="bg-white title">
+        <v-icon
+          v-for="char in `github`"
+          :key="char"
+          :icon="`mdi-alpha-` + char"
+        ></v-icon>
+      </span>
+    </v-list-item>
     <v-list-item @click="fnSendMail">
       <v-dialog v-model="dialog" max-width="800">
         <template v-slot:activator="{ props: activatorProps }">
@@ -51,20 +79,6 @@ import SendMail from "@/components/SendMail.vue";
         </template>
         <SendMail @sendMessage="fnSendMailDone" />
       </v-dialog>
-    </v-list-item>
-    <v-list-item @click="newWindow(`https://github.com/rasz60`)">
-      <v-btn
-        icon="mdi-github"
-        @click.stop="newWindow(`https://github.com/rasz60`)"
-        size="small"
-      />
-      <span class="bg-white title">
-        <v-icon
-          v-for="char in `github`"
-          :key="char"
-          :icon="`mdi-alpha-` + char"
-        ></v-icon>
-      </span>
     </v-list-item>
   </v-list>
 </template>

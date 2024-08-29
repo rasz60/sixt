@@ -1,0 +1,14 @@
+export const MENUS = {
+  GET_MENUS: "GET_MENUS",
+};
+
+export const POSTS = {
+  GET_ALL_POSTS: "GET_ALL_POSTS",
+  RANDOM_COLOR: "RANDOM_COLOR",
+  DATE_DIFF: "DATE_DIFF",
+  SET_POST_LIST_TITLE: "SET_POST_LIST_TITLE",
+};
+
+export const ABOUT = {
+  REG_CHK: "REG_CHK",
+};
