@@ -4,6 +4,32 @@ import WindowGroups from "@/components/WindowGroups.vue";
 </script>
 
 <template>
+  <!--
+  <v-sheet class="mx-auto" width="100%">
+    <h4>devsixt's CODE-Level🧐</h4>
+    <v-row class="py-10">
+      <v-col cols="2" class="d-flex justify-center align-center">
+        <p>Lv.0</p>
+      </v-col>
+      <v-col cols="2" class="d-flex justify-center align-center">
+        <p>Lv.1</p>
+      </v-col>
+      <v-col cols="2" class="d-flex justify-center align-center">
+        <p>Lv.2</p>
+      </v-col>
+      <v-col cols="2" class="d-flex justify-center align-center">
+        <p>Lv.3</p>
+      </v-col>
+      <v-col cols="2" class="d-flex justify-center align-center">
+        <p>Lv.4</p>
+      </v-col>
+      <v-col cols="2" class="d-flex justify-center align-center">
+        <p>Lv.5</p>
+      </v-col>
+    </v-row>
+  </v-sheet>
+  <v-divider></v-divider>
+  -->
   <v-sheet class="mx-auto" width="100%">
     <h4>
       최신 deVLOG&nbsp;<v-chip size="small" color="red" class="px-2"
@@ -46,6 +72,15 @@ export default {
       posts: [],
       groups: [],
       widthFlag: true,
+      lv: {
+        0: "Lv.0",
+        1: "Lv.1",
+        2: "Lv.2",
+        3: "Lv.3",
+        4: "Lv.4",
+        5: "Lv.5",
+      },
+      icons: ["mdi-leaf", "", "", "", "", "mdi-fire"],
     };
   },
   async created() {
@@ -64,6 +99,9 @@ export default {
         .filter((p) => p.groupSeq == groupSeq && p.type == "dev")
         .reverse();
     },
+    season(val) {
+      return this.icons[val];
+    },
   },
   watch: {
     cwidth(v) {
@@ -72,3 +110,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.shadow-n {
+  box-shadow: none !important;
+}
+</style>

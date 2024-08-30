@@ -12,7 +12,7 @@
       },
       {
         "seq": 2,
-        "title": "Stream 사용 - @reference😮",
+        "title": "Stream 사용 - @others😮",
         "code": ""
       }
     ]
@@ -30,7 +30,7 @@
       },
       {
         "seq": 2,
-        "title": "Stream 사용 - @reference😮",
+        "title": "Stream 사용 - @others😮",
         "code": ""
       }
     ]
@@ -48,7 +48,107 @@
       },
       {
         "seq": 2,
-        "title": "Math.sqrt() 사용 - @reference😮",
+        "title": "Math.sqrt() 사용 - @others😮",
+        "code": ""
+      }
+    ]
+  },
+  {
+    "level": 0,
+    "seq": 4,
+    "fold": true,
+    "question": "배열 순서 변경하기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "for문 (1) - devsixt😎",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "IntStream 사용 - @others😮",
+        "code": ""
+      },
+      {
+        "seq": 3,
+        "title": "for문 (2) IntStream 답변 활용 - devsixt😎",
+        "code": ""
+      }
+    ]
+  },
+  {
+    "level": 0,
+    "seq": 5,
+    "fold": true,
+    "question": "조건에 맞는 배열 첫 번째 인덱스 구하기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "for문 - devsixt😎",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "IntStream 사용 - @others😮",
+        "code": ""
+      }
+    ]
+  },
+  {
+    "level": 0,
+    "seq": 6,
+    "fold": true,
+    "question": "범위 숫자 역순으로 출력하기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "for문 - devsixt😎",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "IntStream 사용 : 음수에서 음수 * -1하여 담기 - @others😮",
+        "code": ""
+      },
+      {
+        "seq": 3,
+        "title": "IntStream 사용 : 양수에서 배열 뒤집기 - @others😮",
+        "code": ""
+      }
+    ]
+  },
+  {
+    "level": 0,
+    "seq": 7,
+    "fold": true,
+    "question": "조건에 맞는 범위 숫자 배열 출력하기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "IntStream 사용 : range -> 마지막 수 미만 - @devsixt😎",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "IntStream 사용 : rangeClosed -> 마지막 수 포함 - @others😮",
+        "code": ""
+      }
+    ]
+  },
+  {
+    "level": 0,
+    "seq": 8,
+    "fold": true,
+    "question": "접두사 찾아내기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "for 사용 - @devsixt😎",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "String.startswith() 사용 - @others😮",
         "code": ""
       }
     ]

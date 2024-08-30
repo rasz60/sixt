@@ -1,4 +1,9 @@
 <template>
+  <h2 class="title">
+    머리가 나쁘면 코드가 고생이다.
+    <span class="writer">&nbsp;&nbsp;- devsixt</span>
+  </h2>
+
   <v-row id="listTop">
     <v-col cols="12" id="categorys">
       <v-chip
@@ -32,7 +37,7 @@
       <v-row v-for="a in t.answer" :key="a">
         <v-col cols="12">
           <h4 class="ma-2">A{{ a.seq }}. {{ a.title }}</h4>
-          <pre class="pa-4">{{ a.code }}</pre>
+          <pre class="pa-4" @click.stop="t.fold = false">{{ a.code }}</pre>
         </v-col>
       </v-row>
     </v-sheet>
@@ -62,6 +67,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.title {
+  font-weight: 400;
+  font-style: italic;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  position: fixed;
+  text-align: center;
+  color: darkgray;
+  opacity: 0.5;
+
+  span {
+    height: 100%;
+    font-size: 0.8em;
+    color: darkgray;
+  }
+}
+
 .lvBadge {
   position: relative;
   z-index: 1;

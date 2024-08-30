@@ -185,6 +185,8 @@ const getAllLvTests = async (lv) => {
 
         txt = txt.replace("<pre><code>", "");
         txt = txt.replace("</code></pre>", "");
+        txt = txt.replaceAll("&lt;", "<");
+        txt = txt.replaceAll("&gt;", ">");
 
         answer[j].code = txt;
       }
