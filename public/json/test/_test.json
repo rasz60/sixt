@@ -152,5 +152,28 @@
         "code": ""
       }
     ]
+  },
+  {
+    "level": 0,
+    "seq": 9,
+    "fold": true,
+    "question": "주어진 수 이하의 홀/짝수 구분하여 연산하기",
+    "answer": [
+      {
+        "seq": 1,
+        "title": "for 사용 - @devsixt😎",
+        "code": ""
+      },
+      {
+        "seq": 2,
+        "title": "IntStream 사용 - @devsixt😎",
+        "code": ""
+      },
+      {
+        "seq": 3,
+        "title": "for 사용 - @others😮",
+        "code": ""
+      }
+    ]
   }
 ]
