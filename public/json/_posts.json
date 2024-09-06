@@ -638,5 +638,23 @@
     ],
     "newPost": false,
     "proceeding": true
+  },
+  {
+    "seq": 35,
+    "groupSeq": 3,
+    "groupItemSeq": 6,
+    "type": "dev",
+    "serizes": "g3",
+    "fileName": "seq6.md",
+    "title": "🔨게시물 작성 구현하기 (1/2)",
+    "date": "2024-08-12 20:00:33",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "JPA" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]
