@@ -656,5 +656,41 @@
     ],
     "newPost": false,
     "proceeding": true
+  },
+  {
+    "seq": 36,
+    "groupSeq": 3,
+    "groupItemSeq": 7,
+    "type": "dev",
+    "serizes": "g3",
+    "fileName": "seq7.md",
+    "title": "🔨게시물 작성 구현하기 (2/2)",
+    "date": "2024-08-12 23:19:21",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 37,
+    "groupSeq": 3,
+    "groupItemSeq": 8,
+    "type": "dev",
+    "serizes": "g3",
+    "fileName": "seq8.md",
+    "title": "🔨게시물 상세 조회 구현하기 (1/2)",
+    "date": "2024-08-13 19:33:10",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "JPA" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]

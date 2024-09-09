@@ -222,8 +222,8 @@ public class BoardItems {
     public static BoardItems of(BoardItemsDto boardItemsDto) {
         BoardItems boardItems = new BoardItems();
 
-        boardItems.setItemUuid(boardItems.getItemUuid());
-        boardItems.setItemSeq(boardItems.getItemSeq());
+        boardItems.setItemUuid(boardItemsDto.getItemUuid());
+        boardItems.setItemSeq(boardItemsDto.getItemSeq());
         boardItems.setItemHeader(boardItemsDto.getItemHeader());
         boardItems.setItemTitle(boardItemsDto.getItemTitle());
         boardItems.setItemContents(boardItemsDto.getItemContents());
