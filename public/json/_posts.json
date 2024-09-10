@@ -692,5 +692,77 @@
     ],
     "newPost": false,
     "proceeding": true
+  },
+  {
+    "seq": 38,
+    "groupSeq": 3,
+    "groupItemSeq": 9,
+    "type": "dev",
+    "serizes": "g3",
+    "fileName": "seq9.md",
+    "title": "🔨게시물 상세 조회 구현하기 (2/2)",
+    "date": "2024-08-14 12:45:36",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 39,
+    "groupSeq": 3,
+    "groupItemSeq": 10,
+    "type": "issue",
+    "serizes": "g3",
+    "fileName": "issue1.md",
+    "title": "🩺vue-router 중복 경로 동적 설정",
+    "date": "2024-08-15 18:22:17",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "issue", "value": "issue" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vue-router" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 40,
+    "groupSeq": 3,
+    "groupItemSeq": 11,
+    "type": "dev",
+    "serizes": "g3",
+    "fileName": "seq10.md",
+    "title": "🔨게시물 수정/삭제 기능 구현하기 (1/2)",
+    "date": "2024-08-16 17:09:01",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "back", "value": "Spring-Boot" },
+      { "type": "back", "value": "JPA" }
+    ],
+    "newPost": false,
+    "proceeding": true
+  },
+  {
+    "seq": 41,
+    "groupSeq": 3,
+    "groupItemSeq": 12,
+    "type": "dev",
+    "serizes": "g3",
+    "fileName": "seq11.md",
+    "title": "🔨게시물 수정/삭제 기능 구현하기 (2/2)",
+    "date": "2024-08-19 18:22:17",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]

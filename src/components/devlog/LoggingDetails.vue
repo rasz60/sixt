@@ -40,7 +40,7 @@
             link
             v-for="serizePost in serizePosts"
             :key="serizePost"
-            @click="movePost(serizePost.seq)"
+            @click="movePost(serizePost)"
           >
             {{ serizePost.title }}
           </v-list-item>
@@ -54,7 +54,7 @@
             link
             v-for="relatedPost in relatedPosts"
             :key="relatedPost"
-            @click="movePost(relatedPost.seq)"
+            @click="movePost(relatedPost)"
           >
             {{ relatedPost.title }}
           </v-list-item>

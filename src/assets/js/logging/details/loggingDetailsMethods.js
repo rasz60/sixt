@@ -5,12 +5,9 @@ export default {
     const g = this.$route.params.g;
     const p = this.$route.params.p;
 
-    console.log(g, p);
-
     let displayPost = this.commonjs.getAllPosts().filter((e) => {
       if (e.seq == p && e.groupSeq == g) return e;
     })[0];
-    console.log(displayPost);
     this.post = displayPost;
     const post = await import(
       "/public/posts/" + this.post.serizes + "/" + this.post.fileName
@@ -37,7 +34,12 @@ export default {
     });
   },
 
-  async movePost(seq) {
-    this.$router.push({ name: "loggingDetails", params: { seq: seq } });
+  async movePost(rp) {
+    console.log(rp);
+
+    this.$router.push({
+      name: "loggingDetails",
+      params: { g: rp.groupSeq, p: rp.seq },
+    });
   },
 };

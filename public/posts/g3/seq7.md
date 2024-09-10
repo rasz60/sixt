@@ -20,8 +20,8 @@ import NoticeForm from "./NoticeForm.vue"; // 작성/수정 화면
       <h1>NoTiCe</h1>
     </div>
     <NoticeForm
-      v-if="flag != 'details'"          // flag가 details이 아닐 때 작성/수정 화면 활성화
-      :flag="flag"                      // 작성/수정 화면으로 전달할 파리미터 값
+      v-if="flag == 'form' || flag == 'edit'"       // flag가 details이 아닐 때 작성/수정 화면 활성화
+      :flag="flag"                                  // 작성/수정 화면으로 전달할 파리미터 값
       :seq="seq"
     />
   </v-layout>
