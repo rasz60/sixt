@@ -1,4 +1,4 @@
-### [WEB] GitHub Pages Blog 만들기 #1 중 이슈 [🔗](#/logging/1)
+### [WEB] GitHub Pages Blog 만들기 #1 중 이슈 [🔗](#/logging/1/1)
 
 vue/cli 버전에 따라 기본적으로 설치되는 dependency가 다른 것 같다.<br/>
 노트북으로 완성지은 프로젝트를 집에 있는 데스크탑으로 복기하면서 블로그를 작성하는데 차이가 있었다.<br/>

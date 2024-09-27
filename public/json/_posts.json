@@ -764,5 +764,23 @@
     ],
     "newPost": false,
     "proceeding": true
+  },
+  {
+    "seq": 42,
+    "groupSeq": 3,
+    "groupItemSeq": 13,
+    "type": "dev",
+    "serizes": "g3",
+    "fileName": "seq12.md",
+    "title": "🔨댓글 기능 구현하기 (1/2)",
+    "date": "2024-08-20 19:39:43",
+    "dateDiff": null,
+    "keywords": [
+      { "type": "dev", "value": "dev" },
+      { "type": "front", "value": "vue" },
+      { "type": "front", "value": "vuetify" }
+    ],
+    "newPost": false,
+    "proceeding": true
   }
 ]

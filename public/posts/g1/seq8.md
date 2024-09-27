@@ -7,7 +7,7 @@ Vue3로 만든 블로그를 실제 온라인에서 접속할 수 있게끔 하�
 블로그를 만드는 포스트에서 말했듯이, 정적인 웹페이지만 올릴 수 있기 때문에 모델링한 데이터를 json파일로 저장하였고,<br/>
 게시글 상세 내용도 markdown 파일로 작성하였다.
 
-###### ㄴ [Vue3로 내 블로그 만들기 포스트 보러가기🔗](#/logging/1)
+###### ㄴ [Vue3로 내 블로그 만들기 포스트 보러가기🔗](#/logging/1/1)
 
 <br/>
 우선 Vue3 프로젝트를 웹에 배포하기 위해 소스를 module화하여 build한다.<br/>
@@ -28,7 +28,7 @@ git init
 
 이렇게 하면 프로젝트 내에 숨김폴더로 .git이라는 폴더와 .gitignore 파일이 생성된다.<br/>
 .gitignore 파일은 git에 소스를 commit할 때 제외할 소스를 정의해놓는 파일이다.<br/>
-이 파일을 열어보면 /dist 경로가 제외 경로로 지정되어있는데 이 부분을 삭제한다. [@issue#1 .gitignore 설정](#/logging/12)
+이 파일을 열어보면 /dist 경로가 제외 경로로 지정되어있는데 이 부분을 삭제한다. [@issue#1 .gitignore 설정](#/logging/1/12)
 
 ```
 .DS_Store
@@ -41,7 +41,7 @@ node_modules
 
 <br/>
 다음으로 github Pages를 통해 배포되는 웹페이지의 URL에 맞추어 프로젝트의 publicPath를 지정해주어야하는데,<br/>
-vue.config.js 파일에 아래와 같이 publicPath를 추가해준다. [@issue#2 publicPath 지정](#/logging/13)
+vue.config.js 파일에 아래와 같이 publicPath를 추가해준다. [@issue#2 publicPath 지정](#/logging/1/13)
 <br/><br/>
 
 vue.config.js

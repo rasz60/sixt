@@ -227,7 +227,7 @@ public class Members {    // MEMBERS Entity 테이블
 
 `@DynamicInsert` | `@DynamicUpdate`<br/>
 &nbsp;＋ Default 속성을 위해서 동적인 insert, update할 수 있도록 설정<br/>
-&nbsp;＋ 과거에 진행했던 프로젝트에서 [issue#2. JPA Default 설정 무시되는 현상](/#/logging/18)이 발생하여 이번 프로젝트는 시작부터 추가해주었다.
+&nbsp;＋ 과거에 진행했던 프로젝트에서 [issue#2. JPA Default 설정 무시되는 현상](/#/logging/2/18)이 발생하여 이번 프로젝트는 시작부터 추가해주었다.
 <br/><br/>
 
 `@Id`<br/>

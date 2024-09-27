@@ -207,7 +207,7 @@ public class CustomAuthenticationToken extends AbstractAuthenticationToken {
 
 /src/java/main/com/example/rmfr/config/AppConfig.java
 
-###### -> Spring Sequrity 비밀번호 암호화 인코더 Bean 설정 [🔗issue#4. BCryptPasswordEncoder 순환참조 이슈](/#/logging/24)
+###### -> Spring Sequrity 비밀번호 암호화 인코더 Bean 설정 [🔗issue#4. BCryptPasswordEncoder 순환참조 이슈](/#/logging/2/24)
 
 ```
 package com.example.rmfr.config;

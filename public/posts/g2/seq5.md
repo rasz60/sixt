@@ -84,7 +84,7 @@ public class Members {
 `@PathVariable(${속성명})` : 요청된 url의 속성명으로 지정한 자리에 들어온 값을 parameter 받아온다.<br/>
 `@RequestBody <T>`<br/>
 &nbsp; + front단에서 넘어온 JSON Parameter 다양한 형태의 객체형으로 전환한다.<br/>
-&nbsp; + DTO 형태로 전환하는 과정에서 속성 매핑 이슈가 발생하여 해결했다. [🔗issue#3. @RequestBody 속성명 매핑 이슈](/#/logging/22)<br/>
+&nbsp; + DTO 형태로 전환하는 과정에서 속성 매핑 이슈가 발생하여 해결했다. [🔗issue#3. @RequestBody 속성명 매핑 이슈](/#/logging/2/22)<br/>
 
 ```
 package com.example.rmfr.member.controller;

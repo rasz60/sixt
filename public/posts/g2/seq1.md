@@ -56,7 +56,7 @@ Gradle build 파일에 버전을 명시하여 각각의 버전을 선택할 수 
 <br/><br/>
 
 `IntelliJ` > File > Open을 클릭하여 압축 해제한 폴더 선택하면 Spring Starter로 만든 프로젝트를 불러올 수 있다.<br/>
-폴더를 불러온 후에 Gradle이 자동으로 build를 실행하는데, 여기서.. 첫 번째 이슈를 만났다.🤦‍♂️ [🔗issue#1. Gradle Version 이슈](/#/logging/16)<br/>
+폴더를 불러온 후에 Gradle이 자동으로 build를 실행하는데, 여기서.. 첫 번째 이슈를 만났다.🤦‍♂️ [🔗issue#1. Gradle Version 이슈](/#/logging/2/16)<br/>
 Gradle 버전에 의해서 Build가 되지 않는 현상이 있어 gradle-wrapper.properties의 gradle 버전을 변경해주었더니 해결되었다.
 <br/><br/>
 

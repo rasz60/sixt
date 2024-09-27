@@ -1,4 +1,4 @@
-### [WEB] GitHub Pages Blog 만들기 중 오류 발생 [🔗](#/logging/1)
+### [WEB] GitHub Pages Blog 만들기 중 오류 발생 [🔗](#/logging/1/1)
 
 ① vue create 로 만든 vue 프로젝트에서 eslint, prettier 오류 발생
 

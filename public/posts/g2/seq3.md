@@ -1,7 +1,7 @@
 ### Vue3 프로젝트 만들기
 
 이번 프로젝트도 화면은 Vue3를 통해 구현했다. 먼저 프로젝트 최상위 경로에 frontend 폴더를 추가한다.<br/>
-그리고 frontend 폴더 경로에 이전 [🔗Github Pages Blog 만들기 #1](/#/logging/1)에서 Vue3 프로젝트를 생성을 참고하여 생성했다.<br/>
+그리고 frontend 폴더 경로에 이전 [🔗Github Pages Blog 만들기 #1](/#/logging/1/1)에서 Vue3 프로젝트를 생성을 참고하여 생성했다.<br/>
 다른 점은 markdown 사용을 위한 raw-loader, showdown은 제외했고, http 통신으로 backend와 통신하기 위해 Axios 를 추가해준다.
 <br/><br/>
 

@@ -1,4 +1,4 @@
-### [WEB] GitHub Pages Blog 만들기 #1 중 오류 발생 [🔗](#/logging/1)
+### [WEB] GitHub Pages Blog 만들기 #1 중 오류 발생 [🔗](#/logging/1/1)
 
 vs code terminal에서 vue create 실행 시 아래와 같은 오류 발생
 
